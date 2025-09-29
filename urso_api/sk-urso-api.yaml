@@ -1,0 +1,239 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: URSO
+  license:
+    name: Proprietary
+  description: Úrad pre reguláciu sieťových odvetví
+servers:
+  - url: "{protocol}://{host}:{port}{context_path}"
+    description: adresa URSO
+    variables:
+      protocol:
+        default: https
+      host:
+        default: dev.alfabase.sk
+      port:
+        default: 443
+      context_path:
+        default: /urso
+security:
+  - BearerAuth: []
+paths:
+  /version:
+    get:
+      description: služba vráti verziu aplikácie, služba je dostupná každému, je možné ňou overiť dostupnosť systému
+      tags:
+        - "VersionController"
+      responses:
+        200:
+          description: verzia aplikácie bola vrátená korektne
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/version"
+        default:
+          description: neočakavaná chyba aplikácie
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+  /nedoplatky/{institucia}:
+    post:
+      summary: Služba vyhladá či daný subjekt má nedoplatky vo FS (finančná správa)/ ZP (zdravotné poisťovne)/ PS (sociálna poisťovňa)
+      tags:
+        - NedoplatkyController
+      parameters:
+        - in: path
+          name: institucia
+          schema:
+            $ref: "#/components/schemas/instituciaEnum"
+          required: true
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/subjektNedoplatokVstupnyDetail"
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/subjektVystupnyDetail"                
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: >-
+            Tu je chybová hláška vhodná aj pre používateľa.
+            Hláška by mala byť v slovenskom jazyku
+        detail:
+          type: string
+          description: Tu môže byť zadaná detailná hláška v angličtine, stack trace a podobne!
+        field:
+          type: string
+          description: >-
+            Pole ktoré je nevalidné, v prípade že chyba je vo validácii vstupu.
+            V takom prípade description obsahuje lokalizovanú validačnú hlášku.
+    version:
+      type: object
+      properties:
+        version:
+          type: string
+    subjektNedoplatokVstupnyDetail:
+      type: object
+      properties:
+        rodneCislo:
+          type: string
+        meno:
+          type: string
+        priezvisko:
+          type: string
+        datumNarodenia:
+          type: string
+          format: date
+        ico:
+          type: string
+        nazovSpolocnosti:
+          type: string
+        dic:
+          type: string
+    subjektVystupnyDetail:
+      type: object
+      properties:
+        navratovyKodOperacie:
+          $ref: "#/components/schemas/csruNavratovyKodOperacieEnum"
+        chybovaHlaskaOperacie:
+          type: string
+        navratovyKodStavu:
+          $ref: "#/components/schemas/csruNavratovyKodOperacieEnum"
+        chybovaHlaskaStavu:
+          type: string
+        stavZiadosti:
+          $ref: "#/components/schemas/csruStavZiadostiEnum"
+        nedoplatky:
+          type: array
+          items: 
+            $ref: "#/components/schemas/nedoplatok" 
+        maNedoplatok:
+          type: boolean
+    nedoplatok:
+      type: object
+      properties:
+        chybovyKod:
+          $ref: "#/components/schemas/csruNedoplatokChybovyKodEnum"
+        chybovaSprava:
+          type: string
+        zdravotnaPoistovna:
+          $ref: "#/components/schemas/csruZdravotnaPoistovnaEnum"
+        vysledokSpracovania:
+          $ref: "#/components/schemas/csruVysledokSpracovaniaEnum"
+        nedoplatok:
+          $ref: "#/components/schemas/csruNedoplatokEnum"
+        vyskaNedoplatku:
+          type: string
+        mena:
+          type: string
+        datumNedoplatku:
+          type: string
+          format: date
+        druhDaneAleboPohladavky:
+          $ref: "#/components/schemas/csruDruhDaneAleboPohladavkyEnum"
+        popisOsbStavu:
+          type: string
+    csruDruhDaneAleboPohladavkyEnum:
+      type: string
+      enum:
+        - NDS
+        - SPD
+        - COL
+        - NEZNAMY
+    csruNedoplatokChybovyKodEnum:
+      type: string
+      enum:
+        - OK
+        - SUBJEKT_MA_DUPLICITU_V_EVIDENCII
+        - NEZNAMY
+    csruNedoplatokEnum:
+      type: string
+      enum:
+        - MA_NEDOPLATOK
+        - NEMA_NEDOPLATOK
+        - MA_NEDOPLATOK_NIE_JE_MOZNE_VYCISLIT
+        - MA_NEDOPLATOK_NESPLNENIE_POVINNOSTI
+        - NIE_JE_V_EVIDENCII
+        - NEKOMPLETNE_DATA_TECHNICKA_CHYBA
+        - NEIDENTIFIKOVANA_OSOBA
+        - CHYBA
+        - NEZNAMY
+    csruZdravotnaPoistovnaEnum:
+      type: string
+      enum:
+        - DOVERA
+        - UNION
+        - VSEOBECNA_ZDRAVOTNA
+        - NEZNAMA
+    csruNavratovyKodOperacieEnum:
+      type: string
+      enum:
+        - OK
+        - CHYBA_OVERENIA_OPRAVNENI
+        - CHYBA_VALIDACIE_VSTUPNYCH_PARAMETROV
+        - INTERNA_CHYBA
+        - NEPLATNE_ID_POZIADAVKY
+        - NEZNAMY
+    csruStavZiadostiEnum:
+      type: string
+      enum: 
+        - PREBIEHA_SPRACOVANIE
+        - SPRACOVANIE_USPESNE_UKONCENE
+        - SPRACOVANIE_UKONCENE_S_CHYBOU
+        - NEZNAMA_POZIADAVKA
+        - SPRACOVANIE_UKONCENE_S_UPOZORNENIM
+        - NEZNAMY
+    csruTypeEnum:
+      type: string
+      enum:
+        - RA
+        - RFO
+        - RPO
+        - ZC
+        - SU_FIX
+        - SFA_FIX
+        - SU_DUPL
+        - SU_DUPL_TZS
+        - RPO_REF_FIX
+        - SUBJECT_REFRESH
+        - SUBJECT_RPO_REFRESH
+        - SUBJECT_RFO_REFRESH
+    csruVysledokSpracovaniaEnum:
+      type: string
+      enum:
+        - ZASLANE_UDAJE_OD_ZP
+        - NIE_JE_EVIDOVANY
+        - NIE_SU_EVIDOVANE_ZIADNE_UDAJE
+        - NESULAD_SUBJEKTU_V_OBALKE_A_OBSAHU
+        - NESULAD_RC_ICO_IFO
+        - NEEVIDOVANIY_PARTNER_PRE_POSKYTNUTIE_UDAJOV
+        - NEZNAMY
+    instituciaEnum:
+      type: string
+      enum:
+        - FS
+        - ZP
+        - SP
+    csruResultStatusEnum:
+      type: string
+      enum:
+        - OK
+        - ERROR

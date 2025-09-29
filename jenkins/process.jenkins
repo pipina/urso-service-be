@@ -1,0 +1,115 @@
+pipeline 
+{
+	agent any
+	
+    options 
+	{ 
+		disableConcurrentBuilds() 
+	}
+	
+    tools 
+	{
+		maven 'maven 3.9.2'
+		jdk 'openjdk-17'
+	}
+
+	environment 
+	{
+		WORKSPACE = "${env.WORKSPACE}/urso"
+    }
+	
+	stages 
+	{
+		stage('Clean workspace') 
+        {
+			steps
+			{
+				cleanWs()
+				dir("${env.WORKSPACE}@tmp") 
+				{
+                    deleteDir()
+                }
+			}
+		}
+
+		stage('Git clone') 
+        {
+            steps
+			{
+				script
+				{
+					withCredentials([gitUsernamePassword(credentialsId: 'urso_gitlab_registry', gitToolName: 'Default')])
+					{
+						sh "git clone --branch main https://gitlab.urso.local/alfabase/urso.git"	
+					}	
+				}
+			}
+		}
+
+		stage('BUILD Alfa-common')
+		{
+			steps
+			{
+					build job: 'Alfa-common', parameters: [string(name: 'branch', value: 'main')]
+			}
+		}
+		
+		stage('Backend build plugin common') 
+		{
+			steps 
+			{
+				sh 'echo "Building urso_be"'
+				dir('./urso/urso_be/urso-plugin-common') 
+				{
+					sh ' mvn clean install -D maven.test.skip=true -P generate-sources' 
+				}
+			}		
+		}
+		
+		stage('Backend build urso') 
+		{
+			steps 
+			{
+				sh 'echo "Building urso_be"'
+				dir('./urso/urso_be/urso') 
+				{
+					sh ' mvn clean install -D maven.test.skip=true -P generate-sources' 
+				}
+			}		
+		}
+				
+		stage('Build/run backend image') 
+		{
+			steps 
+			{
+				echo 'Starting to build docker image for REST'
+				sh "mkdir -p ${WORKSPACE}/docker/urso_be/configuration"
+				sh "cp ${WORKSPACE}/urso_be/urso/target/urso-0.0.1-SNAPSHOT.jar  ${WORKSPACE}/docker/urso_be"
+				sh "cp ${WORKSPACE}/urso_be/urso/target/classes/application.properties ${WORKSPACE}/docker/urso_be/application.properties"
+				sh "cp ${WORKSPACE}/urso_be/urso/target/classes/csru_client_cert/self_signed_cert.pem ${WORKSPACE}/docker/urso_be/self_signed_cert.pem"
+				sh "cp ${WORKSPACE}/urso_be/urso/target/classes/csru_client_cert/private_key.pem ${WORKSPACE}/docker/urso_be/private_key.pem"
+				sh "cp ${WORKSPACE}/urso_be/urso/target/classes/csru_client_cert/password.txt ${WORKSPACE}/docker/urso_be/password.txt"
+				sh "cp ${WORKSPACE}/urso_be/doc/csru/rfo_transform.xsl ${WORKSPACE}/docker/urso_be/rfo_transform.xsl"
+				
+				
+				sh "cp /var/lib/jenkins/temp_data/jdk/openjdk-17.0.2.tar.gz ${WORKSPACE}/docker/urso_be"
+				
+				sh "cp -r ${WORKSPACE}/urso_be/urso-common/configuration/ ${WORKSPACE}/docker/urso_be"
+				
+				
+				echo 'Pushing BE image to URSO'
+				
+				script 
+				{		
+					docker.withRegistry( 'https://gitlab.urso.local:5050/', 'urso_gitlab_registry'  )
+					{
+						def customImage = docker.build("alfabase/urso/urso_be:${BUILD_ID}",
+								"-t gitlab.urso.local:5050/alfabase/urso/urso_be:${BUILD_ID} -f ${WORKSPACE}/docker/urso_be/Dockerfile ${WORKSPACE}/docker/urso_be")
+
+						customImage.push()
+					}
+				}	
+			}
+		}
+	}
+}
