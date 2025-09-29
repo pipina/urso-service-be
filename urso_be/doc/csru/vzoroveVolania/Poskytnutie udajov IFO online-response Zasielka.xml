@@ -1,0 +1,201 @@
+<Registration Id="RFO_PS_REFERENCNE_UDAJE_ZOZNAMU_IFO_ONLINE_BEZ_ZEP_WS_OUT_1_0" xmlns="http://www.ditec.sk/ekr/registration/v1.0" ExternalIdentifier="191121033752">
+       <DocumentUnauthorized Id="RFO_PS_REFERENCNE_UDAJE_ZOZNAMU_IFO_ONLINE_BEZ_ZEP_WS_OUT_1_0" xmlns="http://www.ditec.sk/ekr/unauthorized/v1.0">
+             <Object Identifier="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieUdajovIFOOnlineWS-v1.0.xsd" Id="Object20191121135645858" MimeType="application/xml">
+                    <TransEnvOut xmlns="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieUdajovIFOOnlineWS-v1.0.xsd" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+                           <POV>
+                                  <KO>1</KO>
+                                  <AC>2019-11-21T13:56:45.313Z</AC>
+                                  <OEXList>
+                                        <OEX ID="2100032372">
+                                               <ID>2100032372</ID>
+                                               <PO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <RC>730704/6912</RC>
+                                               <DN>1973-07-04</DN>
+                                               <UC>119750</UC>
+                                               <UCEUCNA>Bratislava-Petržalka</UCEUCNA>
+                                               <MN xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <SN>211</SN>
+                                               <STASNNA>Slovenská republika</STASNNA>
+                                               <PI>1</PI>
+                                               <POHPINA>mužské</POHPINA>
+                                               <RS>3</RS>
+                                               <RSTRSNA>ženatý / vydatá</RSTRSNA>
+                                               <NI>2</NI>
+                                               <NARNINA>slovenská</NARNINA>
+                                               <DU xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <UE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <UCEUENA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <MU xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <UM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <SU xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <STASUNA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <BI>8764837994</BI>
+                                               <TV>1</TV>
+                                               <TVKTVNA>Občan s trvalým pobytom na území SR</TVKTVNA>
+                                               <UL>6105</UL>
+                                               <UCEULNA>Bratislava V</UCEULNA>
+                                               <UO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <UCEUONA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <SZ>0</SZ>
+                                               <SZVSZNA>0</SZVSZNA>
+                                               <RN>1973</RN>
+                                               <DK xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <DL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <NK>1</NK>
+                                               <PG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                               <MOSList>
+                                                      <MOS ID="30018715">
+                                                             <ME>Severín</ME>
+                                                             <PO>1</PO>
+                                                      </MOS>
+                                               </MOSList>
+                                               <PRIList>
+                                                      <PRI ID="10518073">
+                                                             <PO>1</PO>
+                                                             <PR>Polievka</PR>
+                                                      </PRI>
+                                               </PRIList>
+                                               <RPRList>
+                                                      <RPR ID="10516408">
+                                                             <PO>1</PO>
+                                                             <RP>Guláš</RP>
+                                                      </RPR>
+                                               </RPRList>
+                                               <TOSList />
+                                               <SPRList>
+                                                      <SPR ID="30024892">
+                                                             <STASTNA>Slovenská republika</STASTNA>
+                                                             <ST>211</ST>
+                                                      </SPR>
+                                               </SPRList>
+                                               <RVEList>
+                                                      <RVE ID="30040794">
+                                                             <IF>808929130</IF>
+                                                             <TR>2</TR>
+                                                             <TRZTRNA>Manželstvo</TRZTRNA>
+                                                             <DV>2010-01-01</DV>
+                                                             <MV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UC>119750</UC>
+                                                             <UCEUCNA>Bratislava-Petržalka</UCEUCNA>
+                                                             <TL>3</TL>
+                                                             <TRRTLNA>Manžel</TRRTLNA>
+                                                             <TE>4</TE>
+                                                             <TRRTENA>Manželka</TRRTENA>
+                                                             <SM>Mestská časť Bratislava - Petržalka</SM>
+                                                             <PA>2969</PA>
+                                                      </RVE>
+                                                      <RVE ID="30040795">
+                                                             <IF>1243892456</IF>
+                                                             <TR>1</TR>
+                                                             <TRZTRNA>Rodičovstvo</TRZTRNA>
+                                                             <DV>1999-01-03</DV>
+                                                             <MV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UCEUCNA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <TL>1</TL>
+                                                             <TRRTLNA>Otec</TRRTLNA>
+                                                             <TE>5</TE>
+                                                             <TRRTENA>Dieťa</TRRTENA>
+                                                             <SM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <PA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                      </RVE>
+                                                      <RVE ID="30040797">
+                                                             <IF>1243893735</IF>
+                                                             <TR>1</TR>
+                                                             <TRZTRNA>Rodičovstvo</TRZTRNA>
+                                                             <DV>2000-08-23</DV>
+                                                             <MV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UCEUCNA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <TL>1</TL>
+                                                             <TRRTLNA>Otec</TRRTLNA>
+                                                             <TE>5</TE>
+                                                             <TRRTENA>Dieťa</TRRTENA>
+                                                             <SM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <PA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                      </RVE>
+                                                      <RVE ID="30016779">
+                                                             <IF>679954818</IF>
+                                                             <TR>1</TR>
+                                                             <TRZTRNA>Rodičovstvo</TRZTRNA>
+                                                             <DV>1973-07-04</DV>
+                                                             <MV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UCEUCNA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <TL>5</TL>
+                                                             <TRRTLNA>Dieťa</TRRTLNA>
+                                                             <TE>1</TE>
+                                                             <TRRTENA>Otec</TRRTENA>
+                                                             <SM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <PA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                      </RVE>
+                                                      <RVE ID="30016780">
+                                                             <IF>679954818</IF>
+                                                             <TR>1</TR>
+                                                             <TRZTRNA>Rodičovstvo</TRZTRNA>
+                                                             <DV>1973-07-04</DV>
+                                                             <MV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UCEUCNA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <TL>5</TL>
+                                                             <TRRTLNA>Dieťa</TRRTLNA>
+                                                             <TE>2</TE>
+                                                             <TRRTENA>Matka</TRRTENA>
+                                                             <SM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <PA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                      </RVE>
+                                               </RVEList>
+                                               <POBList>
+                                                      <POB ID="30049358">
+                                                             <TP>2</TP>
+                                                             <TB>Trvalý pobyt</TB>
+                                                             <DP>1973-07-04</DP>
+                                                             <DU xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <NO>Banská Bystrica</NO>
+                                                             <SC>6313</SC>
+                                                             <NC>Banská Bystrica</NC>
+                                                             <NK>Banská Bystrica</NK>
+                                                             <NU>Tatranská</NU>
+                                                             <ST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <NS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <MP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <OP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <OO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <CC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <UM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <OS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <SI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <CU xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <PM>false</PM>
+                                                             <PC>35997962    </PC>
+                                                             <CB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                                             <VD>3599796</VD>
+                                                             <DI>3599795</DI>
+                                                             <UI>17717</UI>
+                                                             <CE>201928</CE>
+                                                             <OA>101928</OA>
+                                                             <UE>6601</UE>
+                                                             <OL>15</OL>
+                                                             <REGList />
+                                                      </POB>
+                                               </POBList>
+                                               <ZPOList />
+                                               <PZMList />
+                                               <DCDList>
+                                                      <DCD ID="28818905">
+                                                             <DD>34</DD>
+                                                             <DDCDDNA>Občiansky preukaz</DDCDDNA>
+                                                             <CD>024741 XX</CD>
+                                                             <DU>true</DU>
+                                                      </DCD>
+                                               </DCDList>
+                                               <USOList />
+                                               <SNRList />
+                                               <ZUDList />
+                                        </OEX>
+                                  </OEXList>
+                           </POV>
+                    </TransEnvOut>
+             </Object>
+       </DocumentUnauthorized>
+</Registration>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.dominanz.sk/UVZ/Reg/Subject"
+	xmlns:su="http://www.dominanz.sk/UVZ/Reg/Subject"
+	xmlns:rb="http://www.dominanz.sk/UVZ/Reg/RegisterBase"
+	xmlns:sa="http://www.dominanz.sk/UVZ/Reg/SimplifiedAddress"
+	elementFormDefault="qualified" version="1.0">
+
+	<xsd:import
+		namespace="http://www.dominanz.sk/UVZ/Reg/RegisterBase"
+		schemaLocation="../registerBase_v1.xsd" />
+	<xsd:import
+		namespace="http://www.dominanz.sk/UVZ/Reg/SimplifiedAddress"
+		schemaLocation="./simplifiedAddress/simplifiedAddress_v1.xsd" />
+
+	<xsd:complexType name="Subject_t">
+		<xsd:sequence>
+			<xsd:element name="type" type="su:SubjectType_t"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="subjectID" maxOccurs="1" minOccurs="1"
+				type="rb:REG_SubjectID_t">
+				<xsd:annotation>
+					<xsd:documentation>
+						REG_index, REG_shortdata
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="address" maxOccurs="10000"
+				minOccurs="0" type="sa:SimplifiedAddress_t">
+			</xsd:element>
+			<xsd:element name="formattedName" minOccurs="0"
+				maxOccurs="10000" type="su:FormattedName_t">
+				<xsd:annotation>
+					<xsd:documentation>
+						REG_index, REG_shortdata
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="physicalPerson" minOccurs="0"
+				maxOccurs="10000" type="su:PhysicalPerson_t">
+			</xsd:element>
+			<xsd:element name="corporateBody" minOccurs="0"
+				maxOccurs="10000" type="su:CorporateBody_t">
+			</xsd:element>
+			<xsd:element name="foreignPhysicalPerson" minOccurs="0"
+				maxOccurs="10000" type="su:ForeignPerson_t">
+			</xsd:element>
+			<xsd:element name="foreignCorporateBody" minOccurs="0"
+				maxOccurs="10000" type="su:ForeignCorporateBody_t">
+			</xsd:element>
+			<xsd:element name="identificator" minOccurs="0"
+				maxOccurs="10000" type="su:Identificator_t">
+			</xsd:element>
+			<xsd:element name="additionalData" minOccurs="0"
+				maxOccurs="10000" type="su:AdditionalData_t">
+			</xsd:element>
+			<xsd:element name="replacementID" type="rb:REG_SubjectID_t"
+				maxOccurs="1" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID subjektu v prípade že aktuálny subjekt bol
+						nahradený/zjednotený s iným subjektom
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rfoReference"
+				type="su:ExternalRegisterReference_t" maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="rpoReference"
+				type="su:ExternalRegisterReference_t" maxOccurs="1" minOccurs="0">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ForeignPerson_t">
+        <xsd:annotation>
+        	<xsd:documentation>Ciselnik CUREG000015</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="gender" maxOccurs="1"
+						minOccurs="0" type="rb:REG_codelistItem_t">
+					</xsd:element>
+					<xsd:element name="nationality" maxOccurs="1"
+						minOccurs="0" type="rb:REG_codelistItem_t">
+					</xsd:element>
+					<xsd:element name="name" minOccurs="1" maxOccurs="1"
+						type="rb:REG_string255_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>REG_index</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="surname" minOccurs="1"
+						maxOccurs="1" type="rb:REG_string255_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>REG_index</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="birthname" minOccurs="0"
+						maxOccurs="1" type="rb:REG_string255_t">
+					</xsd:element>
+					<xsd:element name="titleBefore"
+						type="rb:REG_string100_t" minOccurs="0"
+						maxOccurs="1000">
+					</xsd:element>
+					<xsd:element name="titleAfter"
+						type="rb:REG_string100_t" minOccurs="0"
+						maxOccurs="1000">
+					</xsd:element>
+					<xsd:element name="birthPlace"
+						type="rb:REG_string255_t" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="birthDate" type="rb:REG_date_t" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>REG_index, REG_shortdata</xsd:documentation></xsd:annotation></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ForeignCorporateBody_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="alternativeName" minOccurs="0"
+						maxOccurs="1" type="rb:REG_string255_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>REG_index, REG_shortdata</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="orgUnitName" minOccurs="0"
+						maxOccurs="1000" type="rb:REG_string1023_t">
+					</xsd:element>
+					<xsd:element name="legalForm" maxOccurs="1"
+						minOccurs="0" type="rb:REG_string100_t">
+					</xsd:element>
+					<xsd:element name="country"
+						type="rb:REG_codelistItem_t" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>
+								Ciselnik CUREG000008
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ID" type="rb:REG_string20_t"
+						minOccurs="0" maxOccurs="1">
+                        <xsd:annotation>
+                        	<xsd:documentation>ID - foreign corporate body identification number 
+REG_index,REG_shortdata</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="NACE" maxOccurs="1" minOccurs="0"
+						type="rb:REG_codelistItem_t">
+						<xsd:annotation>
+							<xsd:documentation>
+								Ciselnik CUREG000012
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="dateFormation"
+						type="rb:REG_date_t" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="dateTerm" type="rb:REG_date_t" minOccurs="0" maxOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CorporateBody_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="alternativeName" minOccurs="0"
+						maxOccurs="1" type="rb:REG_string255_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>REG_index,REG_shortdata</xsd:documentation></xsd:annotation>
+					</xsd:element>
+					<xsd:element name="orgUnitName" minOccurs="0"
+						maxOccurs="1000" type="rb:REG_string1023_t">
+					</xsd:element>
+					<xsd:element name="legalForm" maxOccurs="1"
+						minOccurs="0" type="rb:REG_codelistItem_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>REG_index,REG_shortdata</xsd:documentation></xsd:annotation>
+					</xsd:element>
+					<xsd:element name="NACE" maxOccurs="1" minOccurs="0"
+						type="rb:REG_codelistItem_t">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="PhysicalPerson_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="gender" maxOccurs="1" minOccurs="0"
+						type="rb:REG_codelistItem_t">
+					</xsd:element>
+					<xsd:element name="nationality" maxOccurs="1"
+						minOccurs="0" type="rb:REG_codelistItem_t"></xsd:element>
+					<xsd:element name="name" minOccurs="1" maxOccurs="1"
+						type="rb:REG_string255_t">
+						<xsd:annotation>
+							<xsd:documentation>REG_index</xsd:documentation>
+						</xsd:annotation></xsd:element>
+					<xsd:element name="surname" minOccurs="1" maxOccurs="1"
+						type="rb:REG_string255_t">
+						<xsd:annotation>
+							<xsd:documentation>REG_index</xsd:documentation>
+						</xsd:annotation></xsd:element>
+					<xsd:element name="birthname" minOccurs="0"
+						maxOccurs="1" type="rb:REG_string255_t"></xsd:element>
+					<xsd:element name="titleBefore"
+						type="rb:REG_codelistItem_t" minOccurs="0"
+						maxOccurs="100">
+						<xsd:annotation>
+							<xsd:documentation>
+								Ciselnik CUREG000014
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="titleAfter"
+						type="rb:REG_codelistItem_t" minOccurs="0"
+						maxOccurs="100">
+                        <xsd:annotation>
+                        	<xsd:documentation>Ciselnik  CUREG000015</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="birthDate" type="rb:REG_date_t" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>REG_index, REG_shortdata</xsd:documentation>
+						</xsd:annotation></xsd:element>						
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="FormattedName_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="name" type="rb:REG_string1023_t"
+						minOccurs="1" maxOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="Identificator_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="IDValue" type="rb:REG_string50_t" maxOccurs="1" minOccurs="1"></xsd:element>
+					<xsd:element name="IDType" type="rb:REG_codelistItem_t" maxOccurs="1" minOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="AdditionalData_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="moduleName" minOccurs="0"
+						maxOccurs="1" type="rb:REG_modulename_t"></xsd:element>
+					<xsd:element name="key" minOccurs="1" maxOccurs="1"
+						type="rb:REG_key_t"></xsd:element>
+					<xsd:element name="value" type="rb:REG_string4096_t" maxOccurs="1" minOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="SubjectType_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FO"></xsd:enumeration>
+			<xsd:enumeration value="PO"></xsd:enumeration>
+			<xsd:enumeration value="SZ"></xsd:enumeration>
+			<xsd:enumeration value="ZO"></xsd:enumeration>
+			<xsd:enumeration value="ZP"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ExternalRegisterReference_t">
+		<xsd:sequence>
+			<xsd:element name="EntryId" type="rb:REG_ID_t" maxOccurs="1" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Toto je ID záznamu registra v module REG pre externý register (RFO/RPO). Ak je vyplnené, tak to znamená že údaje sú stotožnené a máme údaje v externom registri.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExternalId" type="rb:REG_string50_t"
+				maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                	<xsd:documentation>Toto je ID záznamu registra externého registra (Teda napr. ID z CSRU registra FO alebo PO)</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

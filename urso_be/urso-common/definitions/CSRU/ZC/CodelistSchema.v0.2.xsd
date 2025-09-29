@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<!-- Schema pre D.5 Zakladny ciselnik podla prilohy c. 13 vynosu c. 55/2014 Z. z. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="CodelistSchema">
+	<xs:element name="Codelist" type="CodelistCType">
+		<xs:annotation>
+			<xs:documentation xml:lang="sk">
+                D.5 Zlozeny datovy prvok na popis struktury zakladneho ciselnika.
+                Hodnoty: Neobsahuje.
+            </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CodelistCType">
+		<xs:annotation>
+			<xs:documentation xml:lang="sk">
+                D.5 Zlozeny datovy prvok na popis struktury zakladneho ciselnika.
+                Hodnoty: Neobsahuje.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CodelistCode" type="CodelistCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.1 Jedinecny kod zakladneho ciselnika.
+                        Poznamky: Textova struktura sa tvori CLXXXXXX, pricom znaky X predstavuju cifry.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodelistName" type="CodelistNameLocHisSCType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">D.5.2 Strucny a zrozumitelny nazov zakladneho ciselnika popisujuci jeho obsah.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodelistManager" type="CodelistManagerLocHisSCType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.3 Cely nazov vecneho gestora zakladneho ciselnika.
+                        Hodnoty: Priklady pouzitia: Ministerstvo financii Slovenskej republiky.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceCodelist" type="SourceCodelistType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.4 Ak zakladny ciselnik prebera udaje z ineho ciselnika, identifikuje sa zdrojovy preberany ciselnik.
+                        Hodnoty: Priklady pouzitia: Alpha-2: Kody krajin. ISO 3166-1 - Kody nazvov krajin a ich casti. Cast 1: Kody krajin.
+                        Poznamky: Pouziva sa najma, ak zakladny ciselnik vychadza z medzinarodne uznaneho ciselnika.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidFrom" type="ValidFromType">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.5 Datum, kedy bol zakladny ciselnik publikovany.
+                        Hodnoty: Podla formatu Date.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectiveFrom" type="EffectiveFromType">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.6 Datum, od ktoreho zakladny ciselnik nadobudol ucinnost, to znamena, odkedy je mozne ho pouzivat.
+                        Hodnoty: Podla formatu Date.
+                        Pravidla pouzitia: Vzhladom na zachovanie kontinuity pouzitelnosti prislusnej hodnoty sa zmenou bezneho ciselnika na zakladny ciselnik jeho ucinnost nemeni. Uvedeny fakt je mozne uviest do datoveho prvku Poznamka.
+                        Poznamky: Ucinnost je spravidla totozna s datumom vytvorenia okrem pripadov, ked je ucinnost posunuta. Zaciatok ucinnosti nemoze byt skorsi ako datum vytvorenia.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectiveTo" type="EffectiveToType" nillable="true">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.7 Datum, od ktoreho bola zrusena ucinnost zakladneho ciselnika.
+                        Hodnoty: Podla formatu Date. Presnost je na urovni dna. Ak nebola ucinnost ukoncena, neobsahuje ziadnu hodnotu.
+                        Pravidla pouzitia: Koniec ucinnosti nemoze byt skorsi ako zaciatok ucinnosti.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Note" type="NoteLocSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.8 Obsahuje doplnujuce informacie k zakladnemu ciselniku, ak je to potrebne.
+                        Hodnoty: Nema predpisany obsah.
+                        Pravidla pouzitia: Moze byt pouzity viackrat.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodelistItem" type="CodelistItemCType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9 Zlozeny datovy prvok pre jednotlive polozky ciselnika.
+                        Pravidla pouzitia: Moze byt pouzity viackrat. Ciselnik musi obsahovat najmenej jednu polozku ciselnika.
+                        Hodnoty: Neobsahuje.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CodelistItemCType">
+		<xs:annotation>
+			<xs:documentation xml:lang="sk">
+                D.5.9 Zlozeny datovy prvok na popis datovej struktury polozky ciselnika.
+                Pravidla pouzitia: Moze byt pouzity viackrat. Ciselnik musi obsahovat najmenej jednu polozku ciselnika.
+                Hodnoty: Neobsahuje.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ItemCode" type="ItemCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.1 Jedinecny kod polozky.
+                        Poznámky: Spravidla je tvorený desiatimi znakmi.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemName" type="ItemNameLocHisSCType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.2 Uplny nazov polozky.
+                        Hodnoty: Nema predpisany obsah. Na umoznenie spracovania problematickych hodnot sa poskytuje polozka s nazvom „Ine“ a podobne, pricom sa spravidla prislusnou obsluznou aplikaciou poskytuje moznost volne vyplnatelneho datoveho pola. Priklady pouzitia: Slobodny, Zenaty, Iny stav, Spolocnost s rucenim obmedzenym, Riadiaci vybor exekutivneho organu.
+                        Pravidla pouzitia: Kazda jazykova verzia sa k prislusnemu datumu ucinnosti pouziva iba raz, pricom atribut „language“ sluzi na urcenie jazyka, v ktorom je polozka vytvorena.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemShortenedName" type="ItemShortenedNameLocHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.3 Zauzivany nazov polozky najma na ucely zrychleneho automatizovaneho spracovania.
+                        Hodnoty: Priklady pouzitia: Velka Britania, Riadiaci vybor.
+                        Poznamky: Pouziva sa najma, ak je nazov polozky velmi dlhy, napriklad pre Spojene kralovstvo Velkej Britanie a Severneho Irska.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemAbbreviatedName" type="ItemAbbreviatedNameLocHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.4 Zauzivana skratka pre nazov polozky.
+                        Hodnoty: Priklady pouzitia: TANAP, RV.
+                        Poznamky: Spravidla sa tvori z prvych pismen jednotlivych slov nazvu polozky.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalContent" type="AdditionalContentLocHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.5 Atribut pre vyznamove rozsirenie udajov ciselnika, ak je to potrebne.
+                        Hodnoty: Nema predpisany obsah.
+                        Pravidla pouzitia: Moze byt pouzity viackrat.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitOfMeasure" type="UnitOfMeasureHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.6 Pouzita merna jednotka.
+                        Pravidla pouzitia: Pouziva sa iba pri ciselnikoch, v ktorych je takato informacia relevantna, najma ak je potrebne taketo odlisenie viacerych poloziek zakladneho ciselnika. Ak existuje, pre dane merne jednotky sa pouziva relevantny zakladny ciselnik.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Note" type="NoteLocSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.8 Lubovolne doplnujuce informacie k polozke.
+                        Hodnoty: Nema predpisany obsah.
+                        Pravidla pouzitia: Obsahuje bud doplnujuce informacie o polozke, alebo vseobecny popis polozky, pricom neopakuje obsah atributov Zahrna, Tiez zahrna a Vylucuje, ak existuju.
+                        Poznamky: Pouziva sa napriklad na zapisanie dovodu zaradenia odporucanej polozky.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Includes" type="IncludesLocHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.7 Tematicke prepojenie na vytvaranie triedenia poloziek a hierarchickych vztahov ciselnikov, najma ak to nie je zrejme z nazvu polozky. Klasifikovanym sposobom opisuje obsah polozky, najma s cielom vytvarania tried.
+                        Hodnoty: Nema predpisany obsah.
+                        Poznamky: Spravidla pouzivane pri statistickych ciselnikoch, najma ako klucove slova pre klasifikaciu poloziek a ich triedenie.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IncludesAlso" type="IncludesAlsoLocHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.8 Tematicke prepojenie na vytvaranie triedenia poloziek a hierarchickych vztahov ciselnikov osobitnej kategorie inej ako v atribute Zahrna sa, najma ak to nie je zrejme z nazvu polozky. Klasifikovanym sposobom opisuje hranicne hodnoty.
+                        Hodnoty: Nema predpisany obsah.
+                        Poznamky: Spravidla pouzivane pri statistickych ciselnikoch, najma ako zoznam hranicnych hodnot klasifikacii pre jednoznacne zaradenie do atributu Zahrna.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Excludes" type="ExcludesLocHisSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.9 Tematicke prepojenie pre vytvaranie hierarchickych vztahov ciselnikov, najma ak to nie je zrejme z nazvu polozky. Klasifikovanym sposobom opisuje vylucene hodnoty.
+                        Hodnoty: Nema predpisany obsah.
+                        Poznamky: Spravidla pouzivane pri statistickych ciselnikoch pre klasifikaciu, do ktorej triedy polozku urcite nemozno zaradit. Vylucene klucove slova mozu obsahovat referencie na polozky, do ktorych vylucene klucove slova patria.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidFrom" type="ValidFromType">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.5 Datum, kedy bola polozka publikovana v ciselniku.
+                        Hodnoty: Podla formatu Date.
+                        Pravidla pouzitia: Vzhladom na zachovanie kontinuity pouzitelnosti prislusnej hodnoty sa zmenou bezneho ciselnika na zakladny ciselnik datum platnosti nemeni. Uvedeny fakt je mozne uviest do datoveho prvku Poznamka.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectiveFrom" type="EffectiveFromHisSCType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.6 Datum, od ktoreho polozka nadobudla ucinnost, to znamena, odkedy je mozne ju pouzivat.
+                        Hodnoty: Podla formatu Date. Presnost je na urovni dna.
+                        Pravidla pouzitia: Vzhladom na zachovanie kontinuity pouzitelnosti prislusnej hodnoty sa zmenou bezneho ciselnika na zakladny ciselnik zaciatok ucinnosti nemeni. Uvedeny fakt je mozne uviest do datoveho prvku Poznamka.
+                        Poznamky: Ucinnost je spravidla totozna s datumom vytvorenia okrem pripadov, ked je ucinnost posunuta. Zaciatok ucinnosti polozky ciselnika sa meni, iba ak mala polozka ciselnika pozastavenu ucinnost. Historicke zmeny hodnot jednotlivych sucasti polozky ciselnika sa eviduju iba v prislusnych sucastiach.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectiveTo" type="EffectiveToHisSCType" nillable="true" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.7 Datum, ktorym sa konci ucinnost polozky.
+                        Hodnoty: Podla formatu Date. Presnost je na urovni dna. Ak nebola ucinnost ukoncena, neobsahuje ziadnu hodnotu.
+                        Pravidla pouzitia: Koniec ucinnosti nemoze byt skorsi ako zaciatok ucinnosti. Koniec ucinnosti polozky ciselnika sa meni, iba ak sa polozke ciselnika pozastavuje ucinnost. Historicke zmeny hodnot jednotlivych sucasti polozky ciselnika sa eviduju iba v prislusnych sucastiach okrem obdobia pozastavenej ucinnosti celej polozky ciselnika, ktora sa eviduje iba v tomto datovom prvku.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemLogicalOrder" type="ItemLogicalOrderLocSCType" nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.10 Odporucane logicke poradie polozky pri pouzivani ciselnika.
+                        Poznamky: Pri zmene svojej hodnoty nevyvolava vytvorenie novej polozky.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LegislativeValidity" type="LegislativeValidityHisSCType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="sk">
+                        D.5.9.11 Datovy prvok sluziaci na rozlisenie legislativnej uznatelnosti danej polozky v podmienkach Slovenskej republiky.
+                        Hodnoty: Datovy typ „Datovy prvok s historiou“ s hodnotami: 1 – uznatelna, 0 – neuznatelna.
+                        Poznamky: Nie kazda hodnota ciselnika je uznatelna na uradne alebo pravne konanie v Slovenskej republike. Pri typoch obchodnych spolocnosti v Slovenskej republike, ako su „Spolocnost s rucenim obmedzenym“ a „Akciova spolocnost“, su tieto legislativne uznatelne, ale pri zahranicnych obchodnych spolocnostiach, ako su napriklad „Unlimited“ a podobne, moze ist iba o niektore z nich, pri urcitej cinnosti sa vsak mozu pouzivat aj tie neuznatelne, napriklad pri statistickom zistovani na urovni Europy.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataElementWithHistorySCType">
+		<xs:annotation>
+			<xs:documentation xml:lang="sk">
+                D.3.1 Osobitny datovy typ pre datove prvky so sledovanim historickych zmien ich obsahu.
+                Hodnoty: Obsahuje vlastnu hodnotu prislusneho datoveho prvku v danom casovom obdobi.
+                Pravidla pouzitia: Tento datovy prvok sa nepouzije bez atributu „Current“ a „EffectiveFrom“ a ak ma datovy prvok ukoncenu platnost, tak ani bez atributu „EffectiveTo“. Moze byt pouzity viackrat.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="HistoryAGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LocalizedDataElementSCType">
+		<xs:annotation>
+			<xs:documentation xml:lang="sk">
+                D.3.2 Osobitny datovy typ pre jazykove verzie datovych prvkov.
+                Hodnoty: Obsahuje vlastnu hodnotu prislusnej jazykovej verzie identifikovanej atributom „language“.
+                Pravidla pouzitia: Tento datovy prvok sa nepouzije bez atributu „language“. Moze byt pouzity viackrat, ale pre jednu jazykovu verziu iba jeden krat.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="LocalizedAGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LocalizedDataElementWithHistorySCType">
+		<xs:annotation>
+			<xs:documentation xml:lang="sk">
+                D.3.3 Osobitny datovy typ pre jazykove verzie datovych prvkov so sledovanim historickych zmien ich obsahu.
+                Hodnoty: Obsahuje vlastnu hodnotu prislusnej jazykovej verzie identifikovanej atributom „language“ v danom casovom obdobi.
+                Pravidla pouzitia: Tento datovy prvok sa nepouzije bez atributu „Language“, „Current“ a „EffectiveFrom“, a ak ma datovy prvok ukoncenu platnost, tak ani bez atributu „EffectiveTo“. Moze byt pouzity viackrat, ale pre jednu jazykovu verziu v jednom case iba jeden krat.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="LocalizedAGroup"/>
+				<xs:attributeGroup ref="HistoryAGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="EffectiveFromHisSCType">
+		<xs:simpleContent>
+			<xs:extension base="xs:date">
+				<xs:attributeGroup ref="HistoryAGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="EffectiveToHisSCType">
+		<xs:simpleContent>
+			<xs:extension base="xs:date">
+				<xs:attributeGroup ref="HistoryAGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ItemLogicalOrderLocSCType">
+		<xs:simpleContent>
+			<xs:extension base="ItemLogicalOrderType">
+				<xs:attributeGroup ref="LocalizedAGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CodelistNameLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CodelistManagerLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="NoteLocSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementSCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="4095"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ItemNameLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="2047"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ItemShortenedNameLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="128"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ItemAbbreviatedNameLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AdditionalContentLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="4095"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UnitOfMeasureHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="DataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="IncludesLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="4095"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="IncludesAlsoLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="1023"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ExcludesLocHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="LocalizedDataElementWithHistorySCType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="2047"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LegislativeValidityHisSCType">
+		<xs:simpleContent>
+			<xs:restriction base="DataElementWithHistorySCType">
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="CodelistCodeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveFromType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveToType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ValidFromType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="SourceCodelistType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2047"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ItemCodeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ItemLogicalOrderType">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="LocalizedAGroup">
+		<xs:attribute name="language" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="sk">
+                    Obsahuje identifikaciu pouziteho jazyka.
+                    Hodnoty: Vyplna sa v sulade s datovym prvkom „Kod polozky“ podla zakladneho ciselnika CL010076 Jazyky.
+                    Zalozene na: RFC 5646: Znacky pre identifikaciu jazykov. STN ISO 639-1 Kody nazvov jazykov. Cast 1: Dvojmiestne abecedne kody (01 0400). STN ISO 639-2 Kody nazvov jazykov. Cast 2: Trojmiestne abecedne kody (01 0400).
+                </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="HistoryAGroup">
+		<xs:attribute name="current" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="sk">
+                    Obsahuje oznacenie, ci je prislusny datovy prvok historicky posledny aktualny.
+                    Hodnoty: „true“ – je aktualne ucinny, „false“ – jeho ucinnost bola ukoncena.
+                    Poznamky: Je urceny na zrychlene vyhladanie aktualne ucinnych hodnot.
+                </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="effectiveFrom" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="sk">
+                    Datum, od ktoreho datovy prvok nadobudol ucinnost, to znamena, odkedy je relevantne pouzitelny.
+                    Hodnoty: Podla formatu Date. Presnost je na urovni dna.
+                </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="effectiveTo" type="xs:date">
+			<xs:annotation>
+				<xs:documentation xml:lang="sk">
+                    Datum, kedy bola ucinnost datoveho prvku ukoncena, to znamena, dokedy je este relevantne pouzitelny.
+                    Hodnoty: Podla formatu Date. Presnost je na urovni dna. Ak ucinnost nie je ukoncena, neobsahuje ziadnu hodnotu.
+                    Pravidla pouzitia: Koniec ucinnosti nemoze byt skorsi ako zaciatok ucinnosti.
+                </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+</xs:schema>

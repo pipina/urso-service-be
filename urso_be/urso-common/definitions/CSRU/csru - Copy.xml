@@ -1,0 +1,28 @@
+<jaxb:bindings
+	xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:extensionBindingPrefixes="xjc">
+
+  <jaxb:bindings
+  schemaLocation="CSRU_GetConsolidatedDataService_v1.4.wsdl"
+  node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://csru.gov.sk/csru_getconsolidateddata/v1.4']">
+	<jaxb:schemaBindings>
+		<jaxb:nameXmlTransform>
+			<jaxb:elementName suffix="AAAAA"/>
+		</jaxb:nameXmlTransform>
+	</jaxb:schemaBindings>
+  </jaxb:bindings>
+
+	<jaxb:bindings
+		schemaLocation="CSRU_GetConsolidatedDataService_v1.4.wsdl"
+		node="//xsd:complexType[@name='GetStatusResponseCType']">
+		<jaxb:class name="GetStatusResponseCType_other" />
+	</jaxb:bindings>
+	
+	<jaxb:bindings
+		schemaLocation="CSRU_GetConsolidatedDataService_v1.4.wsdl"
+		node="//xsd:complexType[@name='GetStatusRequestCType']">
+		<jaxb:class name="GetStatusRequestCType_other" />
+	</jaxb:bindings>
+</jaxb:bindings>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.dominanz.sk/registersConfig" xmlns:tns="http://www.dominanz.sk/registersConfig" elementFormDefault="qualified">
+
+	<element name="RegistersConfig" type="tns:RegistersConfig"></element>
+
+	<complexType name="RegistersConfig">
+		<sequence>
+			<element name="RegisterPlugin" type="tns:RegisterPlugin" maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+	<simpleType name="RegisterIdType">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="256"></maxLength>
+		</restriction>
+	</simpleType>
+	<complexType name="RegisterPlugin">
+		<attribute name="RegisterId" type="tns:RegisterIdType">
+
+		</attribute>
+		<attribute name="Version" use="required">
+			<simpleType>
+				<restriction base="int">
+					<minInclusive value="1"></minInclusive>
+				</restriction>
+			</simpleType>
+		</attribute>
+		<attribute name="Name" type="string" use="required"></attribute>
+		<attribute name="Description" type="string" use="required"></attribute>
+		<attribute name="PluginClass" type="string" use="required"></attribute>
+		<attribute name="Enabled" type="boolean" use="required"></attribute>
+		<attribute name="EffectiveFrom" type="date" use="required"></attribute>
+		<attribute name="EffectiveTo" type="date" use="optional"></attribute>
+		<attribute name="PublicRegisterId" type="tns:RegisterIdType" use="optional"></attribute>
+	</complexType>
+</schema>

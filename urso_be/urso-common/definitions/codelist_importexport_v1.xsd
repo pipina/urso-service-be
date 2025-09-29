@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.dominanz.sk/UVZ/Reg/CodeList_ImportExport"
+    	xmlns:tns="http://www.dominanz.sk/UVZ/Reg/CodeList_ImportExport"
+    	xmlns:cl="http://www.dominanz.sk/UVZ/Reg/CodeList"
+    	xmlns:cld="http://www.dominanz.sk/UVZ/Reg/CodeListData"
+    	elementFormDefault="qualified" version="1.0" xmlns:Q1="http://www.dominanz.sk/UVZ/Reg/CodeListBase">
+	
+    <xsd:import schemaLocation="codelistBase_v1.xsd" namespace="http://www.dominanz.sk/UVZ/Reg/CodeListBase"></xsd:import>
+    <xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/CodeList"
+		schemaLocation="codeList_v1.xsd"/>
+
+	<xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/CodeListData"
+		schemaLocation="codeListData_v1.xsd"/>
+    
+
+	<xsd:simpleType name="importOperationType">
+        <xsd:annotation>
+        	<xsd:documentation>Import type 
+ - INITIAL_LOAD - initial load of data. This will delete old data and replace them with given data. Historical data can be loaded.
+ - ADDNEW_DATA - add new data, without affecting existing entries. Import will fail in case of conflict. Import cannot contain historical data
+ - RELOAD_DATA - invalidate old data and set new data. Import cannot contain historical data
+</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ADDNEW_DATA"></xsd:enumeration>
+			<xsd:enumeration value="RELOAD_DATA"></xsd:enumeration>
+			<xsd:enumeration value="INITIAL_LOAD"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="subsetDefinitionType">
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+     	    
+    <xsd:complexType name="exportDescriptionType">
+    	<xsd:sequence>
+    		<xsd:element name="ExportTime" maxOccurs="1" minOccurs="1" type="xsd:dateTime" >
+    			<xsd:annotation>
+    				<xsd:documentation>Datum a cas vytvorenia exportu.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="SnapshotDate" minOccurs="1" maxOccurs="1" type="xsd:date" >
+    			<xsd:annotation>
+    				<xsd:documentation>Datum ku ktoremu bola vytvorena snimka dat.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="WithHistory" minOccurs="1" maxOccurs="1" type="xsd:boolean">
+    			<xsd:annotation>
+    				<xsd:documentation>Export historickych poloziek - poloziek ktore nie su platne v datume ku ktoremu bola vytvorena snimka (snapshotDate).</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="IsSubset" minOccurs="1" maxOccurs="1" type="xsd:boolean">
+    			<xsd:annotation>
+    				<xsd:documentation>Ci ide o export definovanej podmnoziny dat.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="SubsetDefinition" minOccurs="0" maxOccurs="1" type="tns:subsetDefinitionType">
+    			<xsd:annotation>
+    				<xsd:documentation>Definicia podmnoziny.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="ExportedFor" minOccurs="1" maxOccurs="1" type="xsd:string">
+    			<xsd:annotation>
+    				<xsd:documentation>Pre koho bol vytvoreny export.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="ExportLogId" minOccurs="1" maxOccurs="1" type="xsd:string">
+    			<xsd:annotation>
+    				<xsd:documentation>Id operacie exportu v logu IS REG.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="CodeList" maxOccurs="1" minOccurs="1" type="cl:CodeListType">
+    			<xsd:annotation>
+    				<xsd:documentation>Ciselnik.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<xsd:element name="Notes" type="xsd:string" minOccurs="0" maxOccurs="1">
+    			<xsd:annotation>
+    				<xsd:documentation>Poznamka k exportu.</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+		</xsd:sequence>    		
+    </xsd:complexType>
+    
+    
+    <xsd:complexType name="importDescriptionType">
+    	<xsd:sequence>
+            <xsd:element name="CodelistCode" type="Q1:codeListCodeType" maxOccurs="1" minOccurs="1"></xsd:element>
+            <xsd:element name="CodelistDataDate" minOccurs="1"
+    			maxOccurs="1" type="xsd:date">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					Datum ku ktoremu boli definovane data ciselnika.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element name="ImportCreationTime" maxOccurs="1"
+    			minOccurs="1" type="xsd:dateTime">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					Datum a cas vytvorenia importneho suboru.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element name="DataAuthor" minOccurs="1" maxOccurs="1"
+    			type="xsd:string">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					Autor (zodpovedna osoba) importneho suboru.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element name="CodeList" maxOccurs="1" minOccurs="0"
+    			type="cl:CodeListType">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					Ciselnik. Povinnou polozkou ciselnika pri
+    					importe je kod ciselnika, ostatne su nepovinne a
+    					v pripade pridavania poloziek (ADDNEW_DATA) su
+    					zahodene.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element name="Operation" minOccurs="1" maxOccurs="1"
+    			type="tns:importOperationType">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					Typ operacie s importom: - inicialny load -
+    					nastavenie ciselnika do vychodzieho stavu (pri
+    					nasadeni, odstranenie vsetkych poloziek spolu s
+    					historiou, naplnenie dodanymi polozkami) -
+    					vymena vsetkych poloziek - zneplatnenie
+    					existujucich poloziek, zavedenie dodanych
+    					poloziek - pridanie novych poloziek - doplni
+    					polozky z importu do existujucich dat, v pripade
+    					duplicity import odmietne
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element name="Notes" type="xsd:string" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					Poznamka k importu (dovod,...).
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+
+
+	<xsd:complexType name="ImportExportChoiceType">
+		<xsd:choice>
+			<xsd:element name="Import" type="tns:importDescriptionType"></xsd:element>
+			<xsd:element name="Export" type="tns:exportDescriptionType"></xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+    
+	<xsd:complexType name="ImportExportType">
+		<xsd:sequence>
+			<xsd:element name="Type" type="tns:ImportExportChoiceType" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Vyber importny alebo exportny subor.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+			<xsd:element name="Records" minOccurs="0"
+				maxOccurs="1" type="tns:RecordsType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Polozky (data) cislenika.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Version" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Cislo verzie schemy.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="1"></xsd:minInclusive>
+						<xsd:maxInclusive value="1"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    
+    
+
+
+	<xsd:element name="ImportExport" type="tns:ImportExportType"></xsd:element>
+
+	<xsd:complexType name="RecordsType">
+		<xsd:sequence>
+            <xsd:element name="Record" type="cld:CodeListDataRecType" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.dominanz.sk/registerPluginConfig_v1"
+	xmlns:tns="http://www.dominanz.sk/registerPluginConfig_v1"
+	xmlns:clb="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+	elementFormDefault="qualified">
+
+	<import namespace="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+		schemaLocation="codelistBase_v1.xsd" />
+
+	<import schemaLocation="codelistBase_v1.xsd"
+			namespace="http://www.dominanz.sk/UVZ/Reg/CodeListBase"/>
+	<element name="RegisterPluginConfig"
+			 type="tns:RegisterPluginConfig"/>
+
+	<complexType name="RegisterPluginConfig">
+		<sequence>
+			<element name="Field" type="tns:RegisterEntryField"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+			<element name="RegisterType" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="INTERNAL"/>
+						<enumeration value="EXTERNAL"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="IntegrationParams"
+				type="tns:IntegrationParams" maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="MDMParams" type="tns:MDMParams" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="GdprParams" type="tns:GdprParams"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="Validations" type="tns:Validation"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="XsdFile" type="tns:XsdFile"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+			<element name="FormioField" type="tns:FormioFieldType"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="UseNaturalIdTable" type="boolean" use="optional" default="false"/>
+	</complexType>
+
+	<complexType name="RegisterEntryField">
+		<complexContent>
+			<extension base="tns:XPathNamedKey">
+
+
+				<choice>
+					<element name="Enumeration"
+						type="tns:EnumerationField" minOccurs="0" maxOccurs="1">
+					</element>
+					<element name="Register" type="tns:RegisterField"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="Historical"
+						type="tns:HistoricalField" maxOccurs="1" minOccurs="0">
+					</element>
+				</choice>
+				<attribute name="Description" type="string"
+					use="optional">
+				</attribute>
+
+				<attribute name="ValueType" use="optional"
+					default="STRING">
+					<simpleType>
+						<restriction base="tns:ValueType">
+							<enumeration value="STRING" />
+							<enumeration value="DATE" />
+							<enumeration value="TIME" />
+							<enumeration value="DATETIME" />
+							<enumeration value="NUMBER" />
+						</restriction>
+					</simpleType>
+				</attribute>
+
+				<attribute name="IsFunction" type="boolean"
+					use="optional" default="false">
+					<annotation>
+						<documentation>
+							if true, XPath is describing function - only
+							one value is returned, otherwise node list
+							can be returned - multiple values can be
+							returned!
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="IsIndexed" type="boolean"
+					use="optional" default="false">
+					<annotation>
+						<documentation>
+							If true, this field is indexed - it is
+							prepared for search and we donot have to
+							execute xpath to obtain a value.
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="IsOutputField" type="boolean"
+					use="optional" default="false">
+					<annotation>
+						<documentation>
+							If true this field is returned in register
+							entry output - for search and similar
+							operations.
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="DisplayName" type="string"
+					use="optional">
+					<annotation>
+						<documentation>
+							Lokalizovaný názov tohto poľa
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="IsId" type="boolean" use="optional"
+					default="false" />
+				<attribute name="IsIdGenerated" type="boolean"
+					use="optional" default="true">
+				</attribute>
+				<attribute name="SearchType" use="optional" default="LIKE">
+                    <annotation>
+                    	<documentation>Určuje či sa hodnota má hľadať cez LIKE alebo cez EQUALS. 
+Default hodnota LIKE.
+Default hodnota sa ignoruje ak napr. vieme že pole je ID alebo číselníková hodnota - vtedy hľadáme cez EQUALS.</documentation>
+                    </annotation>
+                    <simpleType>
+						<restriction base="string">
+							<enumeration value="LIKE"></enumeration>
+							<enumeration value="EQUALS"></enumeration>
+						</restriction>
+					</simpleType>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<simpleType name="ValueType">
+		<restriction base="string"/>
+	</simpleType>
+
+	<complexType name="RegisterType"/>
+
+	<complexType name="IntegrationParams">
+		<sequence>
+			<element name="SynchronousCall" type="tns:SynchronousCall"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="AsynchronousCall" type="tns:AsynchronousCall"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="AsyncCallbackId" type="string" maxOccurs="1"
+					 minOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="SynchronousCall">
+		<sequence>
+			<element name="InputToKey" type="tns:XPathNamedKey"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="InputXsdFile" type="string"></attribute>
+		<attribute name="OutputXsdFile" type="string"></attribute>
+		<attribute name="InputClassName" type="string"></attribute>
+		<attribute name="OutputClassName" type="string"></attribute>
+	</complexType>
+
+	<complexType name="XPathNamedKey">
+		<attribute name="KeyName" type="tns:KeyNameType" use="optional"></attribute>
+		<attribute name="XPathValue" type="string" use="required"></attribute>
+	</complexType>
+
+	<complexType name="AsynchronousCall">
+		<sequence>
+			<element name="InputToKey" type="tns:XPathNamedKey"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="InputXsdFile" type="string"></attribute>
+		<attribute name="OutputXsdFile" type="string"></attribute>
+		<attribute name="InputClassName" type="string"></attribute>
+		<attribute name="OutputClassName" type="string"></attribute>
+	</complexType>
+
+	<complexType name="MDMParams"></complexType>
+
+	<complexType name="UIParams"></complexType>
+
+	<complexType name="GdprParams">
+		<attribute name="IsGdprRelevant" type="boolean"
+			use="required">
+            <annotation>
+            	<documentation>If true entries are deleted aut0matically when there is no reference to entry.</documentation>
+            </annotation>
+		</attribute>
+		<attribute name="ImmediateDeleteOnLastReference" type="boolean"
+			use="optional">
+            <annotation>
+            	<documentation>If true, entry is deleted immediately after last reference is removed.</documentation>
+            </annotation>
+		</attribute>
+		<attribute name="TTL" use="optional">
+			<annotation>
+				<documentation>
+					Time after entry is deleted when without references.
+					This is used for entries inserted after search (so
+					they have no references yet) or after last reference
+					is removed from entry and immediate delete is not
+					set.
+				</documentation>
+			</annotation>
+			<simpleType>
+				<restriction base="int">
+					<minInclusive value="1"></minInclusive>
+				</restriction>
+			</simpleType>
+		</attribute>
+		<attribute name="TTLUnit" use="optional">
+            <annotation>
+            	<documentation>Unit of TTL</documentation>
+            </annotation>
+            <simpleType>
+				<restriction base="string">
+					<enumeration value="YEARS"></enumeration>
+					<enumeration value="MONTHS"></enumeration>
+					<enumeration value="WEEKS"></enumeration>
+					<enumeration value="DAYS"></enumeration>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+
+	<complexType name="Validation">
+		<sequence>
+			<element name="Field" type="tns:ValidatedField"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ValidatedField">
+		<sequence>
+		</sequence>
+		<attribute name="ValueXPath" type="string"></attribute>
+	</complexType>
+
+	<complexType name="ValidatedFieldReference">
+		<choice>
+			<element name="Enumeration" type="tns:EnumerationReference"></element>
+			<element name="Register" type="tns:RegisterReference"></element>
+		</choice>
+	</complexType>
+
+	<complexType name="EnumerationReference">
+		<attribute name="CodelistCode" type="clb:codeListCodeType"></attribute>
+	</complexType>
+
+	<complexType name="RegisterReference">
+		<attribute name="RegisterId" type="string"></attribute>
+		<attribute name="KeyName" type="string"></attribute>
+	</complexType>
+
+	<complexType name="XsdFile">
+		<attribute name="IsPrimary" type="boolean" use="required"></attribute>
+		<attribute name="Path" type="string" use="required"></attribute>
+		<attribute name="IsExternal" type="boolean" use="required"></attribute>
+		<attribute name="NamespacePrefix" type="string" use="optional"></attribute>
+		<attribute name="NamespaceUrl" type="string" use="optional"></attribute>
+	</complexType>
+
+	<complexType name="EnumerationField">
+		<attribute name="CodelistCode" type="clb:codeListCodeType" use="required"></attribute>
+		<attribute name="IsItemCodeRequired" type="boolean"
+					use="optional" default="true">
+					<annotation>
+						<documentation>
+							If true this field is required in data.
+						</documentation>
+					</annotation>
+				</attribute>
+	</complexType>
+
+	<complexType name="RegisterField">
+		<sequence>
+			<element name="RegisterJoinKey" type="tns:RegisterJoinKeyType" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+		<attribute name="RegisterId" use="required">
+			<simpleType>
+				<restriction base="string">
+					<minLength value="1"></minLength>
+					<maxLength value="256"></maxLength>
+				</restriction>
+			</simpleType>
+		</attribute>
+		<attribute name="Version" use="required">
+			<simpleType>
+				<restriction base="int">
+					<minInclusive value="1"></minInclusive>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+
+	<simpleType name="KeyNameType">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="256"></maxLength>
+		</restriction>
+	</simpleType>
+
+	<complexType name="RegisterJoinKeyType">
+		<sequence></sequence>
+		<attribute name="Source" type="tns:KeyNameType" use="required"></attribute>
+		<attribute name="Target" type="tns:KeyNameType" use="required"></attribute>
+	</complexType>
+
+	<attribute name="NewAttribute" type="string"></attribute>
+
+
+
+	<complexType name="FormioFieldType">
+		<sequence>
+			<element name="Custom" type="tns:CustomFormioExpressionType" maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+		<attribute name="Name" type="string" use="required">
+			<annotation>
+				<documentation>Obsahuje formio key pola na ktore sa konfiguracia stahuje</documentation>
+			</annotation></attribute>
+		<attribute name="Path" type="string" use="optional">
+			<annotation>
+				<documentation>Obsahuje cestu k formio polu (viacero poli moze mat rovnaky formio Key)</documentation>
+			</annotation></attribute>
+		<attribute name="DefaultValue" type="string" use="optional"></attribute>
+		<attribute name="IsGenerated" type="boolean" use="optional"
+			default="false">
+		</attribute>
+		<attribute name="IsUpdatable" type="boolean" use="optional" default="true"></attribute>
+	</complexType>
+
+	<complexType name="CustomFormioExpressionType">
+		<attribute name="Mark" use="required">
+			<annotation>
+				<documentation>
+					Oznacuje aku formio property nastavit
+				</documentation>
+			</annotation>
+			<simpleType>
+				<restriction
+					base="tns:CustomFormioExpressionMarkType">
+					<enumeration value="valid"></enumeration>
+					<enumeration value="show"></enumeration>
+				</restriction>
+			</simpleType>
+		</attribute>
+        <attribute name="As" type="boolean" use="optional" default="true"></attribute>
+        <attribute name="WhenField" type="string" use="optional"></attribute>
+		<attribute name="Equals" type="string" use="optional"></attribute>
+		<attribute name="ErrorMessage" type="string" use="optional"></attribute>
+		<attribute name="Custom" type="string" use="optional"></attribute>
+	</complexType>
+
+	<simpleType name="CustomFormioExpressionMarkType">
+		<restriction base="string"></restriction>
+	</simpleType>
+
+	<complexType name="HistoricalField">
+		<attribute name="CurrentMax" type="int" use="optional"></attribute>
+	</complexType>
+</schema>

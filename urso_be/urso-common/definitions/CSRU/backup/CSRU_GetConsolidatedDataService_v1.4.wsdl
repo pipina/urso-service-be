@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	name="CSRUGetConsolidatedDataService"
+	targetNamespace="http://csru.gov.sk/csru_getconsolidateddata/v1.4"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:csru="http://csru.gov.sk/csru_getconsolidateddata/v1.4"
+	xmlns:c="http://csru.gov.sk/common/v1.4">
+
+	<wsdl:types>
+		<xs:schema
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+			xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+			xmlns:csru="http://csru.gov.sk/csru_getconsolidateddata/v1.4"
+			xmlns:c="http://csru.gov.sk/common/v1.4"
+			elementFormDefault="qualified"
+			targetNamespace="http://csru.gov.sk/csru_getconsolidateddata/v1.4">
+
+			<!-- import common types schema -->
+			<xs:import namespace="http://csru.gov.sk/common/v1.4" schemaLocation="csru_common_types_v1.4.xsd"/>
+
+			<!-- GetConsolidatedData IN/OUT elements -->
+			<xs:element name="GetConsolidatedDataRequest" type="csru:GetConsolidatedDataRequestCType"/>
+			<xs:complexType name="GetConsolidatedDataRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="parameters" type="c:ParameterListCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetConsolidatedDataResponse" type="csru:GetConsolidatedDataResponseCType"/>
+			<xs:complexType name="GetConsolidatedDataResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="requestId" type="c:RequestIdType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+				</xs:sequence>
+			</xs:complexType>
+
+			<!-- GetProgress IN/OUT elements -->
+			<xs:element name="GetProgressRequest" type="csru:GetProgressRequestCType"/>
+			<xs:complexType name="GetProgressRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="requestId" type="c:RequestIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetProgressResponse" type="csru:GetProgressResponseCType"/>
+			<xs:complexType name="GetProgressResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+					<xs:element name="status" type="c:StatusType"/>
+					<xs:element minOccurs="0" name="requestProcessingErrorMessage" type="c:ErrorMessageType"/>
+					<xs:element name="fileList" type="c:FileListCType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="progress" type="csru:ProgressCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ProgressCType">
+				<xs:sequence>
+					<xs:element name="providerStatus" type="c:ProviderStatus"/>
+					<xs:element name="date" type="xs:dateTime"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+				</xs:sequence>
+			</xs:complexType>
+
+			<!-- GetStatus IN/OUT elements -->
+			<xs:element name="GetStatusRequest" type="csru:GetStatusRequestCType"/>
+			<xs:complexType name="GetStatusRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="requestId" type="c:RequestIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetStatusResponse" type="csru:GetStatusResponseCType"/>
+			<xs:complexType name="GetStatusResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+					<xs:element name="status" type="c:StatusType"/>
+					<xs:element minOccurs="0" name="requestProcessingErrorMessage" type="c:ErrorMessageType"/>
+					<xs:element name="fileList" type="c:FileListCType"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="GetProgressRequestMessage">
+		<wsdl:part name="getProgressRequest" element="csru:GetProgressRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetStatusRequestMessage">
+		<wsdl:part name="getStatusRequest" element="csru:GetStatusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetProgressResponseMessage">
+		<wsdl:part name="getProgressResponse" element="csru:GetProgressResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetConsolidatedDataResponseMessage">
+		<wsdl:part name="getConsolidatedDataRequestResponse" element="csru:GetConsolidatedDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetStatusResponseMessage">
+		<wsdl:part name="getStatusResponse" element="csru:GetStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetConsolidatedDataRequestMessage">
+		<wsdl:part name="getConsolidatedDataRequestRequest" element="csru:GetConsolidatedDataRequest"/>
+	</wsdl:message>
+	<wsdl:portType name="CSRUGetConsolidatedData">
+		<wsdl:operation name="getConsolidatedData">
+			<wsdl:input name="getConsolidatedDataRequest" message="csru:GetConsolidatedDataRequestMessage"/>
+			<wsdl:output name="getConsolidatedDataResponse" message="csru:GetConsolidatedDataResponseMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<wsdl:input name="getStatusRequest" message="csru:GetStatusRequestMessage"/>
+			<wsdl:output name="getStatusResponse" message="csru:GetStatusResponseMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="getProgress">
+			<wsdl:input name="getProgressRequest" message="csru:GetProgressRequestMessage"/>
+			<wsdl:output name="getProgressResponse" message="csru:GetProgressResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CSRUGetConsolidatedDataServiceSoapBinding" type="csru:CSRUGetConsolidatedData">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getConsolidatedData">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zadanie požiadavky na získanie konsolidovaných údajov</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getConsolidatedDataRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getConsolidatedDataResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zistenie stavu vykonávania požiadavky z metódy "getConsolidatedData"</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getStatusRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getStatusResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getProgress">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zistenie stavu vykonávania požiadavky z metódy "getConsolidatedData" plus progress vykonávania jednotlivých volaní voči poskytovateľom služieb</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getProgressRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getProgressResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CSRUGetConsolidatedDataService">
+		<wsdl:port name="CSRUGetConsolidatedDataPort" binding="csru:CSRUGetConsolidatedDataServiceSoapBinding">
+			<soap12:address location="https://c053.csru.gov.sk:443/services/CSRU_GetConsolidatedDataService_v1.4"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

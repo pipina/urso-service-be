@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://v1_0.result.check.arrears.service.integration.socpoist.datalan.sk" targetNamespace="http://v1_0.result.check.arrears.service.integration.socpoist.datalan.sk" elementFormDefault="qualified">
+	<xsd:element name="checkArrearsResultServiceRes" type="tns:checkArrearsResultServiceResType"/>
+	<xsd:complexType name="checkArrearsResultServiceResType">
+		<xsd:sequence>
+			<xsd:element name="requestId" type="tns:NonEmptyStringType" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Identifikátor požiadavky.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="resultInfo" type="tns:resultInfoType" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Informácia o nedoplatku zo služby OSB.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="created" type="xsd:dateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Dátum a čas vytvorenia odpovede.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="formXmlBase64" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Vygenerované xml formuláru odpovede(base64 kvôli zachovaniu validnosti podpisu).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="resultInfoType">
+		<xsd:sequence>
+			<xsd:element name="csruStatus" type="xsd:integer" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Kódová hodnota výsledku, po transformácii cez prevodnú tabuľku.
+			0 - Má nedoplatky
+1 - Nemá nedoplatky
+2 - Má nedoplatok – nesplnenie povinnosti
+3 - Nie je v evidencii
+4 - Nekompletné dáta/Technická chyba
+5 - Nepodarilo sa identifikovať FO/PO 
+     </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="osbStatusDescription" type="tns:NonEmptyStringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Textový popis z OSB</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="NonEmptyStringType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="2147483647"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

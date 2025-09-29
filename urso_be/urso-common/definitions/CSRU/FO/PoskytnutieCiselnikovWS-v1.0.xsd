@@ -1,0 +1,2685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema
+	attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.egov.sk/mvsr/RFO/Podp/Ext/PoskytnutieCiselnikovWS-v1.0"
+	xmlns:this="http://www.egov.sk/mvsr/RFO/Podp/Ext/PoskytnutieCiselnikovWS-v1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<annotation>
+		<documentation>WS rozhranie poskytuje nasledujúcu funkčnosť:
+- získanie iniciálnych hodnôt relevantných číselníkov,
+- získanie zmien hodnôt relevantných číselníkov.
+		</documentation>
+	</annotation>
+	<complexType name="TransEnvelopeType" abstract="true" />
+	<element name="TransEnvIn" type="this:TransEnvTypeIn" />
+	<complexType name="TransEnvTypeIn">
+		<complexContent>
+			<extension base="this:TransEnvelopeType">
+				<sequence>
+					<choice>
+						<element name="RIN" type="this:TRIN">
+							<annotation>
+								<documentation>Kritériá požadovaných zmien</documentation>
+							</annotation>
+						</element>
+						<element name="PCI" type="this:TPCI">
+							<annotation>
+								<documentation>Kritériá požadovaných zmien</documentation>
+							</annotation>
+						</element>
+					</choice>
+				</sequence>
+				<attribute name="corrID" type="string" use="optional">
+					<annotation>
+						<documentation>Jednoznačný identifikátor transakcie klientského systému. Ak je uvedený umožňuje jednoducho napárovať súvisiace volania.</documentation>
+					</annotation>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TRIN">
+		<annotation>
+			<documentation>Kritériá požadovaných zmien</documentation>
+		</annotation>
+		<sequence>
+			<element name="DA" type="dateTime">
+				<annotation>
+					<documentation>Dátum a čas, od ktorého sú požadované zmeny v číselníkoch (mal by tam byť dátum a čas z posledného výstupu pre poskytovanie zmien v číselníkoch)</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TPCI">
+		<annotation>
+			<documentation>Kritériá požadovaných zmien</documentation>
+		</annotation>
+		<sequence>
+			<element name="DO" type="dateTime">
+				<annotation>
+					<documentation>Dátum a čas, od ktorého sú požadované zmeny v konkrétnom číselníku</documentation>
+				</annotation>
+			</element>
+			<element name="DD" type="dateTime">
+				<annotation>
+					<documentation>Dátum a čas, do ktorého sú požadované zmeny v konkrétnom číselníku</documentation>
+				</annotation>
+			</element>
+			<element name="PS" type="int">
+				<annotation>
+					<documentation>Číslo požadovanej stránky číselníka pre zadný časový interval</documentation>
+				</annotation>
+			</element>
+			<choice>
+				<element name="STA" type="this:TSTA">
+					<annotation>
+						<documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</documentation>
+					</annotation>
+				</element>
+				<element name="UCE" type="this:TUCE">
+					<annotation>
+						<documentation>Obec v súlade s číselníkom ŠÚ SR č.0025 Lokálne štatistické územné jednotky, Okres v súlade s číselníkom ŠÚ SR č.0024 Lokálne štatistické územné jednotky, Kraj v súlade s číselníkom ŠÚ SR č.0049 Kraje, časť obce</documentation>
+					</annotation>
+				</element>
+				<element name="NAR" type="this:TNAR">
+					<annotation>
+						<documentation>Číselník národností</documentation>
+					</annotation>
+				</element>
+				<element name="POH" type="this:TPOH_PEX">
+					<annotation>
+						<documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</documentation>
+					</annotation>
+				</element>
+				<element name="RST" type="this:TRST">
+					<annotation>
+						<documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</documentation>
+					</annotation>
+				</element>
+				<element name="SZV" type="this:TSZV">
+					<annotation>
+						<documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</documentation>
+					</annotation>
+				</element>
+				<element name="TVK" type="this:TTVK">
+					<annotation>
+						<documentation>Číselník typov fyzických osôb evidovaných v RFO. Typ fyzickej osoby - hodnoty: Občan s trvalým pobytom na území SR, Občan ktorý nemá trvalý pobyt na území SR, Cudzinec prihlásený na pobyt v SR, Cudzinec ktorému bol pridelený azyl na území SR, Cudzinec bez pobytu na území SR, ktorý prišiel do styku s verejnou správou</documentation>
+					</annotation>
+				</element>
+				<element name="TIT" type="this:TTIT">
+					<annotation>
+						<documentation>Číselník titulov - napĺňaný z IS REGOB</documentation>
+					</annotation>
+				</element>
+				<element name="SNP" type="this:TSNP">
+					<annotation>
+						<documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</documentation>
+					</annotation>
+				</element>
+				<element name="TPO" type="this:TTPO">
+					<annotation>
+						<documentation>Číselník typov pobytu</documentation>
+					</annotation>
+				</element>
+				<element name="SUD" type="this:TSUD">
+					<annotation>
+						<documentation>Číselník súdov</documentation>
+					</annotation>
+				</element>
+				<element name="ULI" type="this:TULI">
+					<annotation>
+						<documentation>Číselník ulíc</documentation>
+					</annotation>
+				</element>
+				<element name="DOM" type="this:TDOM">
+					<annotation>
+						<documentation>Trieda reprezentuje celý dom, ktorý môže obsahovať viac vchodov.</documentation>
+					</annotation>
+				</element>
+				<element name="VDM" type="this:TVDM">
+					<annotation>
+						<documentation>Vchod domu</documentation>
+					</annotation>
+				</element>
+				<element name="TSU" type="this:TTSU">
+					<annotation>
+						<documentation>Typ štátu</documentation>
+					</annotation>
+				</element>
+				<element name="DZB" type="this:TDZB">
+					<annotation>
+						<documentation>Dôvod zrušenia pobytu</documentation>
+					</annotation>
+				</element>
+				<element name="UPO" type="this:TUPO">
+					<annotation>
+						<documentation>Účel pobytu</documentation>
+					</annotation>
+				</element>
+				<element name="TRZ" type="this:TTRZ">
+					<annotation>
+						<documentation>Číselník druhov rodinného vzťahu</documentation>
+					</annotation>
+				</element>
+				<element name="TRR" type="this:TTRR">
+					<annotation>
+						<documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</documentation>
+					</annotation>
+				</element>
+				<element name="UUC" type="this:TUUC">
+					<annotation>
+						<documentation>Väzobný číselník medzi číselníkom ulíc a číselníkom územných celkov</documentation>
+					</annotation>
+				</element>
+				<element name="SDO" type="this:TSDO">
+					<annotation>
+						<documentation>Stav domu</documentation>
+					</annotation>
+				</element>
+				<element name="SVD" type="this:TSVD">
+					<annotation>
+						<documentation>Stav vchodu domu</documentation>
+					</annotation>
+				</element>
+				<element name="TUC" type="this:TTUC">
+					<annotation>
+						<documentation>Typ územného celku</documentation>
+					</annotation>
+				</element>
+				<element name="TSA" type="this:TTSA">
+					<annotation>
+						<documentation>Typ štátu</documentation>
+					</annotation>
+				</element>
+				<element name="TTI" type="this:TTTI">
+					<annotation>
+						<documentation>Typ titulu</documentation>
+					</annotation>
+				</element>
+				<element name="TZN" type="this:TTZN">
+					<annotation>
+						<documentation>Typ zastúpenia zákonný zástupca/opatrovníctvo.</documentation>
+					</annotation>
+				</element>
+				<element name="DDC" type="this:TDDC">
+					<annotation>
+						<documentation>Druh dokladu.</documentation>
+					</annotation>
+				</element>
+				<element name="SDG" type="this:TSDG">
+					<annotation>
+						<documentation>Stav dokladu.</documentation>
+					</annotation>
+				</element>
+				<element name="PRA" type="this:TPRA">
+					<annotation>
+						<documentation>Pracovisko</documentation>
+					</annotation>
+				</element>
+				<element name="TUD" type="this:TTUD">
+					<annotation>
+						<documentation>Typ údajov.</documentation>
+					</annotation>
+				</element>
+			</choice>
+		</sequence>
+	</complexType>
+	<complexType name="TSTA">
+		<annotation>
+			<documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TUCE">
+		<annotation>
+			<documentation>Obec v súlade s číselníkom ŠÚ SR č.0025 Lokálne štatistické územné jednotky, Okres v súlade s číselníkom ŠÚ SR č.0024 Lokálne štatistické územné jednotky, Kraj v súlade s číselníkom ŠÚ SR č.0049 Kraje, časť obce</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TNAR">
+		<annotation>
+			<documentation>Číselník národností</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TPOH_PEX">
+		<annotation>
+			<documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TRST">
+		<annotation>
+			<documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSZV">
+		<annotation>
+			<documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTVK">
+		<annotation>
+			<documentation>Číselník typov fyzických osôb evidovaných v RFO. Typ fyzickej osoby - hodnoty: Občan s trvalým pobytom na území SR, Občan ktorý nemá trvalý pobyt na území SR, Cudzinec prihlásený na pobyt v SR, Cudzinec ktorému bol pridelený azyl na území SR, Cudzinec bez pobytu na území SR, ktorý prišiel do styku s verejnou správou</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTIT">
+		<annotation>
+			<documentation>Číselník titulov - napĺňaný z IS REGOB</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSNP">
+		<annotation>
+			<documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTPO">
+		<annotation>
+			<documentation>Číselník typov pobytu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSUD">
+		<annotation>
+			<documentation>Číselník súdov</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TULI">
+		<annotation>
+			<documentation>Číselník ulíc</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TDOM">
+		<annotation>
+			<documentation>Trieda reprezentuje celý dom, ktorý môže obsahovať viac vchodov.</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TVDM">
+		<annotation>
+			<documentation>Vchod domu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTSU">
+		<annotation>
+			<documentation>Typ štátu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TDZB">
+		<annotation>
+			<documentation>Dôvod zrušenia pobytu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TUPO">
+		<annotation>
+			<documentation>Účel pobytu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTRZ">
+		<annotation>
+			<documentation>Číselník druhov rodinného vzťahu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTRR">
+		<annotation>
+			<documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TUUC">
+		<annotation>
+			<documentation>Väzobný číselník medzi číselníkom ulíc a číselníkom územných celkov</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSDO">
+		<annotation>
+			<documentation>Stav domu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSVD">
+		<annotation>
+			<documentation>Stav vchodu domu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTUC">
+		<annotation>
+			<documentation>Typ územného celku</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTSA">
+		<annotation>
+			<documentation>Typ štátu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTTI">
+		<annotation>
+			<documentation>Typ titulu</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTZN">
+		<annotation>
+			<documentation>Typ zastúpenia zákonný zástupca/opatrovníctvo.</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TDDC">
+		<annotation>
+			<documentation>Druh dokladu.</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSDG">
+		<annotation>
+			<documentation>Stav dokladu.</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TPRA">
+		<annotation>
+			<documentation>Pracovisko</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTUD">
+		<annotation>
+			<documentation>Typ údajov.</documentation>
+		</annotation>
+		<sequence>
+		</sequence>
+		<attribute name="ID" type="int" use="optional">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<element name="TransEnvOut" type="this:TransEnvTypeOut" />
+	<complexType name="TransEnvTypeOut">
+		<complexContent>
+			<extension base="this:TransEnvelopeType">
+				<sequence>
+					<element name="VSP" type="this:TVSPO">
+						<annotation>
+							<documentation>Výstupné XML WS.</documentation>
+						</annotation>
+					</element>
+					<element name="STAList" type="this:TSTAOList">
+						<annotation>
+							<documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</documentation>
+						</annotation>
+					</element>
+					<element name="UCEList" type="this:TUCEOList">
+						<annotation>
+							<documentation>Obec v súlade s číselníkom ŠÚ SR č.0025 Lokálne štatistické územné jednotky, Okres v súlade s číselníkom ŠÚ SR č.0024 Lokálne štatistické územné jednotky, Kraj v súlade s číselníkom ŠÚ SR č.0049 Kraje, časť obce</documentation>
+						</annotation>
+					</element>
+					<element name="NARList" type="this:TNAROList">
+						<annotation>
+							<documentation>Číselník národností</documentation>
+						</annotation>
+					</element>
+					<element name="PEXList" type="this:TPEXOList">
+						<annotation>
+							<documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</documentation>
+						</annotation>
+					</element>
+					<element name="RSTList" type="this:TRSTOList">
+						<annotation>
+							<documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</documentation>
+						</annotation>
+					</element>
+					<element name="SZVList" type="this:TSZVOList">
+						<annotation>
+							<documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</documentation>
+						</annotation>
+					</element>
+					<element name="TVKList" type="this:TTVKOList">
+						<annotation>
+							<documentation>Číselník typov fyzických osôb evidovaných v RFO. Typ fyzickej osoby - hodnoty: Občan s trvalým pobytom na území SR, Občan ktorý nemá trvalý pobyt na území SR, Cudzinec prihlásený na pobyt v SR, Cudzinec ktorému bol pridelený azyl na území SR, Cudzinec bez pobytu na území SR, ktorý prišiel do styku s verejnou správou</documentation>
+						</annotation>
+					</element>
+					<element name="TITList" type="this:TTITOList">
+						<annotation>
+							<documentation>Číselník vedeckých a akademických hodností a titulov obsahuje hodnosti a tituly platné podľa zákona o vysokých školách alebo nostrifikované tituly uvádzané pred menom v súlade s číselníkom ŠÚ SR č.0062 Titul pred menom a s číselníkom ŠÚ SR č.0063 Titul za menom</documentation>
+						</annotation>
+					</element>
+					<element name="SNPList" type="this:TSNPOList">
+						<annotation>
+							<documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</documentation>
+						</annotation>
+					</element>
+					<element name="TPOList" type="this:TTPOOList">
+						<annotation>
+							<documentation>Číselník typov pobytu</documentation>
+						</annotation>
+					</element>
+					<element name="SUDList" type="this:TSUDOList">
+						<annotation>
+							<documentation>Číselník súdov</documentation>
+						</annotation>
+					</element>
+					<element name="ULIList" type="this:TULIOList">
+						<annotation>
+							<documentation>Číselník ulíc</documentation>
+						</annotation>
+					</element>
+					<element name="DOMList" type="this:TDOMOList">
+						<annotation>
+							<documentation>Trieda reprezentuje celý dom, ktorý môže obsahovať viac vchodov.</documentation>
+						</annotation>
+					</element>
+					<element name="VDMList" type="this:TVDMOList">
+						<annotation>
+							<documentation>Vchod domu</documentation>
+						</annotation>
+					</element>
+					<element name="TSUList" type="this:TTSUOList">
+						<annotation>
+							<documentation>Typ štátu</documentation>
+						</annotation>
+					</element>
+					<element name="DZBList" type="this:TDZBOList">
+						<annotation>
+							<documentation>Dôvod zrušenia pobytu</documentation>
+						</annotation>
+					</element>
+					<element name="UPOList" type="this:TUPOOList">
+						<annotation>
+							<documentation>Účel pobytu</documentation>
+						</annotation>
+					</element>
+					<element name="TRZList" type="this:TTRZOList">
+						<annotation>
+							<documentation>Číselník druhov rodinného vzťahu</documentation>
+						</annotation>
+					</element>
+					<element name="TRRList" type="this:TTRROList">
+						<annotation>
+							<documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</documentation>
+						</annotation>
+					</element>
+					<element name="UUCList" type="this:TUUCOList">
+						<annotation>
+							<documentation>Väzobný číselník medzi číselníkom ulíc a číselníkom územných celkov</documentation>
+						</annotation>
+					</element>
+					<element name="SDOList" type="this:TSDOOList">
+						<annotation>
+							<documentation>Stav domu</documentation>
+						</annotation>
+					</element>
+					<element name="SVDList" type="this:TSVDOList">
+						<annotation>
+							<documentation>Stav vchodu domu</documentation>
+						</annotation>
+					</element>
+					<element name="TUCList" type="this:TTUCOList">
+						<annotation>
+							<documentation>Typ územného celku</documentation>
+						</annotation>
+					</element>
+					<element name="TSAList" type="this:TTSAOList">
+						<annotation>
+							<documentation>Typ štátu</documentation>
+						</annotation>
+					</element>
+					<element name="TTIList" type="this:TTTIOList">
+						<annotation>
+							<documentation>Typ titulu</documentation>
+						</annotation>
+					</element>
+					<element name="TZNList" type="this:TTZNOList">
+						<annotation>
+							<documentation>Typ zastúpenia zákonný zástupca/opatrovníctvo.</documentation>
+						</annotation>
+					</element>
+					<element name="DDCList" type="this:TDDCOList">
+						<annotation>
+							<documentation>Druh dokladu.</documentation>
+						</annotation>
+					</element>
+					<element name="SDGList" type="this:TSDGOList">
+						<annotation>
+							<documentation>Stav dokladu.</documentation>
+						</annotation>
+					</element>
+					<element name="PRAList" type="this:TPRAOList">
+						<annotation>
+							<documentation>Pracovisko</documentation>
+						</annotation>
+					</element>
+					<element name="TUDList" type="this:TTUDOList">
+						<annotation>
+							<documentation>Typ údajov.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+				<attribute name="corrID" type="string" use="optional" />
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TVSPO">
+		<annotation>
+			<documentation>Výstupné XML WS.</documentation>
+		</annotation>
+		<sequence>
+			<element name="KI" type="int">
+				<annotation>
+					<documentation>Návratový kód WS.</documentation>
+				</annotation>
+			</element>
+			<element name="PO" minOccurs="0">
+				<annotation>
+					<documentation>Návratový oznam WS, ak nebolo úspešne zrealizované spracovanie volania WS.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="400" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSTAOList">
+		<annotation>
+			<documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</documentation>
+		</annotation>
+		<sequence>
+			<element name="STA" type="this:TSTAO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSTAO">
+		<annotation>
+			<documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="SN" nillable="true">
+				<annotation>
+					<documentation>Skrátený názov štátu</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="AK" nillable="true">
+				<annotation>
+					<documentation>2 písmenkový akronym štátu</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="AR" nillable="true">
+				<annotation>
+					<documentation>3 písmenkový akronym štátu</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="3" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TUCEOList">
+		<annotation>
+			<documentation>Obec v súlade s číselníkom ŠÚ SR č.0025 Lokálne štatistické územné jednotky, Okres v súlade s číselníkom ŠÚ SR č.0024 Lokálne štatistické územné jednotky, Kraj v súlade s číselníkom ŠÚ SR č.0049 Kraje, časť obce</documentation>
+		</annotation>
+		<sequence>
+			<element name="UCE" type="this:TUCEO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Obec v súlade s číselníkom ŠÚ SR č.0025 Lokálne štatistické územné jednotky, Okres v súlade s číselníkom ŠÚ SR č.0024 Lokálne štatistické územné jednotky, Kraj v súlade s číselníkom ŠÚ SR č.0049 Kraje, časť obce</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TUCEO">
+		<annotation>
+			<documentation>Obec v súlade s číselníkom ŠÚ SR č.0025 Lokálne štatistické územné jednotky, Okres v súlade s číselníkom ŠÚ SR č.0024 Lokálne štatistické územné jednotky, Kraj v súlade s číselníkom ŠÚ SR č.0049 Kraje, časť obce</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="TU" type="int">
+				<annotation>
+					<documentation>Typ územného celku</documentation>
+				</annotation>
+			</element>
+			<element name="UE" type="int" nillable="true">
+				<annotation>
+					<documentation>Nadradený územný celok</documentation>
+				</annotation>
+			</element>
+			<element name="PA" type="int" nillable="true">
+				<annotation>
+					<documentation>vyplnuje sa pre uzemne celky obec, alebo tie pre ktore je urcene prislusne pracovisko matriky</documentation>
+				</annotation>
+			</element>
+			<element name="PG" type="int" nillable="true">
+				<annotation>
+					<documentation>vyplnuje sa pre uzemne celky obec, alebo tie pre ktore je urcene prislusne pracovisko hlasenia pobytu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TNAROList">
+		<annotation>
+			<documentation>Číselník národností</documentation>
+		</annotation>
+		<sequence>
+			<element name="NAR" type="this:TNARO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník národností</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TNARO">
+		<annotation>
+			<documentation>Číselník národností</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TPEXOList">
+		<annotation>
+			<documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</documentation>
+		</annotation>
+		<sequence>
+			<element name="PEX" type="this:TPEXO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TPEXO">
+		<annotation>
+			<documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="AS">
+				<annotation>
+					<documentation>Anglická skratka pohlavia</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="1" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TRSTOList">
+		<annotation>
+			<documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</documentation>
+		</annotation>
+		<sequence>
+			<element name="RST" type="this:TRSTO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TRSTO">
+		<annotation>
+			<documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSZVOList">
+		<annotation>
+			<documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</documentation>
+		</annotation>
+		<sequence>
+			<element name="SZV" type="this:TSZVO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSZVO">
+		<annotation>
+			<documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTVKOList">
+		<annotation>
+			<documentation>Číselník typov fyzických osôb evidovaných v RFO. Typ fyzickej osoby - hodnoty: Občan s trvalým pobytom na území SR, Občan ktorý nemá trvalý pobyt na území SR, Cudzinec prihlásený na pobyt v SR, Cudzinec ktorému bol pridelený azyl na území SR, Cudzinec bez pobytu na území SR, ktorý prišiel do styku s verejnou správou</documentation>
+		</annotation>
+		<sequence>
+			<element name="TVK" type="this:TTVKO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník typov fyzických osôb evidovaných v RFO. Typ fyzickej osoby - hodnoty: Občan s trvalým pobytom na území SR, Občan ktorý nemá trvalý pobyt na území SR, Cudzinec prihlásený na pobyt v SR, Cudzinec ktorému bol pridelený azyl na území SR, Cudzinec bez pobytu na území SR, ktorý prišiel do styku s verejnou správou</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTVKO">
+		<annotation>
+			<documentation>Číselník typov fyzických osôb evidovaných v RFO. Typ fyzickej osoby - hodnoty: Občan s trvalým pobytom na území SR, Občan ktorý nemá trvalý pobyt na území SR, Cudzinec prihlásený na pobyt v SR, Cudzinec ktorému bol pridelený azyl na území SR, Cudzinec bez pobytu na území SR, ktorý prišiel do styku s verejnou správou</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTITOList">
+		<annotation>
+			<documentation>Číselník vedeckých a akademických hodností a titulov obsahuje hodnosti a tituly platné podľa zákona o vysokých školách alebo nostrifikované tituly uvádzané pred menom v súlade s číselníkom ŠÚ SR č.0062 Titul pred menom a s číselníkom ŠÚ SR č.0063 Titul za menom</documentation>
+		</annotation>
+		<sequence>
+			<element name="TIT" type="this:TTITO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník vedeckých a akademických hodností a titulov obsahuje hodnosti a tituly platné podľa zákona o vysokých školách alebo nostrifikované tituly uvádzané pred menom v súlade s číselníkom ŠÚ SR č.0062 Titul pred menom a s číselníkom ŠÚ SR č.0063 Titul za menom</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTITO">
+		<annotation>
+			<documentation>Číselník vedeckých a akademických hodností a titulov obsahuje hodnosti a tituly platné podľa zákona o vysokých školách alebo nostrifikované tituly uvádzané pred menom v súlade s číselníkom ŠÚ SR č.0062 Titul pred menom a s číselníkom ŠÚ SR č.0063 Titul za menom</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="60" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="TT" type="int">
+				<annotation>
+					<documentation>Rozlišujú sa tri typy: 1. titul, resp. hodnosť pred menom, 2. titul, resp. hodnosť za menom. 3. titul, resp. hodnosť za menom alebo pred menom.</documentation>
+				</annotation>
+			</element>
+			<element name="VA" type="int">
+				<annotation>
+					<documentation>Váha titulu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSNPOList">
+		<annotation>
+			<documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</documentation>
+		</annotation>
+		<sequence>
+			<element name="SNP" type="this:TSNPO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSNPO">
+		<annotation>
+			<documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTPOOList">
+		<annotation>
+			<documentation>Číselník typov pobytu</documentation>
+		</annotation>
+		<sequence>
+			<element name="TPO" type="this:TTPOO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník typov pobytu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTPOO">
+		<annotation>
+			<documentation>Číselník typov pobytu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSUDOList">
+		<annotation>
+			<documentation>Číselník súdov</documentation>
+		</annotation>
+		<sequence>
+			<element name="SUD" type="this:TSUDO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník súdov</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSUDO">
+		<annotation>
+			<documentation>Číselník súdov</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="AD" nillable="true">
+				<annotation>
+					<documentation>Adresa súdu.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TULIOList">
+		<annotation>
+			<documentation>Číselník ulíc</documentation>
+		</annotation>
+		<sequence>
+			<element name="ULI" type="this:TULIO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník ulíc</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TULIO">
+		<annotation>
+			<documentation>Číselník ulíc</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TDOMOList">
+		<annotation>
+			<documentation>Trieda reprezentuje celý dom, ktorý môže obsahovať viac vchodov.</documentation>
+		</annotation>
+		<sequence>
+			<element name="DOM" type="this:TDOMO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Trieda reprezentuje celý dom, ktorý môže obsahovať viac vchodov.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TDOMO">
+		<annotation>
+			<documentation>Trieda reprezentuje celý dom, ktorý môže obsahovať viac vchodov.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="SC" type="int" nillable="true">
+				<annotation>
+					<documentation>Súpisné číslo. Jednoznačne identifikuje budovu v obci, resp. v časti obce.</documentation>
+				</annotation>
+			</element>
+			<element name="EC" type="int" nillable="true">
+				<annotation>
+					<documentation>Evidenčné číslo je zavedené pre historické záznamy. Atribút nebude vypĺňaný novými údajmi.</documentation>
+				</annotation>
+			</element>
+			<element name="KC" nillable="true">
+				<annotation>
+					<documentation>Katastrálne číslo domu je textové pole vyhradené pre záznamy z katastrálneho úradu.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="SD" type="int">
+				<annotation>
+					<documentation>ID stavu domu.</documentation>
+				</annotation>
+			</element>
+			<element name="UC" type="int">
+				<annotation>
+					<documentation>Obec pre dom</documentation>
+				</annotation>
+			</element>
+			<element name="UE" type="int" nillable="true">
+				<annotation>
+					<documentation>Časť obce pre dom</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TVDMOList">
+		<annotation>
+			<documentation>Vchod domu</documentation>
+		</annotation>
+		<sequence>
+			<element name="VDM" type="this:TVDMO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Vchod domu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TVDMO">
+		<annotation>
+			<documentation>Vchod domu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="PC" nillable="true">
+				<annotation>
+					<documentation>Počítačové číslo domu - jednoznačný identifikátor vchodu domu v rámci celej SR. Jednoznačná identifikácia domu v rámci celej Slovenskej republiky.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="CI" type="int" nillable="true">
+				<annotation>
+					<documentation>Orientačné číslo. Orientačné číslo spolu so znakom orientačného čísla jednoznačne identifikujú budovu na ulici.</documentation>
+				</annotation>
+			</element>
+			<element name="ZO" nillable="true">
+				<annotation>
+					<documentation>Znak orientačného čísla. Orientačné číslo spolu so znakom orientačného čísla jednoznačne identifikujú budovu na ulici.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="1" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="PS" nillable="true">
+				<annotation>
+					<documentation>Poštové smerovanie číslo.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="5" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="UL" type="int" nillable="true">
+				<annotation>
+					<documentation>Ulica, na ktorej je vchod domu</documentation>
+				</annotation>
+			</element>
+			<element name="DO" type="int">
+				<annotation>
+					<documentation>ID domu</documentation>
+				</annotation>
+			</element>
+			<element name="SV" type="int" nillable="true">
+				<annotation>
+					<documentation>Stav vchodu domu.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTSUOList">
+		<annotation>
+			<documentation>Typ štátu</documentation>
+		</annotation>
+		<sequence>
+			<element name="TSU" type="this:TTSUO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Typ štátu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTSUO">
+		<annotation>
+			<documentation>Typ štátu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TDZBOList">
+		<annotation>
+			<documentation>Dôvod zrušenia pobytu</documentation>
+		</annotation>
+		<sequence>
+			<element name="DZB" type="this:TDZBO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Dôvod zrušenia pobytu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TDZBO">
+		<annotation>
+			<documentation>Dôvod zrušenia pobytu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TUPOOList">
+		<annotation>
+			<documentation>Účel pobytu</documentation>
+		</annotation>
+		<sequence>
+			<element name="UPO" type="this:TUPOO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Účel pobytu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TUPOO">
+		<annotation>
+			<documentation>Účel pobytu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTRZOList">
+		<annotation>
+			<documentation>Číselník druhov rodinného vzťahu</documentation>
+		</annotation>
+		<sequence>
+			<element name="TRZ" type="this:TTRZO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník druhov rodinného vzťahu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTRZO">
+		<annotation>
+			<documentation>Číselník druhov rodinného vzťahu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTRROList">
+		<annotation>
+			<documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</documentation>
+		</annotation>
+		<sequence>
+			<element name="TRR" type="this:TTRRO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTRRO">
+		<annotation>
+			<documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="TR" type="int">
+				<annotation>
+					<documentation>Typ role pre typ rodinného vzťahu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TUUCOList">
+		<annotation>
+			<documentation>Väzobný číselník medzi číselníkom ulíc a číselníkom územných celkov</documentation>
+		</annotation>
+		<sequence>
+			<element name="UUC" type="this:TUUCO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Väzobný číselník medzi číselníkom ulíc a číselníkom územných celkov</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TUUCO">
+		<annotation>
+			<documentation>Väzobný číselník medzi číselníkom ulíc a číselníkom územných celkov</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="UL" type="int">
+				<annotation>
+					<documentation>Ulica v úzmenom celku</documentation>
+				</annotation>
+			</element>
+			<element name="UC" type="int">
+				<annotation>
+					<documentation>Územný celok pre ulicu</documentation>
+				</annotation>
+			</element>
+			<element name="TU" type="int">
+				<annotation>
+					<documentation>ID väzby územný celok a ulica</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSDOOList">
+		<annotation>
+			<documentation>Stav domu</documentation>
+		</annotation>
+		<sequence>
+			<element name="SDO" type="this:TSDOO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Stav domu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSDOO">
+		<annotation>
+			<documentation>Stav domu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSVDOList">
+		<annotation>
+			<documentation>Stav vchodu domu</documentation>
+		</annotation>
+		<sequence>
+			<element name="SVD" type="this:TSVDO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Stav vchodu domu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSVDO">
+		<annotation>
+			<documentation>Stav vchodu domu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTUCOList">
+		<annotation>
+			<documentation>Typ územného celku</documentation>
+		</annotation>
+		<sequence>
+			<element name="TUC" type="this:TTUCO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Typ územného celku</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTUCO">
+		<annotation>
+			<documentation>Typ územného celku</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky. Typ územného celku: časť obce, obec, okres, kraj.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="UR" type="int">
+				<annotation>
+					<documentation>najvyssi uzemny celok ma 0, nizsie ++,</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTSAOList">
+		<annotation>
+			<documentation>Typ štátu</documentation>
+		</annotation>
+		<sequence>
+			<element name="TSA" type="this:TTSAO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Typ štátu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTSAO">
+		<annotation>
+			<documentation>Typ štátu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="ST" type="int">
+				<annotation>
+					<documentation>ID štátu.</documentation>
+				</annotation>
+			</element>
+			<element name="TS" type="int">
+				<annotation>
+					<documentation>ID typu štátu.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTTIOList">
+		<annotation>
+			<documentation>Typ titulu</documentation>
+		</annotation>
+		<sequence>
+			<element name="TTI" type="this:TTTIO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Typ titulu</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTTIO">
+		<annotation>
+			<documentation>Typ titulu</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTZNOList">
+		<annotation>
+			<documentation>Typ zastúpenia zákonný zástupca/opatrovníctvo.</documentation>
+		</annotation>
+		<sequence>
+			<element name="TZN" type="this:TTZNO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Typ zastúpenia zákonný zástupca/opatrovníctvo.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTZNO">
+		<annotation>
+			<documentation>Typ zastúpenia zákonný zástupca/opatrovníctvo.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum začiatku platnosti hodnoty</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum ukončenia platnosti hodnoty</documentation>
+				</annotation>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov typu zastúpenia</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TDDCOList">
+		<annotation>
+			<documentation>Druh dokladu.</documentation>
+		</annotation>
+		<sequence>
+			<element name="DDC" type="this:TDDCO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Druh dokladu.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TDDCO">
+		<annotation>
+			<documentation>Druh dokladu.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TSDGOList">
+		<annotation>
+			<documentation>Stav dokladu.</documentation>
+		</annotation>
+		<sequence>
+			<element name="SDG" type="this:TSDGO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Stav dokladu.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TSDGO">
+		<annotation>
+			<documentation>Stav dokladu.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TPRAOList">
+		<annotation>
+			<documentation>Pracovisko</documentation>
+		</annotation>
+		<sequence>
+			<element name="PRA" type="this:TPRAO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Pracovisko</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TPRAO">
+		<annotation>
+			<documentation>Pracovisko</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) začiatku platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum (poprípade dátum a čas) ukončenia platnosti</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky (ak existuje príslušný číselník ŠÚ SR, tak kód položky z číselníka ŠÚ SR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="TTUDOList">
+		<annotation>
+			<documentation>Typ údajov.</documentation>
+		</annotation>
+		<sequence>
+			<element name="TUD" type="this:TTUDO" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Typ údajov.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TTUDO">
+		<annotation>
+			<documentation>Typ údajov.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FR" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum začiatku platnosti hodnoty</documentation>
+				</annotation>
+			</element>
+			<element name="TO" type="dateTime" nillable="true">
+				<annotation>
+					<documentation>Dátum ukončenia platnosti hodnoty</documentation>
+				</annotation>
+			</element>
+			<element name="EK" nillable="true">
+				<annotation>
+					<documentation>Externý kód položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NA">
+				<annotation>
+					<documentation>Názov/hodnota položky</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+		<attribute name="ID" type="int" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor objektu</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="UID" type="string" use="required">
+			<annotation>
+				<documentation>Jedinečný identifikátor verzie objektu</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+</schema>

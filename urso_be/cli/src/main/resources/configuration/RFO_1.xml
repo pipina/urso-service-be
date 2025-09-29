@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:RegisterPluginConfig
+	xmlns:tns="http://www.dominanz.sk/registerPluginConfig_v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.dominanz.sk/registerPluginConfig_v1 ../definitions/registerPluginConfig_v1.xsd">
+	<tns:Field KeyName="ID" XPathValue="fo:FO/fo:ID"
+		IsIndexed="true" IsOutputField="true" DisplayName="Id" Description="Identifikátor fyzickej osoby.">
+	</tns:Field>
+	<tns:Field KeyName="RC" XPathValue="fo:FO/fo:RC"
+		IsIndexed="true" IsOutputField="true" DisplayName="Rodné číslo" Description="Rodné číslo osoby, zapisuje sa úplné aj s lomítkom.">
+	</tns:Field>
+	<tns:Field KeyName="DN" ValueType="DATE" XPathValue="fo:FO/fo:DN"
+		IsIndexed="true" IsOutputField="true" DisplayName="Dátum narodenia" Description="Dátum narodenia osoby.">
+	</tns:Field>
+	<tns:Field KeyName="PI" ValueType="NUMBER" XPathValue="fo:FO/fo:PI"
+		IsIndexed="true" IsOutputField="true" DisplayName="Pohlavie" Description="Pohlavie osoby.">
+	</tns:Field>
+	<tns:Field KeyName="IC" XPathValue="fo:FO/fo:IC"
+		IsIndexed="true" IsOutputField="true" DisplayName="Identifikátor osoby - cudzinca" Description="Identifikátor osoby - cudzinca používaný v cudzine.">
+	</tns:Field>
+	<tns:Field KeyName="DD" ValueType="NUMBER" XPathValue="fo:FO/fo:DCDList/fo:DCD/fo:DD"
+		IsIndexed="true" IsOutputField="true" DisplayName="Druh dokladu" Description="Druh dokladu.">
+	</tns:Field>
+	<tns:Field KeyName="DDCDDNA" XPathValue="fo:FO/fo:DCDList/fo:DCD/fo:DDCDDNA"
+		IsIndexed="true" IsOutputField="true" DisplayName="Typ dokladu"
+		Description="Položka obsahuje hodnotu číselníka CIS.C_DRUH_DOKLADU_CDF.UV_NAZOV referencovaného z REG.T_DOKLAD_CDF.NL_DRUH_DOKLADU_CDF_ID.">
+	</tns:Field>
+	<tns:Field KeyName="CD" XPathValue="fo:FO/fo:DCDList/fo:DCD/fo:CD"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Identifikátor dokladu" Description="Jednoznačný identifikátor dokladu.">
+	</tns:Field>
+	<tns:Field KeyName="ST" XPathValue="fo:FO/fo:SPRList/fo:SPR/fo:STASTNA"
+		IsIndexed="true" IsOutputField="true" DisplayName="Štátna príslušnosť" 
+		Description="Položka obsahuje hodnotu císelníka CIS.C_STAT.UV_NAZOV referencovaného z REG.T_STATNA_PRISLUSNOST.NL_STAT_ID">
+	</tns:Field>
+	<tns:Field KeyName="ST" ValueType="NUMBER" XPathValue="fo:FO/fo:SPRList/fo:SPR/fo:ST"
+		IsIndexed="true" IsOutputField="true" DisplayName="Hodnota štátnej príslušnosti" Description="Hodnota štátnej príslušnosti osoby.">
+	</tns:Field>
+	<tns:Field KeyName="RP" XPathValue="fo:FO/fo:RPRList/fo:RPR/fo:RP"
+		IsIndexed="true" IsOutputField="true" DisplayName="Rodné priezvisko" Description="Hodnota rodného priezviska osoby.">
+	</tns:Field>
+	<tns:Field KeyName="PR" XPathValue="fo:FO/fo:PRIList/fo:PRI/fo:PR"
+		IsIndexed="true" IsOutputField="true" DisplayName="Priezvisko" Description="Hodnota priezviska osoby.">
+	</tns:Field>
+	<tns:Field KeyName="ME" XPathValue="fo:FO/fo:MOSList/fo:MOS/fo:ME"
+		IsIndexed="true" IsOutputField="true" DisplayName="Meno" Description="Hodnota mena osoby.">
+	</tns:Field>
+	<tns:RegisterType>EXTERNAL</tns:RegisterType>
+	<tns:GdprParams IsGdprRelevant="true" ImmediateDeleteOnLastReference="false" TTL="1" TTLUnit="DAYS"/>
+	<tns:XsdFile IsPrimary="true" Path="RFO_1/RFO_1_DATA.xsd" IsExternal="true" NamespacePrefix="fo" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/FO"/>
+	<tns:XsdFile IsPrimary="false" Path="RFO_1/RFO_1_TYPES.xsd" IsExternal="true" NamespacePrefix="fo" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/FO"/>
+</tns:RegisterPluginConfig>

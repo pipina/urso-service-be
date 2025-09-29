@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	name="CSRUGetConsolidatedDataService_Sync"
+	targetNamespace="http://csru.gov.sk/csru_getconsolidateddata_sync/v1.4"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:csru="http://csru.gov.sk/csru_getconsolidateddata_sync/v1.4"
+	xmlns:c="http://csru.gov.sk/common/v1.4">
+
+	<wsdl:types>
+		<xs:schema
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+			xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+			xmlns:csru="http://csru.gov.sk/csru_getconsolidateddata_sync/v1.4"
+			xmlns:c="http://csru.gov.sk/common/v1.4"
+			elementFormDefault="qualified"
+			targetNamespace="http://csru.gov.sk/csru_getconsolidateddata_sync/v1.4">
+
+			<!-- import common types schema -->
+			<xs:import namespace="http://csru.gov.sk/common/v1.4" schemaLocation="csru_common_types_v1.4.xsd"/>
+
+			<!-- GetConsolidatedData IN/OUT elements -->
+			<xs:element name="GetConsolidatedDataRequest" type="csru:GetConsolidatedDataRequestCType"/>
+			<xs:complexType name="GetConsolidatedDataRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="parameters" type="c:ParameterListCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetConsolidatedDataResponse" type="csru:GetConsolidatedDataResponseCType"/>
+			<xs:complexType name="GetConsolidatedDataResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+					<xs:element minOccurs="0" name="consolidatedData" type="c:DataPlaceholderCType"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="GetConsolidatedDataRequestMessage">
+		<wsdl:part name="getConsolidatedDataRequestRequest" element="csru:GetConsolidatedDataRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetConsolidatedDataResponseMessage">
+		<wsdl:part name="getConsolidatedDataRequestResponse" element="csru:GetConsolidatedDataResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="CSRUGetConsolidatedDataSync">
+		<wsdl:operation name="getConsolidatedData">
+			<wsdl:input name="getConsolidatedDataRequest" message="csru:GetConsolidatedDataRequestMessage"/>
+			<wsdl:output name="getConsolidatedDataResponse" message="csru:GetConsolidatedDataResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CSRUGetConsolidatedDataSyncServiceSoapBinding" type="csru:CSRUGetConsolidatedDataSync">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getConsolidatedData">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zadanie požiadavky na získanie konsolidovaných údajov</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getConsolidatedDataRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getConsolidatedDataResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CSRUGetConsolidatedDataSyncService">
+		<wsdl:port name="CSRUGetConsolidatedDataSyncPort" binding="csru:CSRUGetConsolidatedDataSyncServiceSoapBinding">
+			<soap12:address location="https://c053.csru.gov.sk:443/services/CSRU_GetConsolidatedDataService_sync_v1.4"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- schema pre vymenu udajov o pravnickej osobe podla Vynosu 55/2014 Z. z. Vytvorene: MICROCOMP-Computersystem s.r.o. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cs="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4" targetNamespace="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:complexType name="CodelistDataElementCType">
+		<xs:annotation>
+			<xs:documentation>D.3.4 Zlozeny datovy prvok pouzivajuci udaje podla zakladnych ciselnikov.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="NonCodelistData" type="cs:NonCodelistDataType">
+					<xs:annotation>
+						<xs:documentation>D.3.4.1 Obsahuje volnu neciselnikovu polozku. Pravidla pouzitia: Pouziva sa ak hodnotu nie je mozne najst v ciselniku, pricom vtedy je povinny.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Codelist" type="cs:CodelistCType">
+					<xs:annotation>
+						<xs:documentation>D.5 Zlozeny datovy prvok, ktory obsahuje polozku zo zakladneho ciselnika. Pravidla pouzitia: Pri prenose  nepodpisanych udajov vychadzajucich z udajov zakladneho cislenika je pouzitie tohto datoveho prvku povinne.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CodelistItemCType">
+		<xs:annotation>
+			<xs:documentation>D.5.9 Zlozeny datovy prvok pre jednotlive polozky ciselnika</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ItemCode" type="cs:ItemCodeType">
+				<xs:annotation>
+					<xs:documentation>D.5.9.1 Jedinecny kod polozky. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemName" type="cs:ItemNameType">
+				<xs:annotation>
+					<xs:documentation>D.5.9.2 Uplny nazov polozky</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IDCType">
+		<xs:annotation>
+			<xs:documentation>D.1.6 Zlozeny datovy prvok pre rozne identifikatory.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IdentifierType" type="cs:CodelistDataElementCType">
+				<xs:annotation>
+					<xs:documentation>D.1.6.1 Zlozeny datovy prvok pre zakladny ciselnik, obsahujuci udaje o type pouziteho identifikatora. Hodnoty: Podadene prvky sa vyplnaju v sulade so zakladnym ciselnikom CL004001 Identifikator. Pravidla pouzitia: Uvadza sa vo dvojici s Hodnotou identifikatora. Je mozne viacnasobne pouzitie, pricom kazdy typ je mozne pouzit prave raz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IdentifierValue" type="cs:IdentifierValueType">
+				<xs:annotation>
+					<xs:documentation>D.1.6.2 Obsahuje samotnu hodnotu pouziteho identifikatora. Pravidla pouzitia: Uvadza sa vo dvojici s Typom identifikatora. Moze byt pouzity viackrat, pricom pre kazdy typ identifikatora sa moze pouzit prave raz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CodelistCType">
+		<xs:annotation>
+			<xs:documentation>D.5 Zlozeny datovy prvok, ktory obsahuje polozku zo zakladneho ciselnika. Pravidla pouzitia: Pri prenose  nepodpisanych udajov vychadzajucich z udajov zakladneho cislenika je pouzitie tohto datoveho prvku povinne.</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="CodelistCode" type="cs:CodelistCodeType">
+				<xs:annotation>
+					<xs:documentation>D.5.1 Jedinecny kod zakladneho ciselnika. Hodnoty: V sulade s pridelenou hodnotou.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodelistItem" type="cs:CodelistItemCType">
+				<xs:annotation>
+					<xs:documentation>D.5.9 Zlozeny datovy prvok pre jednotlive polozky ciselnika. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ResultStatusCType">
+		<xs:annotation>
+			<xs:documentation>Navratovy stav </xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="ResultCode" type="cs:ResultCodeType">
+				<xs:annotation>
+					<xs:documentation>Kod odpovede</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultReason" type="cs:ResultReasonType">
+				<xs:annotation>
+					<xs:documentation>Retazec, text odpovede (vid Navratove kody)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="GeneratedFileCType">
+		<xs:annotation>
+			<xs:documentation>Informacie o synchronizacnej davke</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="GeneratedFileName" type="cs:GeneratedFileNameType">
+				<xs:annotation>
+					<xs:documentation>Nazov suboru</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GeneratedFileFullPath" type="cs:GeneratedFileFullPathType">
+				<xs:annotation>
+					<xs:documentation>URL adresa, na ktorej je subor pristupny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GeneratedFileType" type="cs:GeneratedFileTypeType">
+				<xs:annotation>
+					<xs:documentation>Typ suboru (NEW – nove, UPDATE- zmeny) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GeneratedFileCreation" type="cs:GeneratedFileCreationType">
+				<xs:annotation>
+					<xs:documentation>Datum a cas vytvorenia suboru</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="PaginationCType">
+		<xs:annotation>
+			<xs:documentation>Strankovanie vysledku </xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="TotalPages" type="cs:TotalPagesType">
+				<xs:annotation>
+					<xs:documentation>Celkovy pocet stranok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalRowsCount" type="cs:TotalRowsCountType">
+				<xs:annotation>
+					<xs:documentation>Celkovy pocet riadkov</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PageSize" type="cs:PageSizeType">
+				<xs:annotation>
+					<xs:documentation>Velkost stranky (pocet riadkov na stranku)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrentPage" type="cs:CurrentPageType">
+				<xs:annotation>
+					<xs:documentation>Aktualne cislo stranky</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:simpleType name="String2">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 2 znaky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String6">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 6 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String10">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 10 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String12">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 12 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String20">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 20 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String50">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 50 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String100">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 100 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String255">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 255 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String511">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 511 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="511"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String1023">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 1023 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1023"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String2047">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 2047 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2047"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String4095">
+		<xs:annotation>
+			<xs:documentation>Text s obmedzenim na 4095 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4095"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringUnlimited">
+		<xs:annotation>
+			<xs:documentation>Text s neobmedzenym poctom znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal">
+		<xs:annotation>
+			<xs:documentation>Desatinne cislo s obmedzenim na 20 cislic, z toho dve desatinne miesta</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="20"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Int10">
+		<xs:annotation>
+			<xs:documentation>Cele cislo s obmedzenim na 10 cislic</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Int20">
+		<xs:annotation>
+			<xs:documentation>Cele cislo s obmedzenim na 20 cislic</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NonCodelistDataType">
+		<xs:annotation>
+			<xs:documentation>D.3.4.1 Obsahuje volnu neciselnikovu hodnotu.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String2047"/>
+	</xs:simpleType>
+	<xs:simpleType name="CodelistCodeType">
+		<xs:annotation>
+			<xs:documentation>D.5.1 Jedinecny kod zakladneho ciselnika. Hodnoty: V sulade s pridelenou hodnotou.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String100"/>
+	</xs:simpleType>
+	<xs:simpleType name="ItemCodeType">
+		<xs:annotation>
+			<xs:documentation>D.5.9.1 Jedinecny kod polozky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String255"/>
+	</xs:simpleType>
+	<xs:simpleType name="ItemNameType">
+		<xs:annotation>
+			<xs:documentation>D.5.9.2 Uplny nazov polozky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String2047"/>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifierValueType">
+		<xs:annotation>
+			<xs:documentation>D.1.6.2 Obsahuje samotnu hodnotu pouziteho identifikatora. Pravidla pouzitia: Uvadza sa vo dvojici s Typom identifikatora. Moze byt pouzity viackrat, pricom pre kazdy typ identifikatora sa moze pouzit prave raz.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String50"/>
+	</xs:simpleType>
+	<xs:simpleType name="ResultCodeType">
+		<xs:annotation>
+			<xs:documentation>Kod odpovede</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="ResultReasonType">
+		<xs:annotation>
+			<xs:documentation>Retazec, text odpovede (vid Navratove kody)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String2047"/>
+	</xs:simpleType>
+	<xs:simpleType name="GeneratedFileNameType">
+		<xs:annotation>
+			<xs:documentation>Nazov vygenerovaneho suboru</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String255"/>
+	</xs:simpleType>
+	<xs:simpleType name="GeneratedFileFullPathType">
+		<xs:annotation>
+			<xs:documentation>URL adresa, na ktorej je subor pristupny</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String1023"/>
+	</xs:simpleType>
+	<xs:simpleType name="GeneratedFileTypeType">
+		<xs:annotation>
+			<xs:documentation>Typ suboru (NEW – nove, UPDATE- zmeny)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cs:String255"/>
+	</xs:simpleType>
+	<xs:simpleType name="GeneratedFileCreationType">
+		<xs:annotation>
+			<xs:documentation>Datum a cas vytvorenia suboru</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="TotalPagesType">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="TotalRowsCountType">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="PageSizeType">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="CurrentPageType">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:attributeGroup name="HistoryAttributes">
+		<xs:annotation>
+			<xs:documentation>D.3.1 Osobitny datovy typ pre datove prvky so sledovanim historickych zmien ich obsahu. Pravidla pouzitia: Tento datovy prvok sa nepouzije bez atributu "Current" a "EffectiveFrom" a ak ma datovy prvok ukoncenu platnost, tak ani bez atributu "EffectiveTo".</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Current" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Obsahuje označenie, či je  príslušný dátový prvok historicky posledný aktuálny.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EffectiveFrom" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation>Dátum, od ktorého dátový prvok nadobudol účinnosť, to znamená odkedy je relevantne použiteľný.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EffectiveTo" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Dátum, kedy bola účinnosť dátového prvku ukončená, to znamená dokedy je ešte relevantne použiteľný.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ExtendedHistoryAttributes">
+		<xs:annotation>
+			<xs:documentation>D.3.1 rozsireny o CreationDate a ModificationDate - pouzite pri RPOCoporateBodySave</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Current" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Obsahuje označenie, či je  príslušný dátový prvok historicky posledný aktuálny.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EffectiveFrom" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation>Dátum, od ktorého dátový prvok nadobudol účinnosť, to znamená odkedy je relevantne použiteľný.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EffectiveTo" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Dátum, kedy bola účinnosť dátového prvku ukončená, to znamená dokedy je ešte relevantne použiteľný.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CreationDate" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Dátum, od ktorého dátový prvok nadobudol účinnosť, to znamená odkedy je relevantne použiteľný.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ModificationDate" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Dátum, kedy bola účinnosť dátového prvku ukončená, to znamená dokedy je ešte relevantne použiteľný.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+</xs:schema>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.egov.sk/mvsr/RFO/Zapis/Ext/OznacenieZaujmovejOsobyWS-v1.0" xmlns:this="http://www.egov.sk/mvsr/RFO/Zapis/Ext/OznacenieZaujmovejOsobyWS-v1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema">
+	<annotation>
+		<documentation>TODO</documentation>
+	</annotation>
+	<complexType name="TransEnvelopeType" abstract="true"/>
+	<element name="TransEnvIn" type="this:TransEnvTypeIn"/>
+	<complexType name="TransEnvTypeIn">
+		<complexContent>
+			<extension base="this:TransEnvelopeType">
+				<sequence>
+					<element name="OSOList" type="this:TOSOList">
+						<annotation>
+							<documentation>Údaje o osobe.</documentation>
+						</annotation>
+					</element>
+					<element name="UES" type="this:TUES">
+						<annotation>
+							<documentation>Hodnoty TID externého systému a externý používateľ sa využívajú aj pri logovaní.</documentation>
+						</annotation>
+					</element>
+					<element name="VDO" type="this:TVDO" minOccurs="0">
+						<annotation>
+							<documentation>Vstupný dokument, ktorý obsahoval vstupné XML a bol uchovaný v DMS.
+</documentation>
+						</annotation>
+					</element>
+				</sequence>
+				<attribute name="corrID" type="string" use="optional"/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TOSOList">
+		<annotation>
+			<documentation>Údaje o osobe.</documentation>
+		</annotation>
+		<sequence>
+			<element name="OSO" type="this:TOSO" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Údaje o osobe.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TOSO">
+		<annotation>
+			<documentation>Údaje o osobe.</documentation>
+		</annotation>
+		<sequence>
+			<element name="ID">
+				<annotation>
+					<documentation>Identifikátor osoby.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="32"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TUES">
+		<annotation>
+			<documentation>Hodnoty TID externého systému a externý používateľ sa využívajú aj pri logovaní.</documentation>
+		</annotation>
+		<sequence>
+			<element name="PO">
+				<annotation>
+					<documentation>Používateľ externého systému, ktorý poslal požiadavku na zavolanie príslušného WS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="32"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="TI">
+				<annotation>
+					<documentation>Identifikátor transakcie v externom systéme, ktorá iniciovala príslušnú transakciu v zdrojovom systéme</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TVDO">
+		<annotation>
+			<documentation>Vstupný dokument, ktorý obsahoval vstupné XML a bol uchovaný v DMS.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="ID">
+				<annotation>
+					<documentation>Identifikátor dokumentu v DMS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="TransEnvOut" type="this:TransEnvTypeOut"/>
+	<complexType name="TransEnvTypeOut">
+		<complexContent>
+			<extension base="this:TransEnvelopeType">
+				<sequence>
+					<element name="ZVY" type="this:TZVYO">
+						<annotation>
+							<documentation>Výstupné XML WS.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+				<attribute name="corrID" type="string" use="optional"/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TZVYO">
+		<annotation>
+			<documentation>Výstupné XML WS.</documentation>
+		</annotation>
+		<sequence>
+			<element name="NK" type="int">
+				<annotation>
+					<documentation>Návratový kód WS</documentation>
+				</annotation>
+			</element>
+			<element name="DN" minOccurs="0">
+				<annotation>
+					<documentation>Návratový oznam WS, ak nebolo úspešne zrealizované spracovanie volania WS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="OEXList" type="this:TOEXOList">
+				<annotation>
+					<documentation>Údaje o osobe.
+</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TOEXOList">
+		<annotation>
+			<documentation>Údaje o osobe.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="OEX" type="this:TOEXO" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Údaje o osobe.
+</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TOEXO">
+		<annotation>
+			<documentation>Údaje o osobe.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="NK" type="int">
+				<annotation>
+					<documentation>Návratový kód WS</documentation>
+				</annotation>
+			</element>
+			<element name="DE" minOccurs="0">
+				<annotation>
+					<documentation>Návratový oznam WS, ak nebolo úspešne zrealizované spracovanie volania WS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="ID">
+				<annotation>
+					<documentation>Identifikátor osoby.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="32"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

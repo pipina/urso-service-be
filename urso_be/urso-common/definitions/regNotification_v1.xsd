@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.dominanz.sk/regNotification_v1"
+	xmlns:tns="http://www.dominanz.sk/regNotification_v1"
+	elementFormDefault="qualified">
+
+	<element name="notification" type="tns:Notification_t"></element>
+
+	<complexType name="Notification_t">
+        <annotation>
+        	<documentation>Notifikácia z modulu registrov ohľadom číselníka, hodnoty číselníka alebo záznamu registra</documentation>
+        </annotation>
+        <sequence>
+			<element name="header" type="tns:Header_t" maxOccurs="1" minOccurs="1"></element>
+			<element name="eventData" type="tns:EventData_t" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Header_t">
+		<attribute name="timestamp" type="dateTime" use="required"></attribute>
+		<attribute name="domain" use="required" type="tns:domain_t"></attribute>
+		<attribute name="user" type="tns:user_t" use="required"></attribute>
+		<attribute name="category" type="tns:category_t" use="required"></attribute>
+		<attribute name="eventId" type="long" use="required"></attribute>
+	</complexType>
+
+	<simpleType name="domain_t">
+		<restriction base="string">
+			<enumeration value="enumeration"></enumeration>
+			<enumeration value="enumeration_value"></enumeration>
+			<enumeration value="register_value"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="category_t">
+		<restriction base="string">
+			<enumeration value="create"></enumeration>
+			<enumeration value="update"></enumeration>
+			<enumeration value="delete"></enumeration>
+			<enumeration value="identification"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<complexType name="EventData_t"></complexType>
+
+	<complexType name="EnumerationEventData_t">
+		<complexContent>
+			<extension base="tns:EventData_t">
+				<attribute name="codelistCode" type="tns:codelistCode_t"
+					use="required">
+				</attribute>
+				<attribute name="oldVersionId" type="long" use="optional">
+					<annotation>
+						<documentation>Vyplní sa len pri kategórii 'update'.
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="newVersionId" type="long" use="required">
+				</attribute>
+				<attribute name="url" type="string" use="required">
+					<annotation>
+						<documentation>URL služby pre načítanie najnovšej definície
+							číselníka.
+							Uvedené bez servera a protokolu, http volanie GET.
+						</documentation>
+					</annotation>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="EnumerationValueEventData_t">
+		<complexContent>
+			<extension base="tns:EventData_t">
+				<attribute name="codelistCode" type="tns:codelistCode_t"
+					use="required">
+				</attribute>
+				<attribute name="itemCode" type="tns:itemCode_t"
+					use="required">
+				</attribute>
+				<attribute name="oldVersionId" type="long" use="optional">
+					<annotation>
+						<documentation>Vyplní sa len pri kategórii 'update'.
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="newVersionId" type="long" use="required">
+				</attribute>
+				<attribute name="url" type="string" use="required">
+					<annotation>
+						<documentation>URL služby pre načítanie najnovšej definície
+							hodnoty číselníka.
+							Uvedené bez servera a protokolu, http volanie GET.
+						</documentation>
+					</annotation>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="RegisterValueEventData_t">
+		<complexContent>
+			<extension base="tns:EventData_t">
+                <sequence minOccurs="1" maxOccurs="1">
+					<element name="id" type="tns:RegisterEntryId" maxOccurs="1" minOccurs="1">
+						<annotation>
+							<documentation>
+								Id zaznamu. Obsahuje entryId a moze
+								obsahovat aj ine id (napr. subjectId)
+							</documentation>
+						</annotation>
+					</element>
+					<choice minOccurs="0" maxOccurs="1"><element name="renumber" type="tns:Renumber_t" maxOccurs="1" minOccurs="0">
+					</element><element name="nonidentified" type="tns:Nonidentified_t" maxOccurs="1" minOccurs="0">
+					</element><element name="identificationError" type="tns:IdentificationError_t" maxOccurs="1" minOccurs="0">
+					</element></choice>
+                    <element name="newData" type="string" maxOccurs="1" minOccurs="0">
+						<annotation>
+							<documentation>
+								Contains new entry data (xml). Data are
+								delivered only when reported through
+								secure channel and only for
+								non-grpd-relevant data.
+							</documentation>
+						</annotation>
+					</element>
+                </sequence>
+				<attribute name="subCategory" type="tns:subCategory_t"
+					use="optional">
+				</attribute>
+				<attribute name="registerId" type="tns:registerId_t"
+					use="required">
+				</attribute>
+				<attribute name="registerVersionId"
+					type="tns:registerVersionId_t" use="required">
+				</attribute>
+				<attribute name="url" type="string" use="required">
+					<annotation>
+						<documentation>
+							URL služby pre načítanie najnovšej hodnoty
+							záznamu registra. Uvedené bez servera a
+							protokolu, http volanie GET.
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="user" type="tns:user_t"
+					use="required">
+					<annotation>
+						<documentation>
+							Používateľ ktorý spustil akciu vyžadujúcu
+							notifikáciu. Môže byť technický používateľ
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="module" type="tns:module_t"
+					use="optional">
+					<annotation>
+						<documentation>
+							Modul ktorý spôsobil notifikovanú akciu
+						</documentation>
+					</annotation>
+				</attribute>
+				<attribute name="validFrom" type="date"
+					use="required">
+				</attribute>
+				<attribute name="effectiveFrom" type="date"
+					use="required">
+				</attribute>
+				<attribute name="effectiveTo" type="date"
+					use="required">
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<simpleType name="codelistCode_t">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="100"></maxLength>
+		</restriction>
+	</simpleType>
+	<simpleType name="itemCode_t">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="100"></maxLength>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="registerId_t">
+		<restriction base="string"></restriction>
+	</simpleType>
+
+	<simpleType name="registerVersionId_t">
+		<restriction base="int"></restriction>
+	</simpleType>
+    
+    <simpleType name="subCategory_t">
+		<restriction base="string">
+			<enumeration value="identified"></enumeration>
+			<enumeration value="renumber"></enumeration>
+			<enumeration value="nonidentified"></enumeration>
+			<enumeration value="idenificationError"></enumeration>
+		</restriction>
+	</simpleType>
+
+    <simpleType name="entryId_t">
+    	<restriction base="long"></restriction>
+    </simpleType>
+
+    <complexType name="Renumber_t">
+    	<sequence>
+    		<element name="deleted" type="tns:RegisterEntryId" maxOccurs="1" minOccurs="1"></element>
+    		<element name="replacement" type="tns:RegisterEntryId" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Nonidentified_t">
+    	<attribute name="message" type="string" use="optional"></attribute>
+    </complexType>
+
+    <simpleType name="user_t">
+        <annotation>
+        	<documentation>Id pouzivatela (login)</documentation>
+        </annotation>
+        <restriction base="string">
+    		<maxLength value="256"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="IdentificationError_t">
+    	<attribute name="message" type="string" use="required"></attribute>
+    </complexType>
+
+    <simpleType name="module_t">
+    	<annotation>
+    		<documentation>Id modulu</documentation>
+    	</annotation>
+    	<restriction base="string">
+    		<minLength value="2"></minLength>
+    		<maxLength value="4"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="RegisterEntryId">
+        <attribute name="entryId" type="tns:entryId_t" use="required">
+				</attribute>
+        <attribute name="id" use="optional">
+                    <annotation>
+                    	<documentation>Obsahuje id zaznamu v XML. To moze byt identicke s entryId, ale moze byt aj ine, napr. pre subjekty to je format AA0000000000. 
+Ak v XML nie je uvedene id tak toto pole nie je vyplnene.</documentation>
+                    </annotation>
+                    <simpleType>
+						<restriction base="string">
+							<maxLength value="255"></maxLength>
+						</restriction>
+					</simpleType>
+				</attribute>
+    </complexType>
+</schema>

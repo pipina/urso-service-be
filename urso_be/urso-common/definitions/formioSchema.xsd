@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.dominanz.sk/formioSchema"
+	xmlns:tns="http://www.dominanz.sk/formioSchema"
+	elementFormDefault="qualified">
+
+	<element name="components">
+		<complexType>
+			<sequence>
+				<element name="components" type="tns:ComponentType"
+					maxOccurs="unbounded" minOccurs="1">
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="ComponentType">
+		<sequence>
+			<element name="conditional" type="tns:ConditionalType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>
+						Podmienené zobrazenie komponentu
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="key" type="string" use="required"></attribute>
+		<attribute name="label" type="string" use="required"></attribute>
+		<attribute name="tableView" type="boolean" use="required"
+			fixed="false">
+		</attribute>
+		<attribute name="type" type="tns:ComponentTypeType"
+			use="required">
+		</attribute>
+		<attribute name="hideLabel" type="boolean" default="false"></attribute>
+		<attribute name="customConditional" type="string"
+			use="optional">
+			<annotation>
+				<documentation>
+					Custom podmienka show = xxx
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="hidden" type="boolean" use="optional"
+			default="false">
+		</attribute>
+		<attribute name="customClass" type="string"></attribute>
+	</complexType>
+
+
+	<simpleType name="ComponentTypeType">
+		<restriction base="string">
+			<enumeration value="textfield"></enumeration>
+			<enumeration value="select"></enumeration>
+			<enumeration value="datagrid"></enumeration>
+			<enumeration value="container"></enumeration>
+			<enumeration value="datetime"></enumeration>
+			<enumeration value="checkbox"></enumeration>
+			<enumeration value="textarea"></enumeration>
+			<enumeration value="panel"></enumeration>
+			<enumeration value="none"></enumeration>
+			<enumeration value="button"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<complexType name="ComponentsType">
+		<complexContent>
+			<extension base="tns:ComponentType">
+				<sequence>
+					<element name="components" type="tns:ComponentType"
+						maxOccurs="unbounded" minOccurs="1">
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Textfield">
+		<complexContent>
+			<extension base="tns:InputType">
+    			<attribute name="labelPosition" type="string"
+    				fixed="left-left" use="required">
+    			</attribute>
+    			<attribute name="placeholder" type="string"
+    				use="required">
+    			</attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+
+	<complexType name="InputType">
+		<complexContent>
+			<extension base="tns:ComponentType">
+				<sequence>
+					<element name="validate" type="tns:ValidateType"></element>
+				</sequence>
+				<attribute name="input" type="boolean" fixed="true"
+					use="required">
+				</attribute>
+				<attribute name="defaultValue" type="string"
+					use="optional">
+				</attribute>
+				<attribute name="disabled" type="boolean"></attribute>
+				<attribute name="calculateValue" type="string" use="optional"></attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Textarea">
+    	<complexContent>
+    		<extension base="tns:Textfield">
+    			<attribute name="autoExpand" type="boolean" use="required" fixed="true"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Panel">
+    	<complexContent>
+    		<extension base="tns:ComponentsType">
+    			<attribute name="collapsible" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+    			<attribute name="collapsed" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+    			<attribute name="title" type="string" use="required"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+    
+    <complexType name="Checkbox">
+    	<complexContent>
+    		<extension base="tns:InputType"></extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Datagrid">
+    	<complexContent>
+    		<extension base="tns:Container">
+    			<sequence>
+    				<element name="validate" type="tns:ValidateType"></element>
+    			</sequence>
+    			<attribute name="reorder" type="boolean" use="required"
+    				fixed="false">
+    			</attribute>
+    			<attribute name="addAnotherPosition" type="string"
+    				use="required" fixed="bottom">
+    			</attribute>
+    			<attribute name="defaultOpen" type="boolean"
+    				use="required" fixed="false">
+    			</attribute>
+    			<attribute name="layoutFixed" type="boolean"
+    				use="required" fixed="false">
+    			</attribute>
+    			<attribute name="enableRowGroups" type="boolean"
+    				use="required" fixed="false">
+    			</attribute>
+    			<attribute name="initEmpty" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+    			<attribute name="addAnother" type="string"
+    				use="required" fixed="Pridať">
+    			</attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Container">
+    	<complexContent>
+    		<extension base="tns:ComponentsType">
+                <attribute name="input" type="boolean" use="required" fixed="true">
+    			</attribute>
+            </extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Datetime">
+    	<complexContent>
+    		<extension base="tns:InputType">
+    			<sequence>
+    				<element name="datePicker" type="tns:DatePickerType"
+    					maxOccurs="1" minOccurs="1">
+    				</element>
+    				<element name="widget"
+    					type="tns:DatetimeWidgetType">
+    				</element>
+    			</sequence>
+    			<attribute name="format" type="string" use="required"
+    				fixed="dd.MM.yyyy">
+    			</attribute>
+    			<attribute name="enableMinDateInput" type="boolean"
+    				use="required" fixed="false">
+    			</attribute>
+    			<attribute name="enableMaxDateInput" type="boolean"
+    				use="required" fixed="false">
+    			</attribute>
+    			<attribute name="suffix" type="string" use="required"
+    				fixed='&lt;i ref=\"icon\" class=\"fa fa-calendar\" style=\"\"&gt;&lt;/i&gt;'>
+    			</attribute>
+    			<attribute name="useLocaleSettings" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+    			<!--     			<attribute name="enableTime" type="boolean" use="required" fixed="false"></attribute> -->
+    			<attribute name="enableTime" type="boolean"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="DatePickerType">
+    	<attribute name="disableWeekends" type="boolean" use="required"></attribute>
+    	<attribute name="disableWeekdays" type="boolean" use="required"></attribute>
+    </complexType>
+
+    <complexType name="DatetimeWidgetType">
+    	<complexContent>
+    		<extension base="tns:DatePickerType">
+    			<attribute name="type" type="string" fixed="calendar"
+    				use="required">
+    			</attribute>
+
+    			<attribute name="displayInTimezone" type="string"
+    				fixed="viewer" use="required">
+    			</attribute>
+
+    			<attribute name="locale" type="string" use="required"
+    				fixed="sk">
+    			</attribute>
+
+    			<attribute name="useLocaleSettings" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+
+    			<attribute name="allowInput" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+
+    			<attribute name="mode" type="string" use="required"
+    				fixed="single">
+    			</attribute>
+
+    			<attribute name="enableTime" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+
+    			<attribute name="noCalendar" type="boolean"
+    				use="required" fixed="false">
+    			</attribute>
+
+    			<attribute name="format" type="string" use="required"
+    				fixed="dd.MM.yyyy">
+    			</attribute>
+
+    			<attribute name="hourIncrement" type="int"
+    				use="required" fixed="1">
+    			</attribute>
+
+    			<attribute name="minuteIncrement" type="int"
+    				use="required" fixed="1">
+    			</attribute>
+
+    			<attribute name="time_24hr" type="boolean"
+    				use="required" fixed="true">
+    			</attribute>
+
+    			<attribute name="minDate" type="string"></attribute>
+
+    			<attribute name="maxDate" type="string"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Select">
+    	<complexContent>
+    		<extension base="tns:InputType">
+    			<sequence>
+    				<element name="data" type="tns:SelectDataType"
+    					maxOccurs="1" minOccurs="0">
+    				</element>
+    			</sequence>
+    			<attribute name="selectThreshold" type="float"
+    				use="required" fixed="0.3">
+    			</attribute>
+    			<attribute name="dataSrc" use="optional">
+    				<simpleType>
+    					<restriction base="string">
+    						<enumeration value="values"></enumeration>
+    						<enumeration value="url"></enumeration>
+    					</restriction>
+    				</simpleType>
+    			</attribute>
+    			<attribute name="selectValues" type="string"
+    				use="optional">
+    			</attribute>
+    			<attribute name="lazyLoad" type="boolean" use="required"
+    				fixed="false">
+    			</attribute>
+    			<attribute name="valueProperty" type="string"></attribute>
+    			<attribute name="template" type="string"></attribute>
+    			<attribute name="searchField" type="string"></attribute>
+    			<attribute name="idPath" type="string"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="SelectDataType">
+    	<sequence>
+    		<element name="values" type="tns:SelectDataValueType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</element>
+			<element name="headers" type="tns:SelectDataHeaderType"
+					 maxOccurs="unbounded" minOccurs="1">
+			</element>
+    	</sequence>
+    	<attribute name="url" type="string"></attribute>
+    </complexType>
+
+    <complexType name="SelectDataValueType">
+    	<attribute name="label" type="string" use="optional"></attribute>
+    	<attribute name="value" type="string" use="required"></attribute>
+    </complexType>
+
+	<complexType name="SelectDataHeaderType">
+		<attribute name="key" type="string" use="required"></attribute>
+		<attribute name="value" type="string" use="required"></attribute>
+	</complexType>
+
+    <complexType name="Button">
+    	<complexContent>
+    		<extension base="tns:InputType">
+    			<attribute name="disableOnInvalid" type="string" use="required" fixed="true"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="ValidateType">
+    	<attribute name="required" type="boolean"></attribute>
+    	<attribute name="minLength" type="int"></attribute>
+    	<attribute name="maxLength" type="int"></attribute>
+    	<attribute name="pattern" type="string"></attribute>
+    	<attribute name="custom" type="string">
+    		<annotation>
+    			<documentation>
+    				Custom validacia inputu. Napr. "validate": {
+    				"custom": "valid = data.typOsoby != 'FO' ||
+    				(data.typOsoby == 'FO' &amp;&amp; input != '') ?
+    				true: \"Pole je povinné pre fyzickú osobu\"",
+    			</documentation>
+    		</annotation>
+    	</attribute>
+    	<attribute name="customMessage" type="string"></attribute>
+    </complexType>
+
+    <complexType name="ConditionalType">
+    	<attribute name="show" type="string">
+    		<annotation>
+    			<documentation>Ak true, pole sa zobrazí ak platí podmienka</documentation>
+    		</annotation></attribute>
+    	<attribute name="when" type="string">
+    		<annotation>
+    			<documentation>pole ktoré validujeme</documentation>
+    		</annotation></attribute>
+    	<attribute name="eq" type="string">
+    		<annotation>
+    			<documentation>hodnota ktorá sa má zhodovať s hodnotou kontrolovaného poľa</documentation>
+    		</annotation></attribute>
+    </complexType>
+</schema>

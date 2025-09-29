@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:RegisterPluginConfig
+	xmlns:tns="http://www.dominanz.sk/registerPluginConfig_v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.dominanz.sk/registerPluginConfig_v1 ../definitions/registerPluginConfig_v1.xsd">
+	<tns:Field KeyName="RegionItemName" XPathValue="ad:Address/Region/NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="Okres" Description="Okres.">
+	</tns:Field>
+	<tns:Field KeyName="RegionItemName" XPathValue="ad:Address/Region/Codelist/CodelistItem/ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Okres" Description="Okres.">
+	</tns:Field>
+	<tns:Field KeyName="RegionItemCode" XPathValue="ad:Address/Region/Codelist/CodelistItem/ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Okres" Description="Okres.">
+	</tns:Field>
+	<tns:Field KeyName="CountyItemName" XPathValue="ad:Address/County/NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj" Description="Kraj.">
+	</tns:Field>
+	<tns:Field KeyName="CountyItemName" XPathValue="ad:Address/County/Codelist/CodelistItem/ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj" Description="Kraj.">
+	</tns:Field>
+	<tns:Field KeyName="CountyItemCode" XPathValue="ad:Address/County/Codelist/CodelistItem/ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj" Description="Kraj.">
+	</tns:Field>
+	<tns:Field KeyName="MunicipalityItemName" XPathValue="ad:Address/Municipality/NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="Obec" Description="Obec.">
+	</tns:Field>
+	<tns:Field KeyName="MunicipalityItemName" XPathValue="ad:Address/Municipality/Codelist/CodelistItem/ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Obec" Description="Obec.">
+	</tns:Field>
+	<tns:Field KeyName="MunicipalityItemCode" XPathValue="ad:Address/Municipality/Codelist/CodelistItem/ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Obec" Description="Obec." SearchType="EQUALS">
+	</tns:Field>
+	<tns:Field KeyName="StreetName" XPathValue="ad:Address/StreetName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Ulica" Description="Názov ulice.">
+	</tns:Field>
+	<tns:Field KeyName="BuildingNumber" XPathValue="ad:Address/BuildingNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="Číslo budovy" Description="Číslo budovy.">
+	</tns:Field>
+	<tns:Field KeyName="PropertyRegistrationNumber" ValueType="NUMBER" XPathValue="ad:Address/PropertyRegistrationNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="Súpisné číslo" Description="Súpisné číslo.">
+	</tns:Field>
+	<tns:Field KeyName="BuildingIndex" XPathValue="ad:Address/BuildingIndex"
+		IsIndexed="true" IsOutputField="true" DisplayName="Index budovy" Description="Index budovy.">
+	</tns:Field>
+	<tns:RegisterType>EXTERNAL</tns:RegisterType>
+	<tns:GdprParams IsGdprRelevant="true" ImmediateDeleteOnLastReference="false" TTL="1" TTLUnit="DAYS"/>
+	<tns:XsdFile IsPrimary="true" Path="RA_1/RA_1_DATA.xsd" IsExternal="true" NamespacePrefix="ad" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/ADDRESS"/>
+	<tns:XsdFile IsPrimary="false" Path="RA_1/RA_1_TYPES.xsd" IsExternal="true" NamespacePrefix="" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/ADDRESS"/>
+</tns:RegisterPluginConfig>

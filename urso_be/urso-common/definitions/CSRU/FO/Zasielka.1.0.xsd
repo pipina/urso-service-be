@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.egov.sk/mvsr/Ekr/Zasielka.1.0" xmlns:p="http://www.egov.sk/mvsr/Ekr/Zasielka.1.0" elementFormDefault="qualified">
+	<element name="Zasielka" type="p:ZasielkaType" />
+	<complexType name="ZasielkaType">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="CisloZasielky" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="DatumACasVytvorenia" type="date" />
+			<element minOccurs="1" maxOccurs="1" name="DataZasielkyBase64" type="string" />
+		</sequence>
+		<attribute name="CorrelationId" type="string" use="optional" />
+	</complexType>
+</schema>

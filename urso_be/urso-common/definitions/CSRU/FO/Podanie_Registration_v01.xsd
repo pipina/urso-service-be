@@ -1,0 +1,58 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:reg="http://www.ditec.sk/ekr/registration/v1.0"
+	targetNamespace="http://www.ditec.sk/ekr/registration/v1.0"
+	version="1.0" elementFormDefault="qualified">
+	<xsd:element name="Registration"
+		type="reg:RegistrationType" />
+	<xsd:complexType name="RegistrationType">
+		<xsd:sequence>
+			<xsd:any minOccurs="1" processContents="lax"
+				namespace="##any" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Xml obsah lubovolneho dokumentu, ktory je
+						schvaleny spravcom biznisu a EKR je schopne ho spracovat.
+						Napriklad dokument zlozeneho el. podpisu, dokument bez
+						autorizacie.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:any>
+		</xsd:sequence>
+		<xsd:attribute name="URI" type="xsd:anyURI"
+			use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Blizsia identifikacia podania. Z pohladu
+					spracovania nie je vyzadovany ani nijak kontrolovany, pokial to nie
+					je explicitne vyzadovane spravcom biznisu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Identifikator typu podania na zaklade ktoreho sa
+					pracuje s podanim.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Description" type="xsd:string"
+			use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Blizsia identifikacia podania. Z pohladu
+					spracovania nie je vyzadovany ani nijak kontrolovany, pokial to nie
+					je explicitne vyzadovane spravcom biznisu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="ExternalIdentifier"
+			type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Identifikacia externeho systemu v pripade
+					komunikacie podatelna-podatelna.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="BusinessIdentifier"
+			type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Identifikator biznis pripadu. Umoznuje
+					odosielatelovi pridelit vlastny identifikator k zaslanemu podaniu.
+					Odpovede viazuce sa k danemu podaniu budu mat vyplneny tento
+					identifikator za ucelom parovania odpovede.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

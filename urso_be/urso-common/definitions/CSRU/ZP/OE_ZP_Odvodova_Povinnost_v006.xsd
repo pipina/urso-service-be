@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tn="http://csru.gov.sk/oe_zp_odvodova_povinnost/v1.0" xmlns="http://csru.gov.sk/oe_zp_odvodova_povinnost/v1.0" targetNamespace="http://csru.gov.sk/oe_zp_odvodova_povinnost/v1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="EvidenciaCType">
+		<xs:sequence>
+			<xs:element name="SplnenaOdvodovaPovinnost">
+				<xs:annotation>
+					<xs:documentation>Či je splnená odvodová povinnosť A/N/C (pokiaľ nie je nedoplatok - A a výška nedoplatku bude 0,00/pokiaľ je nedoplatok - N a bude uvedená výška nedoplatku ).
+                                                  Ale, ak bude mať platiteľ iné nedostatky (pre ktoré nie je možné reálne vyčísliť pohľadávku), tak sa uvedie C ale bez výšky pohľadávky. 
+                    </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="A"/>
+						<xs:enumeration value="N"/>
+						<xs:enumeration value="C"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NedoplatokVyska" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nedoplatok -  na 2 desatinné čísla</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OdvodovaPovinnostZPCType">
+		<xs:sequence>
+			<xs:element name="FO" type="tn:UdajeFOCType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Údaje o osobe</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PO" type="tn:UdajePOCType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Údaje o PO</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Evidencia" type="tn:EvidenciaCType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Údaje evidencie</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ZP">
+				<xs:annotation>
+					<xs:documentation>ZP, od ktorej sú údaje žiadané.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="DÔVERA zdravotná poisťovňa"/>
+						<xs:enumeration value="VšZP"/>
+						<xs:enumeration value="UZP"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DatZiad" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dátum podania žiadosti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Datum" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dátum, ku ktorému sa overuje nedoplatok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VysledokSpracovaniaStav" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                        Výsledok spracovania Použitý číselník: Výsledok.
+                        0=Zaslané údaje od ZP,
+                        1=FO/PO nie je evidovaná v systéme ZP,
+                        2=FO/PO je evidovaná v systéme ZP a nie sú evidované žiadne údaje v ZP,
+                        3=Nesúlad subjektu v obálke a obsahu,
+                        4=Nesúlad RČ/IČO/IFO,
+                        5=Neevidovaný partner pre poskytnutie údajov  
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="JednacieCisloZP" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Jednacie číslo spracovania</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VybavujeOsobaZP" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vybavuje osoba v ZP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VybavujeEmailZP" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vybavuje e-mail v ZP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ErrorCode">
+				<xs:annotation>
+					<xs:documentation>
+                        Stav spracovania v IS CSRÚ. V pripade ErrorCode 3 a 4 bude vyplený element ErrorMessage.
+                    </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ErrorMessage" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>     Ak ErrorCode=3 tak chybova hlaska bude - ZP nenaintegrovana v IS CSRU
+                                                       Ak ErrorCode=4 tak chybova hlaska bude - Popis chyby, ktora nastala pri spracovani
+                        </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UdajeFOCType">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="tn:IdentifikatorCType">
+				<xs:annotation>
+					<xs:documentation>Identifkátor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Meno" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Meno</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Priezvisko" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Priezvisko</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Adresa" type="tn:AdresaCType">
+				<xs:annotation>
+					<xs:documentation>Adresa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UdajePOCType">
+		<xs:sequence>
+			<xs:element name="ObchodneMeno" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Názov zamestnávateľa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identifikator" type="tn:IdentifikatorCType">
+				<xs:annotation>
+					<xs:documentation>Identifikátor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Adresa" type="tn:AdresaCType">
+				<xs:annotation>
+					<xs:documentation>Adresa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdentifikatorCType">
+		<xs:sequence>
+			<xs:element name="Typ" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Typ identifikátora
+Použitý číselník: CL004001</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hodnota" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Hodnota identifikátora (RČ, číslo OP, IČO, DIČ...)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdresaCType">
+		<xs:sequence>
+			<xs:element name="TypAdresy" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Typ adresy
+Použitý číselník: CL010139</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ulica" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ulica</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Orientacne-SupisneCislo" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Orientačné/súpisné číslo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Obec" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Obec</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CastObce" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Časť obce - lokalita</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Psc" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>PSČ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUTS" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>NUTS
+Použitý číselník: CL000025</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stat" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Štát
+Použitý číselník: CL000086</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PlnenieOdvodovejPovinnosti">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OdvodovaPovinnostZP" type="tn:OdvodovaPovinnostZPCType" minOccurs="3" maxOccurs="3"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

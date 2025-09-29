@@ -1,0 +1,1538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieUdajovIFOOnlineWS-v1.0.xsd" xmlns:this="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieUdajovIFOOnlineWS-v1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema">
+    <annotation>
+        <documentation>Poskytnutie všetkých povolených údajov zoznamu osôb na základe identifikátora osoby, pričom maximálny počet zaslaných identifikátorov na vstupe je 10.</documentation>
+    </annotation>
+    <complexType name="TransEnvelopeType" abstract="true" />
+    <element name="TransEnvIn" type="this:TransEnvTypeIn" />
+    <complexType name="TransEnvTypeIn">
+        <complexContent>
+            <extension base="this:TransEnvelopeType">
+                <sequence>
+                    <element name="POD" type="this:TPOD">
+                        <annotation>
+                            <documentation>Vstupné XML WS.</documentation>
+                        </annotation>
+                    </element>
+                </sequence>
+                <attribute name="corrID" type="string" use="optional">
+                    <annotation>
+                        <documentation>Jednoznačný identifikátor transakcie klientského systému. Ak je uvedený umožňuje jednoducho napárovať súvisiace volania.</documentation>
+                    </annotation>
+                </attribute>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="TPOD">
+        <annotation>
+            <documentation>Vstupné XML WS.</documentation>
+        </annotation>
+        <sequence>
+            <element name="IOSList" type="this:TIOSList">
+                <annotation>
+                    <documentation>Identifikátor osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="UES" type="this:TUES">
+                <annotation>
+                    <documentation>Hodnoty TID externého systému a externý používatel sa využívajú aj pri logovaní.</documentation>
+                </annotation>
+            </element>
+            <element name="SPIList" type="this:TSPI_SPNList">
+                <annotation>
+                    <documentation>Špecifikuje požadovaný typ informácie na výstupe.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TIOSList">
+        <annotation>
+            <documentation>Identifikátor osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="IOS" type="this:TIOS" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Identifikátor osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TIOS">
+        <annotation>
+            <documentation>Identifikátor osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="IF">
+                <annotation>
+                    <documentation>Identifikátor fyzickej osoby</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="32" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TUES">
+        <annotation>
+            <documentation>Hodnoty TID externého systému a externý používatel sa využívajú aj pri logovaní.</documentation>
+        </annotation>
+        <sequence>
+            <element name="PO">
+                <annotation>
+                    <documentation>Používatel externého systému, ktorý poslal požiadavku na zavolanie príslušného WS</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="32" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TI">
+                <annotation>
+                    <documentation>Identifikátor transakcie v externom systéme, ktorá iniciovala príslušnú transakciu v zdrojovom systéme</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="50" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TSPI_SPNList">
+        <annotation>
+            <documentation>Špecifikuje požadovaný typ informácie na výstupe.</documentation>
+        </annotation>
+        <sequence>
+            <element name="SPI" type="this:TSPI_SPN" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Špecifikuje požadovaný typ informácie na výstupe.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TSPI_SPN">
+        <annotation>
+            <documentation>Špecifikuje požadovaný typ informácie na výstupe.</documentation>
+        </annotation>
+        <sequence>
+            <element name="TUDHONA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka REG.C_TYP_UDAJOV.UV_NAZOV referencovaného z RFO.T_SPECIFIKACIA_POZADOVANEJ_INFORMACIE.NL_HODNOTA_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="HO" type="int">
+                <annotation>
+                    <documentation>Hodnota typu požadovanej informácie.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <element name="TransEnvOut" type="this:TransEnvTypeOut" />
+    <complexType name="TransEnvTypeOut">
+        <complexContent>
+            <extension base="this:TransEnvelopeType">
+                <sequence>
+                    <element name="POV" type="this:TPOVO">
+                        <annotation>
+                            <documentation>Výstupné XML WS.</documentation>
+                        </annotation>
+                    </element>
+                </sequence>
+                <attribute name="corrID" type="string" use="optional">
+                    <annotation>
+                        <documentation>Jednoznačný identifikátor transakcie systému poskytovateľa. Klientský systém môže identifikátor použiť na párovanie s transakciou vo svojom systéme.</documentation>
+                    </annotation>
+                </attribute>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="TPOVO">
+        <annotation>
+            <documentation>Výstupné XML WS.</documentation>
+        </annotation>
+        <sequence>
+            <element name="NU" minOccurs="0">
+                <annotation>
+                    <documentation>Návratový oznam WS, ak nebolo úspešne zrealizované spracovanie volania WS</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="512" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="KO" type="int">
+                <annotation>
+                    <documentation>Návratový kód WS</documentation>
+                </annotation>
+            </element>
+            <element name="AC" type="dateTime">
+                <annotation>
+                    <documentation>Aktuálny dátum a cas vytvorenia výstupu</documentation>
+                </annotation>
+            </element>
+            <element name="OEXList" type="this:TOEX_OEIOList">
+                <annotation>
+                    <documentation>Poskytované údaje o osobe.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TOEX_OEIOList">
+        <annotation>
+            <documentation>Poskytované údaje o osobe.</documentation>
+        </annotation>
+        <sequence>
+            <element name="OEX" type="this:TOEX_OEIO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Poskytované údaje o osobe.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TOEX_OEIO">
+        <annotation>
+            <documentation>Poskytované údaje o osobe.</documentation>
+        </annotation>
+        <sequence>
+            <element name="ID" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Identifikátor osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="32" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PO" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Identifikátor pravej osoby</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="RC" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Rodné císlo osoby, zapisuje sa úplné aj s lomítkom.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="11" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DN" type="date" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Dátum narodenia osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="UC" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Miesto narodenia osoby (obec, resp. cast obce).</documentation>
+                </annotation>
+            </element>
+            <element name="UCEUCNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.REG_UZEMNY_CELOK.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_UZEMNY_CELOK_NARODENIA_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="MN" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Miesto narodenia osoby, ak hodnota nie je uvedená v císelníku miesta narodení (císelník obcí, resp. castí obce).</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="80" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SN" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Štát narodenia osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="STASNNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_STAT.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_STAT_NARODENIA_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PI" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Pohlavie osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="POHPINA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.CI_POHLAVIE.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_POHLAVIE_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="RS" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Rodinný stav osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="RSTRSNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_RODINNY_STAV.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_RODINNY_STAV_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="RM" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Rodná matrika osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="NI" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Národnost osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="NARNINA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_NARODNOST.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_NARODNOST_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DU" type="date" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Dátum úmrtia osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="UE" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Miesto úmrtia osoby (obec, resp. cast obce).</documentation>
+                </annotation>
+            </element>
+            <element name="UCEUENA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.REG_UZEMNY_CELOK.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_UZEMNY_CELOK_UMRTIA_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="MU" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Miesto úmrtia osoby, ak hodnota nie je uvedená v císelníku miesta narodení (císelník obcí, resp. castí obce).</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="80" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="UM" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Úmrtná matrika osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SU" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Štát úmrtia osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="STASUNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_STAT.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_STAT_UMRTIA_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="BI" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Bezvýznamový identifikátor osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TV" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Typ osoby v rámci RFO.</documentation>
+                </annotation>
+            </element>
+            <element name="TVKTVNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_TYP_VZTAHU_K_REGOB.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_TYP_VZTAHU_K_REGOB_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="UL" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Okres narodenia poskytnutej osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="UCEULNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.REG_UZEMNY_CELOK.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_UZEMNY_CELOK_OKRES_NAR_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="UO" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Okres úmrtia poskytnutej osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="UCEUONA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.REG_UZEMNY_CELOK.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_UZEMNY_CELOK_OKRES_UMR_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="IC" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Identifikátor osoby - cudzinca používaný v cudzine.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="32" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SZ" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Stupen zverejnenia údajov príslušnej osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="SZVSZNA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_STUPEN_ZVEREJNENIA.UV_NAZOV referencovaného z RFO.T_OSOBA.NL_STUPEN_ZVEREJNENIA_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="RN" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Rok narodenia, položka sa používa vtedy, ked nie známy presný dátum narodenia (formát RRRR).</documentation>
+                </annotation>
+            </element>
+            <element name="DK" type="date" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Dátum ukoncenia rodinného vztahu.</documentation>
+                </annotation>
+            </element>
+            <element name="DL" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Dôvod neplatnosti</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="NK" type="int">
+                <annotation>
+                    <documentation>Návratový kód WS</documentation>
+                </annotation>
+            </element>
+            <element name="DP" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Návratový oznam WS, ak nebolo úspešne zrealizované spracovanie volania WS.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PA" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Rodná matrika</documentation>
+                </annotation>
+            </element>
+            <element name="PG" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Úmrtná matrika</documentation>
+                </annotation>
+            </element>
+            <element name="MOSList" type="this:TMOSOList">
+                <annotation>
+                    <documentation>Reprezentuje evidované meno osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="PRIList" type="this:TPRIOList">
+                <annotation>
+                    <documentation>Reprezentuje evidované priezvisko osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="RPRList" type="this:TRPROList">
+                <annotation>
+                    <documentation>Reprezentuje evidované rodné priezvisko osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="TOSList" type="this:TTOS_TOIOList">
+                <annotation>
+                    <documentation>Reprezentuje evidovaný titul osoby</documentation>
+                </annotation>
+            </element>
+            <element name="SPRList" type="this:TSPR_SPIOList">
+                <annotation>
+                    <documentation>Reprezentuje evidovanú štátnu príslušnost osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="RVEList" type="this:TRVE_RVXOList">
+                <annotation>
+                    <documentation>Údaje osoby, ktorá je s hlavnou osobou v rodinnom vztahu.</documentation>
+                </annotation>
+            </element>
+            <element name="POBList" type="this:TPOB_PHROList">
+                <annotation>
+                    <documentation>Údaje o pobyte osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="ZPOList" type="this:TZPOOList">
+                <annotation>
+                    <documentation>Údaje o zákaze pobytu.</documentation>
+                </annotation>
+            </element>
+            <element name="PZMList" type="this:TPZMOList">
+                <annotation>
+                    <documentation>Údaje o zrušení vyhlásenia osoby za mrtvu.</documentation>
+                </annotation>
+            </element>
+            <element name="DCDList" type="this:TDCD_DCIOList">
+                <annotation>
+                    <documentation>Reprezentuje evidovaný doklad osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="USOList" type="this:TUSOOList">
+                <annotation>
+                    <documentation>Údaje o udelení alebo strate štátneho obcianstva.</documentation>
+                </annotation>
+            </element>
+            <element name="SNRList" type="this:TSNR_SNPOList">
+                <annotation>
+                    <documentation>Údaje o pozbavení alebo obmedzení právnej spôsobilosti.</documentation>
+                </annotation>
+            </element>
+            <element name="ZUDList" type="this:TZUD_ZUNOList">
+                <annotation>
+                    <documentation>Externý systém modifikujúci údaje osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="optional">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TMOSOList">
+        <annotation>
+            <documentation>Reprezentuje evidované meno osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="MOS" type="this:TMOSO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Reprezentuje evidované meno osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TMOSO">
+        <annotation>
+            <documentation>Reprezentuje evidované meno osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="ME" nillable="true">
+                <annotation>
+                    <documentation>Hodnota mena osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PO" type="int">
+                <annotation>
+                    <documentation>Poradie mena v rámci všetkých ostatných mien osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TPRIOList">
+        <annotation>
+            <documentation>Reprezentuje evidované priezvisko osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="PRI" type="this:TPRIO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Reprezentuje evidované priezvisko osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TPRIO">
+        <annotation>
+            <documentation>Reprezentuje evidované priezvisko osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="PO" type="int">
+                <annotation>
+                    <documentation>Poradie priezviska v rámci všetkých ostatných priezvísk osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="PR" nillable="true">
+                <annotation>
+                    <documentation>Hodnota priezviska osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TRPROList">
+        <annotation>
+            <documentation>Reprezentuje evidované rodné priezvisko osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="RPR" type="this:TRPRO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Reprezentuje evidované rodné priezvisko osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TRPRO">
+        <annotation>
+            <documentation>Reprezentuje evidované rodné priezvisko osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="PO" type="int">
+                <annotation>
+                    <documentation>Poradie rodného priezviska v rámci všetkých ostatných rodných priezvísk osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="RP" nillable="true">
+                <annotation>
+                    <documentation>Hodnota rodného priezviska osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TTOS_TOIOList">
+        <annotation>
+            <documentation>Reprezentuje evidovaný titul osoby</documentation>
+        </annotation>
+        <sequence>
+            <element name="TOS" type="this:TTOS_TOIO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Reprezentuje evidovaný titul osoby</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TTOS_TOIO">
+        <annotation>
+            <documentation>Reprezentuje evidovaný titul osoby</documentation>
+        </annotation>
+        <sequence>
+            <element name="TITTINA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_TITUL.UV_NAZOV referencovaného z REG.T_TITUL_OSOBY.NL_TITUL_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="60" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TTITTNA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.CI_TYP_TITULU.UV_NAZOV referencovaného z REG.T_TITUL_OSOBY.NL_TYP_TITULU_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TI" type="int">
+                <annotation>
+                    <documentation>Hodnota titulu osoby.</documentation>
+                </annotation>
+            </element>
+            <element name="TT" type="int">
+                <annotation>
+                    <documentation>Typ titulu.</documentation>
+                </annotation>
+            </element>
+            <element name="FR" type="dateTime" nillable="true">
+                <annotation>
+                    <documentation>Dátum zaciatku platnosti</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TSPR_SPIOList">
+        <annotation>
+            <documentation>Reprezentuje evidovanú štátnu príslušnost osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="SPR" type="this:TSPR_SPIO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Reprezentuje evidovanú štátnu príslušnost osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TSPR_SPIO">
+        <annotation>
+            <documentation>Reprezentuje evidovanú štátnu príslušnost osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="STASTNA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_STAT.UV_NAZOV referencovaného z REG.T_STATNA_PRISLUSNOST.NL_STAT_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ST" type="int">
+                <annotation>
+                    <documentation>Hodnota štátnej príslušnosti osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TRVE_RVXOList">
+        <annotation>
+            <documentation>Údaje osoby, ktorá je s hlavnou osobou v rodinnom vztahu.</documentation>
+        </annotation>
+        <sequence>
+            <element name="RVE" type="this:TRVE_RVXO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje osoby, ktorá je s hlavnou osobou v rodinnom vztahu.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TRVE_RVXO">
+        <annotation>
+            <documentation>Údaje osoby, ktorá je s hlavnou osobou v rodinnom vztahu.</documentation>
+        </annotation>
+        <sequence>
+            <element name="IF" nillable="true">
+                <annotation>
+                    <documentation>Identifikátor vztahovej osoby.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="32" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TR" type="int">
+                <annotation>
+                    <documentation>Typ rodinného vztahu.</documentation>
+                </annotation>
+            </element>
+            <element name="TRZTRNA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_TYP_RODINNEHO_VZTAHU.UV_NAZOV referencovaného z REG.T_RODINNY_VZTAH.NL_TYP_RODINNEHO_VZTAHU_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DV" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum vzniku rodinného vztahu.</documentation>
+                </annotation>
+            </element>
+            <element name="MV" nillable="true">
+                <annotation>
+                    <documentation>Miesto vydania sobášneho listu - obec. Využíva sa iba pri vztahu manželstvo. Ak nie je príslušná obec uvedená v císelníku obcí (väzba), tak sa zapíše hodnota ako text.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="UC" type="int" nillable="true">
+                <annotation>
+                    <documentation>Miesto vydania sobášneho listu (obec).</documentation>
+                </annotation>
+            </element>
+            <element name="UCEUCNA" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.REG_UZEMNY_CELOK.UV_NAZOV referencovaného z REG.T_RODINNY_VZTAH.NL_UZEMNY_CELOK_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TL" type="int" nillable="true">
+                <annotation>
+                    <documentation>Rola primárnej osoby v rodinnom vztahu.</documentation>
+                </annotation>
+            </element>
+            <element name="TRRTLNA" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_TYP_ROLE_V_RODIN_VZTAHU.UV_NAZOV referencovaného z REG.T_RODINNY_VZTAH.NL_TYP_ROLE_V_RODIN_VZTAHU1_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TE" type="int" nillable="true">
+                <annotation>
+                    <documentation>Rola vztahovej osoby v rodinnom vztahu.</documentation>
+                </annotation>
+            </element>
+            <element name="TRRTENA" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_TYP_ROLE_V_RODIN_VZTAHU.UV_NAZOV referencovaného z REG.T_RODINNY_VZTAH.NL_TYP_ROLE_V_RODIN_VZTAHU2_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SM" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Sobášna matrika názov</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PA" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Sobášna matrika</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TPOB_PHROList">
+        <annotation>
+            <documentation>Údaje o pobyte osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="POB" type="this:TPOB_PHRO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje o pobyte osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TPOB_PHRO">
+        <annotation>
+            <documentation>Údaje o pobyte osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="TP" type="int">
+                <annotation>
+                    <documentation>Typ pobytu.</documentation>
+                </annotation>
+            </element>
+            <element name="TB" nillable="true">
+                <annotation>
+                    <documentation>Typ pobytu mimo císelník.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="50" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DP" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum prihlásenia na pobyt</documentation>
+                </annotation>
+            </element>
+            <element name="DU" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum ukoncenia pobytu.</documentation>
+                </annotation>
+            </element>
+            <element name="NO" nillable="true">
+                <annotation>
+                    <documentation>Názov obce pobytu</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SC" type="int" nillable="true">
+                <annotation>
+                    <documentation>Súpisné císlo pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="NC" nillable="true">
+                <annotation>
+                    <documentation>Názov casti obce pobytu</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="NK" nillable="true">
+                <annotation>
+                    <documentation>Názov okresu pobytu</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="NU" nillable="true">
+                <annotation>
+                    <documentation>Názov ulice pobytu</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ST" type="int" nillable="true">
+                <annotation>
+                    <documentation>Štát adresy mimo SR.</documentation>
+                </annotation>
+            </element>
+            <element name="NS" nillable="true">
+                <annotation>
+                    <documentation>Názov štátu pobytu</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="MP" nillable="true">
+                <annotation>
+                    <documentation>Adresa pobytu mimo SR - umožnené ukladat aj vo viacerých riadkoch.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="120" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="OP" nillable="true">
+                <annotation>
+                    <documentation>Okres adresy mimo SR.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="OO" nillable="true">
+                <annotation>
+                    <documentation>Obec adresy mimo SR.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="CC" nillable="true">
+                <annotation>
+                    <documentation>Cast obce adresy mimo SR.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="UM" nillable="true">
+                <annotation>
+                    <documentation>Ulica adresy mimo SR.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="OS" nillable="true">
+                <annotation>
+                    <documentation>Orientacné císlo pobytu mimo SR</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SI" nillable="true">
+                <annotation>
+                    <documentation>Súpisné císlo pobytu mimo SR</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="CU" nillable="true">
+                <annotation>
+                    <documentation>Bližšie urcenie miesta v rámci budovy mimo SR</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PM" type="boolean">
+                <annotation>
+                    <documentation>Príznak ci ide o pobyt mimo SR.</documentation>
+                </annotation>
+            </element>
+            <element name="PC" nillable="true">
+                <annotation>
+                    <documentation>Index domu.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="12" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="CB" nillable="true">
+                <annotation>
+                    <documentation>Bližšie urcenie miesta v rámci budovy.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="10" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="IA" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Identifikátor adresy v registry adries.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="VD" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Vchod domu pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="DI" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Dom pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="UI" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Ulica pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="CE" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Cast obce pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="OA" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Obec pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="UE" type="int" minOccurs="0" nillable="true">
+                <annotation>
+                    <documentation>Okres pobytu</documentation>
+                </annotation>
+            </element>
+            <element name="OL" nillable="true">
+                <annotation>
+                    <documentation>Orientacné císlo pobytu</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="REGList" type="this:TREGOList">
+                <annotation>
+                    <documentation>Región v rámci adresných údajov mimo územia SR.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TREGOList">
+        <annotation>
+            <documentation>Región v rámci adresných údajov mimo územia SR.</documentation>
+        </annotation>
+        <sequence>
+            <element name="REG" type="this:TREGO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Región v rámci adresných údajov mimo územia SR.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TREGO">
+        <annotation>
+            <documentation>Región v rámci adresných údajov mimo územia SR.</documentation>
+        </annotation>
+        <sequence>
+            <element name="PO" type="int">
+                <annotation>
+                    <documentation>Poradové císlo zadaného regiónu v rámci všetkých regiónov príslušnej adresy.</documentation>
+                </annotation>
+            </element>
+            <element name="RE">
+                <annotation>
+                    <documentation>Názov regiónu.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="250" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TZPOOList">
+        <annotation>
+            <documentation>Údaje o zákaze pobytu.</documentation>
+        </annotation>
+        <sequence>
+            <element name="ZPO" type="this:TZPOO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje o zákaze pobytu.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TZPOO">
+        <annotation>
+            <documentation>Údaje o zákaze pobytu.</documentation>
+        </annotation>
+        <sequence>
+            <element name="DZ" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum zaciatku platnosti zákazu pobytu.</documentation>
+                </annotation>
+            </element>
+            <element name="DK" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum ukoncenia platnosti zákazu pobytu.</documentation>
+                </annotation>
+            </element>
+            <element name="PO" nillable="true">
+                <annotation>
+                    <documentation>Doplnujúce údaje o zákaze pobytu.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2560" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ZPZList" type="this:TZPZOList">
+                <annotation>
+                    <documentation>Údaje o obci z císelníka obcí.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TZPZOList">
+        <annotation>
+            <documentation>Údaje o obci z císelníka obcí.</documentation>
+        </annotation>
+        <sequence>
+            <element name="ZPZ" type="this:TZPZO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje o obci z císelníka obcí.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TZPZO">
+        <annotation>
+            <documentation>Údaje o obci z císelníka obcí.</documentation>
+        </annotation>
+        <sequence>
+            <element name="UC" type="int">
+                <annotation>
+                    <documentation>Obec</documentation>
+                </annotation>
+            </element>
+            <element name="UCEUCNA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.REG_UZEMNY_CELOK.UV_NAZOV referencovaného z REG.T_ZAKAZ_POBYTU_UZEM_CELOK.NL_UZEMNY_CELOK_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TPZMOList">
+        <annotation>
+            <documentation>Údaje o zrušení vyhlásenia osoby za mrtvu.</documentation>
+        </annotation>
+        <sequence>
+            <element name="PZM" type="this:TPZMO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje o zrušení vyhlásenia osoby za mrtvu.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TPZMO">
+        <annotation>
+            <documentation>Údaje o zrušení vyhlásenia osoby za mrtvu.</documentation>
+        </annotation>
+        <sequence>
+            <element name="DP" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum právoplatnosti rozhodnutia o zrušení vyhlásenia osoby za mrtvu.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TDCD_DCIOList">
+        <annotation>
+            <documentation>Reprezentuje evidovaný doklad osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="DCD" type="this:TDCD_DCIO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Reprezentuje evidovaný doklad osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TDCD_DCIO">
+        <annotation>
+            <documentation>Reprezentuje evidovaný doklad osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="DD" type="int">
+                <annotation>
+                    <documentation>Druh dokladu</documentation>
+                </annotation>
+            </element>
+            <element name="DDCDDNA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_DRUH_DOKLADU_CDF.UV_NAZOV referencovaného z REG.T_DOKLAD_CDF.NL_DRUH_DOKLADU_CDF_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="CD">
+                <annotation>
+                    <documentation>Jednoznacný identifikátor dokladu.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DU" type="boolean">
+                <annotation>
+                    <documentation>Príznak, ci je doklad u držitela. Tento príznak však neurcuje platnost dokladu.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TUSOOList">
+        <annotation>
+            <documentation>Údaje o udelení alebo strate štátneho obcianstva.</documentation>
+        </annotation>
+        <sequence>
+            <element name="USO" type="this:TUSOO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje o udelení alebo strate štátneho obcianstva.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TUSOO">
+        <annotation>
+            <documentation>Údaje o udelení alebo strate štátneho obcianstva.</documentation>
+        </annotation>
+        <sequence>
+            <element name="DP" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum prevzatia Listiny o udelení štátneho obcianstva SR alebo Dátum prevzatia Listiny o uvolnení zo štátneho zväzku SR.</documentation>
+                </annotation>
+            </element>
+            <element name="UD" type="boolean" nillable="true">
+                <annotation>
+                    <documentation>Ak je Udelenie true, tak ide o udelenie štátneho obcianstva, inak ide o stratu štátneho obcianstva.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TSNR_SNPOList">
+        <annotation>
+            <documentation>Údaje o pozbavení alebo obmedzení právnej spôsobilosti.</documentation>
+        </annotation>
+        <sequence>
+            <element name="SNR" type="this:TSNR_SNPO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Údaje o pozbavení alebo obmedzení právnej spôsobilosti.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TSNR_SNPO">
+        <annotation>
+            <documentation>Údaje o pozbavení alebo obmedzení právnej spôsobilosti.</documentation>
+        </annotation>
+        <sequence>
+            <element name="SN" type="int">
+                <annotation>
+                    <documentation>Typ obmedzenia/pozbavenia právnej spôsobilosti - Obmedzenie spôsobilosti na právne úkony alebo Pozbavenie spôsobilosti na právne úkony.</documentation>
+                </annotation>
+            </element>
+            <element name="SNPSNNA">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka CIS.C_SPOSOBIL_NA_PRAV_UKONY.UV_NAZOV referencovaného z REG.T_SPOSOBIL_NA_PRAV_OSOB.NL_SPOSOBIL_NA_PRAV_UKON_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="255" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DZ" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum zaciatku platnosti obmedzenia/pozbavenia spôsobilosti na právne úkony.</documentation>
+                </annotation>
+            </element>
+            <element name="DK" type="date" nillable="true">
+                <annotation>
+                    <documentation>Dátum ukoncenia platnosti obmedzenia/pozbavenia spôsobilosti na právne úkony.</documentation>
+                </annotation>
+            </element>
+            <element name="PZ" nillable="true">
+                <annotation>
+                    <documentation>Volným textom vložená poznámka ku obmedzeniu/pozbaveniu právnej spôsobilosti</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2560" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="TZUD_ZUNOList">
+        <annotation>
+            <documentation>Externý systém modifikujúci údaje osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="ZUD" type="this:TZUD_ZUNO" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>Externý systém modifikujúci údaje osoby.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="TZUD_ZUNO">
+        <annotation>
+            <documentation>Externý systém modifikujúci údaje osoby.</documentation>
+        </annotation>
+        <sequence>
+            <element name="ZO" type="int">
+                <annotation>
+                    <documentation>Názov externého systému.</documentation>
+                </annotation>
+            </element>
+            <element name="ZOBZONA" nillable="true">
+                <annotation>
+                    <documentation>Položka obsahuje hodnotu císelníka REG.C_ZD_ODBERATEL.UV_NAZOV referencovaného z REG.T_ZDROJ_UDAJOV.NL_ZD_ODBERATEL_ID</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="ID" type="int" use="required">
+            <annotation>
+                <documentation>Jedinečný identifikátor objektu</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+</schema>

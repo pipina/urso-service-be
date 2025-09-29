@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	name="CSRUGetConsolidatedReferenceDataService_Sync"
+	targetNamespace="http://csru.gov.sk/csru_getconsolidatedreferencedata_sync/v1.4"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:csru="http://csru.gov.sk/csru_getconsolidatedreferencedata_sync/v1.4"
+	xmlns:c="http://csru.gov.sk/common/v1.4">
+
+	<wsdl:types>
+		<xs:schema
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+			xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+			xmlns:csru="http://csru.gov.sk/csru_getconsolidatedreferencedata_sync/v1.4"
+			xmlns:c="http://csru.gov.sk/common/v1.4"
+			elementFormDefault="qualified"
+			targetNamespace="http://csru.gov.sk/csru_getconsolidatedreferencedata_sync/v1.4">
+
+			<!-- import common types schema -->
+			<xs:import namespace="http://csru.gov.sk/common/v1.4" schemaLocation="csru_common_types_v1.4.xsd"/>
+
+			<!-- GetConsolidatedReferenceData IN/OUT elements -->
+			<xs:element name="GetConsolidatedReferenceDataRequest" type="csru:GetConsolidatedReferenceDataRequestCType"/>
+			<xs:complexType name="GetConsolidatedReferenceDataRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+					<xs:element name="scenario" type="c:ScenarioType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="payload" type="c:DataPlaceholderCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetConsolidatedReferenceDataResponse" type="csru:GetConsolidatedReferenceDataResponseCType"/>
+			<xs:complexType name="GetConsolidatedReferenceDataResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+					<xs:element minOccurs="0" name="payload" type="c:DataPlaceholderCType"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="GetConsolidatedReferenceDataRequestMessage">
+		<wsdl:part name="getConsolidatedReferenceDataRequestRequest" element="csru:GetConsolidatedReferenceDataRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetConsolidatedReferenceDataResponseMessage">
+		<wsdl:part name="getConsolidatedReferenceDataRequestResponse" element="csru:GetConsolidatedReferenceDataResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="CSRUGetConsolidatedReferenceDataSync">
+		<wsdl:operation name="getConsolidatedReferenceData">
+			<wsdl:input name="getConsolidatedReferenceDataRequest" message="csru:GetConsolidatedReferenceDataRequestMessage"/>
+			<wsdl:output name="getConsolidatedReferenceDataResponse" message="csru:GetConsolidatedReferenceDataResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CSRUGetConsolidatedReferenceDataSyncServiceSoapBinding" type="csru:CSRUGetConsolidatedReferenceDataSync">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getConsolidatedReferenceData">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zadanie požiadavky na získanie konsolidovaných referenčných údajov.</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getConsolidatedReferenceDataRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getConsolidatedReferenceDataResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CSRUGetConsolidatedReferenceDataSyncService">
+		<wsdl:port name="CSRUGetConsolidatedReferenceDataSyncPort" binding="csru:CSRUGetConsolidatedReferenceDataSyncServiceSoapBinding">
+			<soap12:address location="https://c053.csru.gov.sk:443/services/CSRU_GetConsolidatedReferenceDataService_Sync_v1.4"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

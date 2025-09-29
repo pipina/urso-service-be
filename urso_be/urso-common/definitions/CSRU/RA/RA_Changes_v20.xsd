@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.minv.sk/ra" xmlns:ns0="http://www.minv.sk/ra" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="DistrictCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:CodelistDataElementCType">
+                <xsd:sequence/>
+                <xsd:attribute name="UniqueNumbering" type="xsd:boolean" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BuildingUnitSCType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="UnitNumber" type="xsd:string"/>
+                <xsd:attribute name="Floor" type="xsd:integer"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeCountyCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="County" type="ns0:CodelistDataElementCType" minOccurs="0"/>
+                    <xsd:element name="regionIdentifier" type="xsd:long" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CodelistItemCType">
+        <xsd:sequence>
+            <xsd:element name="ItemCode" type="xsd:string"/>
+            <xsd:element name="ItemName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="AffixCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:CodelistDataElementCType">
+                <xsd:sequence/>
+                <xsd:attribute name="type" type="xsd:string" use="required"/>
+                <xsd:attribute name="position" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="baseResponse" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="corrId" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getChanges">
+        <xsd:sequence>
+            <xsd:element name="request" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="ns0:baseRequest">
+                            <xsd:sequence/>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="AddressPointCType">
+        <xsd:sequence>
+            <xsd:element name="XYH" type="ns0:XYHCType" minOccurs="0"/>
+            <xsd:element name="BLH" type="ns0:BLHCType" minOccurs="0"/>
+            <xsd:element name="AddressPointID" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeBuildingNumberCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="BuildingNumber" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="BuildingIndex" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="PostalCode" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="AddressPoint" type="ns0:AddressPointCType" minOccurs="0"/>
+                    <xsd:element name="propertyRegistrationNumberIdentifier" type="xsd:long" minOccurs="0"/>
+                    <xsd:element name="streetNameIdentifier" type="xsd:long" minOccurs="0"/>
+                    <xsd:element name="verifiedAt" type="xsd:dateTime" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ChangePropertyRegistrationNumberCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="PropertyRegistrationNumber" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="Building" type="ns0:BuildingCType" minOccurs="0"/>
+                    <xsd:element name="municipalityIdentifier" type="xsd:long" minOccurs="0"/>
+                    <xsd:element name="districtIdentifier" type="xsd:long" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="baseRequest">
+        <xsd:sequence>
+            <xsd:element name="corrId" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeStreetNameCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="StreetName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="municipalityIdentifier" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="districtIdentifier" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CodelistDataElementCType">
+        <xsd:sequence>
+            <xsd:element name="NonCodelistData" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Codelist" type="ns0:CodelistCType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CodelistCType">
+        <xsd:sequence>
+            <xsd:element name="CodelistCode" type="xsd:string"/>
+            <xsd:element name="CodelistItem" type="ns0:CodelistItemCType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="confirmChanges">
+        <xsd:sequence>
+            <xsd:element name="request" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="ns0:baseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="changesId" type="xsd:long"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeBuildingUnitSCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="BuildingUnit" type="ns0:BuildingUnitSCType" minOccurs="0"/>
+                    <xsd:element name="buildingNumberIdentifier" type="xsd:long" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="resultCodeResponse" abstract="true">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:baseResponse">
+                <xsd:sequence>
+                    <xsd:element name="resultCode" type="xsd:long"/>
+                    <xsd:element name="resultReasons" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="resultReason" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeMunicipalityCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="Municipality" type="ns0:CodelistDataElementCType" minOccurs="0"/>
+                    <xsd:element name="countyIdentifier" type="xsd:long" minOccurs="0"/>
+                    <xsd:element name="status" type="ns0:municipalityStatus" minOccurs="0"/>
+                    <xsd:element name="cityIdentifier" type="xsd:long" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeRegisterCType">
+        <xsd:sequence>
+            <xsd:element name="type" type="ns0:registerType"/>
+            <xsd:element name="count" type="xsd:long"/>
+            <xsd:element name="regionChange" type="ns0:ChangeRegionCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="countyChange" type="ns0:ChangeCountyCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="municipalityChange" type="ns0:ChangeMunicipalityCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="districtChange" type="ns0:ChangeDistrictCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="streetNameChange" type="ns0:ChangeStreetNameCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="propertyRegistrationNumberChange" type="ns0:ChangePropertyRegistrationNumberCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="buildingNumberChange" type="ns0:ChangeBuildingNumberCType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="buildingUnitChange" type="ns0:ChangeBuildingUnitSCType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeRegionCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="Region" type="ns0:CodelistDataElementCType" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="XYHCType">
+        <xsd:sequence>
+            <xsd:element name="AxisX" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="AxisY" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="HeightH" type="xsd:decimal" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="changesConfirmResponseCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:resultCodeResponse">
+                <xsd:sequence>
+                    <xsd:element name="changesId" type="xsd:long" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BLHCType">
+        <xsd:sequence>
+            <xsd:element name="AxisB" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="AxisL" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="AxisH" type="xsd:decimal" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeDistrictCType">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:ChangeBaseCType">
+                <xsd:sequence>
+                    <xsd:element name="District" type="ns0:DistrictCType" minOccurs="0"/>
+                    <xsd:element name="municipalityIdentifier" type="xsd:long" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="getChangesById">
+        <xsd:sequence>
+            <xsd:element name="request" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="ns0:baseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="changesId" type="xsd:long"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="BuildingCType">
+        <xsd:sequence>
+            <xsd:element name="BuildingName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="BuildingPurpose" type="ns0:CodelistDataElementCType" minOccurs="0"/>
+            <xsd:element name="BuildingTypeCode" type="ns0:CodelistDataElementCType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="ContainsFlats" type="xsd:boolean" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="ChangeBaseCType">
+        <xsd:sequence>
+            <xsd:element name="changeId" type="xsd:long" minOccurs="0"/>
+            <xsd:element name="changedAt" type="xsd:dateTime" minOccurs="0"/>
+            <xsd:element name="databaseOperation" type="ns0:changeType"/>
+            <xsd:element name="objectId" type="xsd:long"/>
+            <xsd:element name="versionId" type="xsd:long"/>
+            <xsd:element name="createdReason" type="ns0:createdReason" minOccurs="0"/>
+            <xsd:element name="validFrom" type="xsd:dateTime" minOccurs="0"/>
+            <xsd:element name="validTo" type="xsd:dateTime" minOccurs="0"/>
+            <xsd:element name="effectiveDate" type="xsd:date" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="confirmChangesResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:changesConfirmResponseCType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getChangesResponse">
+        <xsd:sequence>
+            <xsd:element name="return" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="ns0:resultCodeResponse">
+                            <xsd:sequence>
+                                <xsd:element name="changesId" type="xsd:long" minOccurs="0"/>
+                                <xsd:element name="changesGenerated" type="xsd:dateTime" minOccurs="0"/>
+                                <xsd:element name="register" type="ns0:ChangeRegisterCType" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getChangesByIdResponse">
+        <xsd:sequence>
+            <xsd:element name="return" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="ns0:resultCodeResponse">
+                            <xsd:sequence>
+                                <xsd:element name="changesId" type="xsd:long" minOccurs="0"/>
+                                <xsd:element name="changesGenerated" type="xsd:dateTime" minOccurs="0"/>
+                                <xsd:element name="register" type="ns0:ChangeRegisterCType" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="getChangesById" type="ns0:getChangesById"/>
+    <xsd:element name="confirmChangesResponse" type="ns0:confirmChangesResponse"/>
+    <xsd:element name="getChanges" type="ns0:getChanges"/>
+    <xsd:element name="getChangesResponse" type="ns0:getChangesResponse"/>
+    <xsd:element name="getChangesByIdResponse" type="ns0:getChangesByIdResponse"/>
+    <xsd:element name="confirmChanges" type="ns0:confirmChanges"/>
+    <xsd:simpleType name="municipalityStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="MUNICIPALITY"/>
+            <xsd:enumeration value="CITY_DISTRICT"/>
+            <xsd:enumeration value="CITY"/>
+            <xsd:enumeration value="CITY_MANAGED_BY_SPECIAL_LAW"/>
+            <xsd:enumeration value="MILITARY_DISTRICT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="changeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="INSERT"/>
+            <xsd:enumeration value="UPDATE"/>
+            <xsd:enumeration value="DELETE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="registerType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="REGION"/>
+            <xsd:enumeration value="COUNTY"/>
+            <xsd:enumeration value="MUNICIPALITY"/>
+            <xsd:enumeration value="DISTRICT"/>
+            <xsd:enumeration value="STREET_NAME"/>
+            <xsd:enumeration value="PROPERTY_REGISTRATION_NUMBER"/>
+            <xsd:enumeration value="BUILDING_NUMBER"/>
+            <xsd:enumeration value="BUILDING_UNIT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="createdReason">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="IMPORT"/>
+            <xsd:enumeration value="CREATE"/>
+            <xsd:enumeration value="UPDATE"/>
+            <xsd:enumeration value="CANCEL"/>
+            <xsd:enumeration value="CORRECT"/>
+            <xsd:enumeration value="REVERT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

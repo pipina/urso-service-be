@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.dominanz.sk/UVZ/Reg/ADDRESS"
+	xmlns:ad="http://www.dominanz.sk/UVZ/Reg/ADDRESS" 
+	elementFormDefault="qualified" version="1.0">
+
+	<xsd:include schemaLocation="./RA_1_TYPES.xsd" />
+
+	<xsd:element name="Address" type="ad:PhysicalAddressCType"/>
+
+</xsd:schema>

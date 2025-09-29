@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:RegisterPluginConfig
+	xmlns:tns="http://www.dominanz.sk/registerPluginConfig_v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.dominanz.sk/registerPluginConfig_v1 ../definitions/registerPluginConfig_v1.xsd">
+	<tns:Field KeyName="addressType" XPathValue="ns0:Address/type"
+		IsIndexed="true" IsOutputField="true" DisplayName="Typ" Description="Typ adresy.">
+	</tns:Field>
+	<tns:Field KeyName="objectId" XPathValue="ns0:Address/objectId"
+	    IsId="true" IsIndexed="true" IsOutputField="true" DisplayName="Id" Description="Id objektu." IsIdGenerated="false">
+	</tns:Field>
+	<tns:Field KeyName="RegionItemCode" XPathValue="ns0:Address/data/change/regionChange/Region/Codelist/CodelistItem/ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj - kód" Description="Kraj - kód.">
+<!-- 		<tns:Enumeration CodelistCode="CUREG000006"/> -->
+	</tns:Field>
+	<tns:Field KeyName="RegionItemName" XPathValue="ns0:Address/data/change/regionChange/Region/Codelist/CodelistItem/ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj - názov" Description="Kraj - názov.">
+	</tns:Field>
+	<tns:Field KeyName="RegionItemName" XPathValue="ns0:Address/data/change/regionChange/Region/NonCodelistData"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Kraj - nečíselníkové údaje" Description="Kraj - nečíselníkové údaje.">
+	</tns:Field>
+	<tns:Field KeyName="CountyItemCode" XPathValue="ns0:Address/data/change/countyChange/County/Codelist/CodelistItem/ItemCode"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Okres - kód" Description="Okres - kód.">
+<!-- 		<tns:Enumeration CodelistCode="CUREG000007"/> -->
+	</tns:Field>
+	<tns:Field KeyName="CountyItemName" XPathValue="ns0:Address/data/change/countyChange/County/Codelist/CodelistItem/ItemName"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Okres - názov" Description="Okres - názov.">
+	</tns:Field>
+	<tns:Field KeyName="CountyItemName" XPathValue="ns0:Address/data/change/countyChange/County/NonCodelistData"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Okres - nečíselníkové údaje" Description="Okres - nečíselníkové údaje.">
+	</tns:Field>
+	<tns:Field KeyName="regionId" XPathValue="ns0:Address/data/change/countyChange/regionIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id kraja" Description="Id kraja.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="regionId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="MunicipalityItemCode" XPathValue="ns0:Address/data/change/municipalityChange/Municipality/Codelist/CodelistItem/ItemCode"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Obec - kód" Description="Obec - kód.">
+<!-- 		<tns:Enumeration CodelistCode="CUREG000005"/> -->
+	</tns:Field>
+	<tns:Field KeyName="MunicipalityItemName" XPathValue="ns0:Address/data/change/municipalityChange/Municipality/Codelist/CodelistItem/ItemName"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Obec - názov" Description="Obec - názov..">
+	</tns:Field>
+	<tns:Field KeyName="MunicipalityNonCodelistData" XPathValue="ns0:Address/data/change/municipalityChange/Municipality/NonCodelistData"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Obec - nečíselníkové údaje" Description="Obec - nečíselníkové údaje.">
+	</tns:Field>
+	<tns:Field KeyName="countyId" XPathValue="ns0:Address/data/change/municipalityChange/countyIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id okresu" Description="Id okresu.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="countyId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="DistrictItemCode" XPathValue="ns0:Address/data/change/districtChange/District/Codelist/CodelistItem/ItemCode"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Obvod - kód" Description="Obvod - kód.">
+<!-- 		<tns:Enumeration CodelistCode="CL010141"/> -->
+	</tns:Field>
+	<tns:Field KeyName="DistrictItemName" XPathValue="ns0:Address/data/change/districtChange/District/Codelist/CodelistItem/ItemName"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Obvod - názov" Description="Obvod - názov.">
+	</tns:Field>
+	<tns:Field KeyName="DistrictItemName" XPathValue="ns0:Address/data/change/districtChange/District/NonCodelistData"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Obvod - nečíselníkové údaje" Description="Obvod - nečíselníkové údaje.">
+	</tns:Field>
+	<tns:Field KeyName="municipalityId" XPathValue="ns0:Address/data/change/districtChange/municipalityIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id obce" Description="Id obce.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="municipalityId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="StreetName" XPathValue="ns0:Address/data/change/streetNameChange/StreetName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Ulica" Description="Názov ulice.">
+	</tns:Field>
+	<tns:Field KeyName="municipalityId" XPathValue="ns0:Address/data/change/streetNameChange/municipalityIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id obce" Description="Id obce.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="municipalityId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="districtId" XPathValue="ns0:Address/data/change/streetNameChange/districtIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id obvodu" Description="Id obvodu.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="districtId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="PropertyRegistrationNumber" ValueType="NUMBER" XPathValue="ns0:Address/data/change/propertyRegistrationNumberChange/PropertyRegistrationNumber"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Súpisné číslo" Description="Súpisné číslo.">
+	</tns:Field>
+	<tns:Field KeyName="municipalityId" XPathValue="ns0:Address/data/change/propertyRegistrationNumberChange/municipalityIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id obce" Description="Id obce.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="municipalityId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="districtId" XPathValue="ns0:Address/data/change/propertyRegistrationNumberChange/districtIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id obvodu" Description="Id obvodu.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="districtId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="BuildingIndex" XPathValue="ns0:Address/data/change/buildingNumberChange/BuildingIndex"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Index budovy" Description="Index budovy.">
+	</tns:Field>
+	<tns:Field KeyName="PostalCode" XPathValue="ns0:Address/data/change/buildingNumberChange/PostalCode"
+			   IsIndexed="true" IsOutputField="true" DisplayName="PSČ" Description="PSČ.">
+	</tns:Field>
+	<tns:Field KeyName="BuildingNumber" XPathValue="ns0:Address/data/change/buildingNumberChange/BuildingNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="Číslo budovy" Description="Číslo budovy">
+	</tns:Field>
+	<tns:Field KeyName="PropertyRegistrationNumberIdr" XPathValue="ns0:Address/data/change/buildingNumberChange/propertyRegistrationNumberIdentifier"
+		IsIndexed="true" IsOutputField="true" DisplayName="ID súpisného čísla nehnuteľnosti" Description="Identifikátor súpisného čísla nehnuteľnosti">
+	</tns:Field>
+	<tns:Field KeyName="streetNameId" XPathValue="ns0:Address/data/change/buildingNumberChange/streetNameId"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Id ulice" Description="Id názvu ulice.">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="streetNameId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="BuildingUnit" XPathValue="ns0:Address/data/change/buildingUnitChange/BuildingUnit/UnitNumber"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Číslo jednotky" Description="Číslo jednotky">
+	</tns:Field>
+	<tns:Field KeyName="BuildingNumberId" XPathValue="ns0:Address/data/change/buildingUnitChange/buildingNumberIdentifier"
+			   IsIndexed="true" IsOutputField="true" DisplayName="ID čísla budovy" Description="Identifikátor čísla budovy">
+		<tns:Register RegisterId="RA_INTERNAL" Version="1">
+			<tns:RegisterJoinKey  Source="BuildingNumberId" Target="objectId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field XPathValue="ns0:Address/data">
+		<tns:Historical/>
+	</tns:Field>
+
+	<tns:RegisterType>EXTERNAL</tns:RegisterType>
+	<tns:GdprParams IsGdprRelevant="false" ImmediateDeleteOnLastReference="false" TTL="1" TTLUnit="DAYS"/>
+	<tns:XsdFile IsPrimary="true" Path="RA_INTERNAL_1/RA_INTERNAL_1_DATA.xsd" IsExternal="true" NamespacePrefix="ns0" NamespaceUrl="http://www.minv.sk/ra"/>
+	<tns:XsdFile IsPrimary="false" Path="RA_INTERNAL_1/RA_INTERNAL_1_TYPES.xsd" IsExternal="true" NamespacePrefix="" NamespaceUrl="http://www.minv.sk/ra"/>
+</tns:RegisterPluginConfig>

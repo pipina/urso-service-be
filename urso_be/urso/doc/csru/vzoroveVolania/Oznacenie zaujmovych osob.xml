@@ -1,0 +1,32 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:v1="http://csru.gov.sk/csru_getconsolidatedreferencedata_sync/v1.4">
+   <soap:Header/>
+   <soap:Body>
+      <v1:GetConsolidatedReferenceDataRequest>
+         <v1:ovmIsId>isvs_5836</v1:ovmIsId>
+         <v1:oeId>RFO_Mark</v1:oeId>
+         <v1:scenario>markPersonOfInterest</v1:scenario>
+         <v1:ovmTransactionId>${=java.util.UUID.randomUUID()}</v1:ovmTransactionId>
+         <v1:ovmCorrelationId>${=java.util.UUID.randomUUID()}</v1:ovmCorrelationId>
+         <v1:payload>
+
+      <ozn:TransEnvIn corrID="df3a7043-e7c3-4087-a9d7-b6aa0c4a0a22"
+      	xmlns:ozn="http://www.egov.sk/mvsr/RFO/Zapis/Ext/OznacenieZaujmovejOsobyWS-v1.0">
+         <ozn:OSOList>
+            <ozn:OSO>
+               <ozn:ID>2100205829</ozn:ID>
+            </ozn:OSO>
+            <ozn:OSO>
+               <ozn:ID>2100205830</ozn:ID>
+            </ozn:OSO>
+         </ozn:OSOList>
+         <ozn:UES>
+            <ozn:PO>csru_test</ozn:PO>
+            <ozn:TI>df3a7043-e7c3-4087-a9d7-b6aa0c4a0a22</ozn:TI>
+         </ozn:UES>
+      </ozn:TransEnvIn>
+
+         </v1:payload>
+      </v1:GetConsolidatedReferenceDataRequest>
+   </soap:Body>
+</soap:Envelope>

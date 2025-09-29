@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.dominanz.sk/UVZ/Reg/RegisterBase"
+		xmlns:rb="http://www.dominanz.sk/UVZ/Reg/RegisterBase"
+    	xmlns:clb="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+    	elementFormDefault="qualified" version="1.0">		
+		
+	<xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+		schemaLocation="./codelistBase_v1.xsd"/>
+		
+
+    <xsd:simpleType name="REG_numeric_t">
+    	<xsd:restriction base="xsd:decimal"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_date_t">
+    	<xsd:restriction base="xsd:date"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_time_t">
+    	<xsd:restriction base="xsd:time"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_datetime_t">
+    	<xsd:restriction base="xsd:dateTime"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_numberPositive_t">
+    	<xsd:restriction base="xsd:nonNegativeInteger"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_number_t">
+    	<xsd:restriction base="xsd:integer"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_numberShortPositive_t">
+    	<xsd:restriction base="xsd:short">
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="REG_boolean_t">
+    	<xsd:restriction base="xsd:boolean">    		
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_double_t">
+    	<xsd:restriction base="xsd:double"></xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="REG_dec10.1_t">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:fractionDigits value="1"></xsd:fractionDigits>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+	<xsd:simpleType name="REG_dec10.2_t">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:fractionDigits value="2"></xsd:fractionDigits>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+    <xsd:simpleType name="REG_string1023_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="1023"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    
+    <xsd:simpleType name="REG_string2047_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="2047"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_string4096_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="4096"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+        
+    <xsd:simpleType name="REG_string255_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="255"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_string50_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="50"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_string20_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="20"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_string10_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="10"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_string100_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="0"></xsd:minLength>
+    		<xsd:maxLength value="100"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="REG_codelistItem_t">
+    	<xsd:sequence>
+    		<xsd:element name="itemCode" minOccurs="1" maxOccurs="1" type="clb:ItemCodeType"></xsd:element>
+    		<xsd:element name="itemValue" minOccurs="0" maxOccurs="1" type="clb:ItemCodeType"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="codeListCode">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:minLength value="1"></xsd:minLength>
+    				<xsd:maxLength value="100"></xsd:maxLength>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="REG_codelistItemOptional_t">
+    	<xsd:sequence>
+    		<xsd:element name="itemCode" minOccurs="0" maxOccurs="1" type="clb:ItemCodeType"></xsd:element>
+    		<xsd:element name="itemValue" minOccurs="0" maxOccurs="1" type="clb:ItemCodeType"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="codeListCode">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:minLength value="1"></xsd:minLength>
+    				<xsd:maxLength value="100"></xsd:maxLength>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:simpleType name="REG_key_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="2"></xsd:minLength>
+    		<xsd:maxLength value="30"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="REG_modulename_t">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="2"></xsd:minLength>
+    		<xsd:maxLength value="4"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="REG_itemWithHistory_t">
+    	<xsd:attribute name="effectiveFrom" type="rb:REG_date_t" use="required">
+            <xsd:annotation>
+            	<xsd:documentation>Povinný parameter určujúci začiatok účinnosti elementu a jeho vnorených častí.</xsd:documentation>
+            </xsd:annotation>
+    	</xsd:attribute>
+    	<xsd:attribute name="effectiveTo" type="rb:REG_date_t"
+    		default="2049-01-01" use="optional">
+            <xsd:annotation>
+            	<xsd:documentation>Nepovinný parameter určujúci koniec účinnosti elementu a jeho vnorených častí.</xsd:documentation>
+            </xsd:annotation>
+    	</xsd:attribute>
+    	<xsd:attribute name="sequence"
+    		type="rb:REG_numberShortPositive_t" use="required">
+            <xsd:annotation>
+            	<xsd:documentation>Poradové číslo v histórii (verzia)</xsd:documentation>
+            </xsd:annotation>
+    	</xsd:attribute>
+    	<xsd:attribute name="valid" type="xsd:boolean"
+    		default="true" use="optional">
+            <xsd:annotation>
+            	<xsd:documentation>Ak je false tak element a jeho vnorené časti nie sú platné (v súčasnosti ani inokedy)</xsd:documentation>
+            </xsd:annotation>
+    	</xsd:attribute>
+    	<xsd:attribute name="current" type="xsd:boolean" use="required">
+    		<xsd:annotation>
+    			<xsd:documentation>Ak true tento element a jeho vnorené prvky sú aktuálne účinné</xsd:documentation>
+    		</xsd:annotation></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:simpleType name="REG_ZIP_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\d{3,3} \d{2,2}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="REG_URI_t">
+		<xsd:restriction base="xsd:anyURI"></xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="REG_URL_t">
+		<xsd:restriction base="xsd:anyURI"></xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="REG_email_t"> 
+    	<xsd:restriction base="xsd:string"> 
+      		<xsd:pattern value="[^@]+@[^\.]+\..+"/> 
+    	</xsd:restriction> 
+  	</xsd:simpleType> 
+	
+	<xsd:simpleType name="REG_phone_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="14"/>
+			<xsd:pattern value="[0|+]{1}([0-9/]){9,13}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="REG_ID_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="15"></xsd:maxLength>
+			<xsd:pattern value="NULL"></xsd:pattern>
+			<xsd:pattern value="\d{1,15}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="REG_OS_zamestnanec_t">
+		<xsd:sequence>
+			<xsd:element name="meno" minOccurs="1" maxOccurs="1"
+				type="rb:REG_string255_t">
+			</xsd:element>
+			<xsd:element name="priezvisko" minOccurs="1" maxOccurs="1"
+				type="rb:REG_string255_t">
+			</xsd:element>
+			<xsd:element name="id" minOccurs="1" maxOccurs="1"
+				type="rb:REG_string255_t">
+			</xsd:element>
+			<xsd:element name="titulPred" minOccurs="0"
+				maxOccurs="unbounded" type="rb:REG_codelistItem_t">
+				<xsd:annotation>
+					<xsd:documentation>
+						Titul pred menom CUREG000014
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="titulZa" minOccurs="0"
+				maxOccurs="unbounded" type="rb:REG_codelistItem_t">
+				<xsd:annotation>
+					<xsd:documentation>
+						Titul za menom CUREG000015
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="telefon" type="rb:REG_phone_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="email" type="rb:REG_email_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="REG_ID_hist_t">
+		<xsd:annotation>
+			<xsd:documentation>
+				Toto je historizovaný zoznam referencií na register
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="id" type="rb:REG_ID_t"
+						maxOccurs="1" minOccurs="1">
+                        <xsd:annotation>
+                        	<xsd:documentation>id registra</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="REG_SubjectID_t">
+		<xsd:annotation>
+			<xsd:documentation>"FO\d{10,10}"- fyzicka osoba;
+				"PO\d{10}"- pravnicka osoba;
+				"ZO\d{10}"- zahranicna osoba;
+				"SZ\d{10}"- SZCO;
+				"SZ\d{10}"- zahranicna pravnicka osoba;
+				"NULL"- neurčené, nový záznam;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="FO\d{10,10}"></xsd:pattern>
+			<xsd:pattern value="PO\d{10}"></xsd:pattern>
+			<xsd:pattern value="ZO\d{10}"></xsd:pattern>
+			<xsd:pattern value="SZ\d{10}"></xsd:pattern>
+			<xsd:pattern value="NULL"></xsd:pattern>
+			<xsd:pattern value="ZP\d{10}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="REG_SubjectFOID_t">
+		<xsd:annotation>
+			<xsd:documentation>Referencia na fyzicku osobu v registri subjektov "FO\d{10,10}"- fyzicka osoba;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="rb:REG_SubjectID_t">
+			<xsd:pattern value="FO\d{10,10}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="REG_SubjectPOID_t">
+		<xsd:annotation>
+			<xsd:documentation>Referencia na pravnicku osobu v registri subjektov "PO\d{10,10}"- právnická osoba;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="rb:REG_SubjectID_t">
+			<xsd:pattern value="PO\d{10,10}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="REG_PracoviskoID_t">
+		<xsd:annotation>
+			<xsd:documentation>"PA\d{10}"- pracovisko;
+				"NULL"- neurčené, nový záznam;
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="PA\d{10}"></xsd:pattern>
+			<xsd:pattern value="NULL"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="REG_Urad_t">
+        <xsd:annotation>
+        	<xsd:documentation>IAM OŠ úrad, obsahuje id - referencia na IAM OŠ, bez ďalších závislostí na IAM zamestnancov </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="id" type="rb:REG_string255_t"
+            	maxOccurs="1" minOccurs="1">
+            </xsd:element>
+            <xsd:element name="nazov" type="rb:REG_string255_t"
+				maxOccurs="1" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>REG_index</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+            <xsd:element name="pravnickaOsoba"
+            	type="rb:REG_SubjectPOID_t" maxOccurs="1" minOccurs="0">
+            	<xsd:annotation>
+            		<xsd:documentation>
+            			REG_index, Reference to SUBJECT register
+            		</xsd:documentation>
+            	</xsd:annotation>
+            </xsd:element>
+            <xsd:element name="skratka" type="rb:REG_string50_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="posobnost" type="rb:REG_codelistItem_t"
+				maxOccurs="unbounded" minOccurs="0">
+			</xsd:element>
+			<!-- nadriadeny urad som zatial nechal zakomentovany - vo formio by to spravilo rekurziu! -->
+			<!-- 			<xsd:element name="nadriadeny" type="ad:Urad_t" -->
+			<!-- 				maxOccurs="1" minOccurs="0"> -->
+			<!-- 			</xsd:element> -->
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="REG_codelistItemWithHistory_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="codelistItem"
+						type="rb:REG_codelistItem_t" maxOccurs="1" minOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="REG_subjectIDWithHistory_t">
+		<xsd:complexContent>
+			<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="subject"
+						type="rb:REG_SubjectID_t" maxOccurs="1" minOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

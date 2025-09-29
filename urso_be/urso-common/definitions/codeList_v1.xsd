@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.dominanz.sk/UVZ/Reg/CodeList"
+    	xmlns:tns="http://www.dominanz.sk/UVZ/Reg/CodeList"
+    	xmlns:clb="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+    	elementFormDefault="qualified" version="1.0">
+    
+
+	<xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+		schemaLocation="codelistBase_v1.xsd"/>
+
+    
+    
+
+    <xsd:simpleType name="ReferenceIdentifierType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="2047"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="CodelistNameType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="255"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+
+
+    <xsd:complexType name="CodelistNameLocType">
+    	<xsd:sequence>
+    		<xsd:element name="CodelistName" maxOccurs="1" minOccurs="1" type="tns:CodelistNameType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="Localized_CodelistNameType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultCodelistName" type="tns:CodelistNameType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedCodelistName" type="tns:CodelistNameLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+
+    <xsd:simpleType name="CodelistManagerType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="255"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="CodelistManagerLocType">
+    	<xsd:sequence>
+    		<xsd:element name="CodelistManager" maxOccurs="1" minOccurs="1" type="tns:CodelistManagerType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="Localized_CodelistManagerType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultCodelistManager" type="tns:CodelistManagerType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedCodelistManager" type="tns:CodelistManagerLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+
+
+
+    <xsd:simpleType name="SourceCodelistType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="2047"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ValidFromType">
+	    <xsd:restriction base="xsd:date">
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="EffectiveFromType">
+	    <xsd:restriction base="xsd:date">
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="EffectiveToType">
+	    <xsd:restriction base="xsd:date">
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="NoteType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="4095"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    
+    <xsd:complexType name="NoteLocType">
+    	<xsd:sequence>
+    		<xsd:element name="Note" maxOccurs="1" minOccurs="1" type="tns:NoteType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:complexType name="Localized_NoteType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultNote" type="tns:NoteType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedNote" type="tns:NoteLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CodeListType">
+		<xsd:sequence>
+			<xsd:element name="CodelistCode" type="clb:codeListCodeType" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Jedinečný kód číselníka. Veľkosť dátového poľa 100 znakov, budú prideľované hodnoty podľa definovanej štruktúry.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ReferenceIdentifier" type="tns:ReferenceIdentifierType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Obsahuje jednotný referencovateľný identifikátor (URI). Veľkosť dátového poľa 2047 znakov, napríklad „https://data.gov.sk/set/codelist/CL000086“.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="CodelistName" type="tns:Localized_CodelistNameType" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Stručný a zrozumiteľný názov číselníka popisujúci jeho obsah. Veľkosť dátového poľa 255 znakov.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="CodelistManager" type="tns:Localized_CodelistManagerType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Celý názov vecného gestora základného číselníka. Veľkosť dátového poľa 255 znakov. Môžu byť aj podgestori, poradie je určujúce (podgestori na druhom a ďalších miestach).</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="SourceCodelist" type="tns:SourceCodelistType"  minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Identifikuje zdrojový číselník ak sú údaje preberané z iného číselníka. Veľkosť dátového poľa 2047 znakov, môže byť použitý viackrát.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ValidFrom" type="tns:ValidFromType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Dátum publikovania číselníka. Dátové pole typu dátum.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="EffectiveFrom" type="tns:EffectiveFromType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Dátum od ktorého číselník nadobudol účinnosť a je možné ho používať. Dátové pole typu dátum.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="EffectiveTo" type="tns:EffectiveToType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Dátum odkedy je účinnosť zrušená. Dátové pole typu dátum (presnosť na deň). (ak platnost nie je obmedzena je prazdne)</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="Note" type="tns:Localized_NoteType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Obsahuje doplňujúce informácie. Veľkosť dátového poľa 4095 znakov, môže byť použitý viackrát.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+     	    
+    
+    
+    
+</xsd:schema>

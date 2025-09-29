@@ -1,0 +1,77 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:unauthorized="http://www.ditec.sk/ekr/unauthorized/v1.0"
+	targetNamespace="http://www.ditec.sk/ekr/unauthorized/v1.0"
+	version="1.0" elementFormDefault="qualified">
+	<xsd:element name="DocumentUnauthorized"
+		type="unauthorized:DocumentUnauthorizedType" />
+	<xsd:complexType name="DocumentUnauthorizedType">
+		<xsd:sequence>
+			<xsd:element ref="unauthorized:Object" minOccurs="1"
+				maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Struktura popisujuca samotny biznis objekt s
+						doplnujucimi udajmi.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="URI" type="xsd:anyURI"
+			use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Blizsia identifikacia dokumentu. Z pohladu
+					spracovania nie je vyzadovany ani nijak kontrolovany, pokial to nie
+					je explicitne vyzadovane spravcom biznisu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Identifikator typu dokumentu na zaklade ktoreho
+					sa pracuje s dokumentom.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Description" type="xsd:string"
+			use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Blizsia identifikacia dokumentu. Z pohladu
+					spracovania nie je vyzadovany ani nijak kontrolovany, pokial to nie
+					je explicitne vyzadovane spravcom biznisu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="Object" type="unauthorized:ObjectType" />
+	<xsd:complexType name="ObjectType" mixed="true">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:any namespace="##any" processContents="lax">
+				<xsd:annotation>
+					<xsd:documentation>Lubovolny obsah biznis objektu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:any>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Blizsia identifikacia objektu. Z pohladu
+					spracovania nie je vyzadovany ani nijak kontrolovany, pokial to nie
+					je explicitne vyzadovane spravcom biznisu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="MimeType" type="xsd:string"
+			use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Mimetype daneho objektu na zaklade ktoreho sa
+					moze cielovy system rozhodnut ako spracovat dany objekt.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Encoding" type="xsd:anyURI"
+			use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Kodovanie daneho objektu na zaklade ktoreho sa
+					moze cielovy system rozhodnut ako spracovat dany objekt.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Identifier" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Identifikacia typu objektu na zaklade ktorej sa
+					pracuje s objektom.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

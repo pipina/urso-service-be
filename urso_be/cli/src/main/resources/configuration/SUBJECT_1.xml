@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:RegisterPluginConfig
+		xmlns:tns="http://www.dominanz.sk/registerPluginConfig_v1"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.dominanz.sk/registerPluginConfig_v1 ../definitions/registerPluginConfig_v1.xsd"
+		UseNaturalIdTable="true">
+	
+	<tns:Field KeyName="subj_type" XPathValue="su:subject/su:type"
+		IsIndexed="true" IsOutputField="true" DisplayName="Typ" 
+		Description="Typ subjektu (FO - fyzická /PO - právnická/ZO - zahraničná/... osoba)"/>
+	<tns:Field KeyName="subjectID" XPathValue="su:subject/su:subjectID"
+		IsIndexed="true" IsOutputField="true" DisplayName="ID subjektu" IsId="true"
+		Description="Id subjektu vo formáte [TYP][CISLO]"/>
+	<tns:Field KeyName="subj_formattedname" XPathValue="su:subject/su:formattedName/su:name"
+		IsIndexed="true" IsOutputField="true" DisplayName="Formátované meno"
+		Description="Formátované meno subjektu. Formát záleží od typu"/>
+	<tns:Field KeyName="identifierTypeCode" XPathValue="su:subject/su:identificator/su:IDType/rb:itemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Typ identifikátora"
+		Description="Typ identifikátora (občiansky preukaz, ...)">
+		<tns:Enumeration CodelistCode="CUREG000010"/>
+	</tns:Field>
+	<tns:Field KeyName="identifierValue" XPathValue="su:subject/su:identificator/su:IDValue"
+		IsIndexed="true" IsOutputField="true" DisplayName="Hodnota identifikátora" 
+		Description="Hodnota identifikátora podľa typu (číslo občianskeho preukazu, ...)"/>
+	<tns:Field KeyName="su_name" XPathValue="su:subject/su:physicalPerson/su:name"
+		IsIndexed="true" DisplayName="Meno" 
+		Description="Meno fyzickej osoby"/>
+	<tns:Field KeyName="su_surname" XPathValue="su:subject/su:physicalPerson/su:surname"
+		IsIndexed="true" DisplayName="Priezvisko" 
+		Description="Priezvisko fyzickej osoby"/>
+	<tns:Field KeyName="title_before" XPathValue="su:subject/su:physicalPerson/su:titleBefore/rb:itemCode"
+			   DisplayName="Titul pred menom"
+		Description="Titul pred menom fyzickej osoby">
+		<tns:Enumeration CodelistCode="CUREG000014"/>
+	</tns:Field>
+	<tns:Field KeyName="title_after" XPathValue="su:subject/su:physicalPerson/su:titleAfter/rb:itemCode"
+			   DisplayName="Titul za menom"
+		Description="Titul za menom fyzickej osoby">
+		<tns:Enumeration CodelistCode="CUREG000015"/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:physicalPerson/su:gender/rb:itemCode"
+		Description="Pohlavie fyzickej osoby">
+		<tns:Enumeration CodelistCode="CUREG000009"/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:foreignPhysicalPerson/su:gender/rb:itemCode"
+		Description="Pohlavie fyzickej osoby">
+		<tns:Enumeration CodelistCode="CUREG000009"/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:physicalPerson/su:nationality/rb:itemCode"
+			   Description="Národnosť fyzickej osoby">
+		<tns:Enumeration CodelistCode="CUREG000008"/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:foreignPhysicalPerson/su:nationality/rb:itemCode"
+			   Description="Národnosť fyzickej osoby">
+		<tns:Enumeration CodelistCode="CUREG000008"/>
+	</tns:Field>
+	<tns:Field KeyName="po_legalForm" XPathValue="su:subject/su:corporateBody/su:legalForm/rb:itemCode" 
+		IsIndexed="true" IsOutputField="true" DisplayName="Právna forma" 
+		Description="Právna forma subjektu">
+		<tns:Enumeration CodelistCode="CUREG000011"/>
+	</tns:Field>
+	<tns:Field KeyName="su_alternativeName" XPathValue="su:subject/su:corporateBody/su:alternativeName"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Alternatívny názov"
+			   Description="Alternatívny názov právneho subjektu"/>
+	<tns:Field KeyName="su_birthDate" ValueType="DATE" XPathValue="su:subject/su:physicalPerson/su:birthDate"
+		IsIndexed="true" IsOutputField="true" DisplayName="Dátum narodenia" 
+		Description="Dátum narodenia fyzickej osoby"/>
+	<tns:Field KeyName="adr_formattedAddress" XPathValue="su:subject/su:address/sa:formattedAddress/sa:address" 
+		IsIndexed="true" IsOutputField="true" DisplayName="Formátovaná poštová adresa" 
+		Description="Formátovaná poštová adresa. Irelevantné pre iné typy adresy (elektronická,...)"/>
+	<tns:Field KeyName="adr_municipality" XPathValue="su:subject/su:address/sa:postalAddress/sa:municipality/rb:itemCode" 
+		IsIndexed="true" IsOutputField="true" DisplayName="Obec" 
+		Description="Obec">
+		<tns:Enumeration CodelistCode="CUREG000005" IsItemCodeRequired="false"/>
+	</tns:Field>
+	<tns:Field KeyName="adr_municipality_itemValue" XPathValue="su:subject/su:address/sa:postalAddress/sa:municipality/rb:itemValue"
+		IsIndexed="true" IsOutputField="true" DisplayName="Obec"
+		Description="Obec - textová hodnota">
+	</tns:Field>
+	<tns:Field KeyName="adr_zip" XPathValue="su:subject/su:address/sa:postalAddress/sa:ZIP"
+		IsIndexed="true" IsOutputField="true" DisplayName="PSČ" 
+		Description="PSČ"/>
+	<tns:Field KeyName="adr_state" XPathValue="su:subject/su:address/sa:postalAddress/sa:state/rb:itemCode"
+		IsIndexed="true" DisplayName="Krajina" 
+		Description="Krajina">
+		<tns:Enumeration CodelistCode="CUREG000008"/>
+	</tns:Field>
+	<tns:Field KeyName="adr_street" XPathValue="su:subject/su:address/sa:postalAddress/sa:street/sa:streetName" 
+		IsIndexed="true" DisplayName="Ulica" 
+		Description="Názov ulice"/>
+	<tns:Field KeyName="adr_registrationNumber" XPathValue="su:subject/su:address/sa:postalAddress/sa:street/sa:registrationNumber" 
+		IsIndexed="true" DisplayName="Súpisné číslo" 
+		Description="Súpisné číslo"/>
+	<tns:Field KeyName="adr_addressUsage" XPathValue="su:subject/su:address/sa:addressUsage/rb:itemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Použitie adresy" 
+		Description="Použitie adresy (účel)">
+		<tns:Enumeration CodelistCode="CUREG000016"/>
+	</tns:Field>
+	<tns:Field KeyName="adr_region" XPathValue="su:subject/su:address/sa:postalAddress/sa:region/rb:itemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj" 
+		Description="Kraj">
+		<tns:Enumeration CodelistCode="CUREG000006" IsItemCodeRequired="false"/>
+	</tns:Field>
+	<tns:Field KeyName="email" XPathValue="su:subject/su:address/sa:electronicAddress/sa:email/sa:email"
+		IsIndexed="true" IsOutputField="true" DisplayName="Email"
+		Description="Email"/>
+	<tns:Field KeyName="uri" XPathValue="su:subject/su:address/sa:electronicAddress/sa:URI/sa:URI"
+		IsIndexed="true" IsOutputField="true" DisplayName="URI"
+		Description="URI"/>
+	<tns:Field KeyName="phone" XPathValue="su:subject/su:address/sa:phones/sa:phone"
+		IsIndexed="true" IsOutputField="true" DisplayName="Telefón"
+		Description="Telefón"/>
+	<tns:Field KeyName="su_name" XPathValue="su:subject/su:foreignPhysicalPerson/su:name" 
+		IsIndexed="true" DisplayName="Meno" 
+		Description="Meno"/>
+	<tns:Field KeyName="su_surname" XPathValue="su:subject/su:foreignPhysicalPerson/su:surname" 
+		IsIndexed="true" DisplayName="Priezvisko" 
+		Description="Priezvisko"/>
+	<tns:Field KeyName="su_birthDate" XPathValue="su:subject/su:foreignPhysicalPerson/su:birthDate" 
+		IsIndexed="true" IsOutputField="true" DisplayName="Dátum narodenia" 
+		Description="Dátum narodenia"/>
+	<tns:Field KeyName="su_alternativeName" XPathValue="su:subject/su:foreignCorporateBody/su:alternativeName" 
+		IsIndexed="true" IsOutputField="true" DisplayName="Alternatívny názov" 
+		Description="Alternatívny názov"/>
+	<tns:Field KeyName="zp_id" XPathValue="su:subject/su:foreignCorporateBody/su:ID" 
+		IsIndexed="true" IsOutputField="true" DisplayName="ID zahraničnej právnickej osoby"
+		Description="Identifikačné číslo"/>
+	<tns:Field XPathValue="su:subject/su:corporateBody/su:NACE/rb:itemCode" DisplayName="NACE" 
+		Description="NACE">
+		<tns:Enumeration CodelistCode="CUREG000012"/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:foreignCorporateBody/su:NACE/rb:itemCode" DisplayName="NACE" 
+		Description="NACE">
+		<tns:Enumeration CodelistCode="CUREG000012"/>
+	</tns:Field>
+	<tns:Field KeyName="foreignCorporate_adr_state" XPathValue="su:subject/su:foreignCorporateBody/su:country/rb:itemCode"
+		DisplayName="Krajina" Description="Krajina">
+		<tns:Enumeration CodelistCode="CUREG000008"/>
+	</tns:Field>
+	<tns:Field KeyName="additionalData_moduleName" XPathValue="su:subject/su:additionalData/su:moduleName" 
+		IsIndexed="true" DisplayName="Meno modulu" 
+		Description="Doplňujúce informácie, meno modulu"/>
+	<tns:Field KeyName="additionalData_key" XPathValue="su:subject/su:additionalData/su:key" 
+		IsIndexed="true" DisplayName="Kľúc" 
+		Description="Doplňujúce informácie, kľúč"/>
+	<tns:Field KeyName="additionalData_value" XPathValue="su:subject/su:additionalData/su:value" 
+		IsIndexed="true" DisplayName="Hodnota" 
+		Description="Doplňujúce informácie, hodnota"/>
+	<tns:Field KeyName="rfoEntryId" XPathValue="su:subject/su:rfoReference/su:EntryId"
+		IsIndexed="true" IsOutputField="true" DisplayName="Id fyzickej osoby"
+		Description="Id fyzickej osoby z externého registra">
+		<tns:Register RegisterId="RFO" Version="1">
+			<tns:RegisterJoinKey  Source="rfoEntryId" Target="entryId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="rfoExternalId" XPathValue="su:subject/su:rfoReference/su:ExternalId"
+		IsIndexed="true" IsOutputField="true" DisplayName="Externé Id fyzickej osoby"
+		Description="Externé Id fyzickej osoby z externého registra"/>
+	<tns:Field KeyName="rpoEntryId" XPathValue="su:subject/su:rpoReference/su:EntryId"
+		IsIndexed="true" IsOutputField="true" DisplayName="Id právnickej osoby"
+		Description="Id právnickej osoby z externého registra">
+		<tns:Register RegisterId="RPO" Version="1">
+			<tns:RegisterJoinKey  Source="rpoEntryId" Target="entryId"/>
+		</tns:Register>
+	</tns:Field>
+	<tns:Field KeyName="rpoExternalId" XPathValue="su:subject/su:rpoReference/su:ExternalId"
+		IsIndexed="true" IsOutputField="true" DisplayName="Externé Id právnickej osoby"
+		Description="Externé Id právnickej osoby z externého registra"/>
+	<tns:Field KeyName="replacementID" XPathValue="su:subject/su:replacementID"
+		IsIndexed="true" DisplayName="Náhradné id subjektu" 
+		Description="Id subjektu vo formáte [TYP][CISLO]. Určuje iný subjekt ktorý by sa mal použiť miesto aktuálneho subjektu pretože ide o duplikáciu!">
+		<tns:Register RegisterId="SUBJECT" Version="1">
+			<tns:RegisterJoinKey  Source="replacementID" Target="subjectID"/>
+		</tns:Register>
+	</tns:Field>
+
+	<tns:Field XPathValue="su:subject/su:address/sa:formattedAddress">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:address/sa:postalAddress">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:address/sa:electronicAddress/sa:URI">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:address/sa:electronicAddress/sa:email">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:address/sa:phones">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:formattedName">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:physicalPerson">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:corporateBody">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:foreignPhysicalPerson">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:foreignCorporateBody">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:identificator">
+		<tns:Historical/>
+	</tns:Field>
+	<tns:Field XPathValue="su:subject/su:additionalData">
+		<tns:Historical/>
+	</tns:Field>
+
+	<tns:RegisterType>INTERNAL</tns:RegisterType>
+	<tns:GdprParams IsGdprRelevant="true" ImmediateDeleteOnLastReference="false" TTL="1" TTLUnit="DAYS"/>
+	<tns:XsdFile IsPrimary="true" Path="SUBJECT_1/SUBJECT_1_DATA.xsd" IsExternal="true" NamespacePrefix="su" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/Subject"/>
+	<tns:XsdFile IsPrimary="false" Path="SUBJECT_1/SUBJECT_1_TYPES.xsd" IsExternal="true" NamespacePrefix="su" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/Subject"/>
+	<tns:XsdFile IsPrimary="false" Path="SUBJECT_1/simplifiedAddress/simplifiedAddress_v1.xsd" IsExternal="true" NamespacePrefix="sa" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/SimplifiedAddress"/>
+	<tns:XsdFile IsPrimary="false" Path="registerBase_v1.xsd" IsExternal="true" NamespacePrefix="rb" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/RegisterBase"/>
+	<tns:XsdFile IsPrimary="false" Path="codelistBase_v1.xsd" IsExternal="false"/>
+	
+	<tns:FormioField Name="subjectID" DefaultValue="NULL" IsGenerated="true" IsUpdatable="false" Path=""/>
+	<tns:FormioField Name="type" IsUpdatable="false" Path=""/>
+	<tns:FormioField Name="physicalPerson" Path="">
+		<tns:Custom Mark="show" Custom="data.type=='FO' || data.type=='SZ'"/>
+	</tns:FormioField>
+	<tns:FormioField Name="corporateBody" Path="">
+		<tns:Custom Mark="show" Custom="data.type=='PO' || data.type=='SZ'"/>
+	</tns:FormioField>
+	<tns:FormioField Name="foreignPhysicalPerson" Path="">
+		<tns:Custom Mark="show" As="true" WhenField="type" Equals="ZO"/>
+	</tns:FormioField>
+	<tns:FormioField Name="foreignCorporateBody" Path="">
+		<tns:Custom Mark="show" As="true" WhenField="type" Equals="ZP"/>
+	</tns:FormioField>
+	<tns:FormioField Name="formattedName" Path="">
+		<tns:Custom Mark="show" Custom="data.type=='PO' || data.type=='ZP'"/>
+	</tns:FormioField>
+	<tns:FormioField Name="valid" DefaultValue="true" Path="subject.address.formattedAddress.address"/>
+	<tns:FormioField Name="valid" DefaultValue="true" Path="subject.address.postalAddress"/>
+	<tns:FormioField Name="valid" DefaultValue="true" Path="subject.address.electronicAddress"/>
+	<tns:FormioField Name="valid" DefaultValue="true" Path="subject.address.phones"/>
+	<tns:FormioField Name="valid" DefaultValue="true" Path="subject.physicalPerson"/>
+</tns:RegisterPluginConfig>

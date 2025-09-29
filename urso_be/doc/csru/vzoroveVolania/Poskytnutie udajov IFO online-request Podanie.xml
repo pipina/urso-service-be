@@ -1,0 +1,55 @@
+<Registration xmlns="http://www.ditec.sk/ekr/registration/v1.0" Id="RFO_PS_REFERENCNE_UDAJE_ZOZNAMU_IFO_ONLINE_BEZ_ZEP_WS_IN_1_0">
+<DocumentUnauthorized xmlns="http://www.ditec.sk/ekr/unauthorized/v1.0" Id="RFO_PS_REFERENCNE_UDAJE_ZOZNAMU_IFO_ONLINE_BEZ_ZEP_WS_IN_1_0">
+             <Object Id="20091010132356000" Identifier="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieUdajovIFOOnlineWS-v1.0.xsd">
+                    <TransEnvIn xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieUdajovIFOOnlineWS-v1.0.xsd">
+                           <POD>
+  <!-- RFO.T_POSKYTNUTIE_ODPISU_VSTUP (1, _) -->
+  <IOSList>
+    <!-- RFO.T_IDENTIFIKATOR_OSOBY (1, _) -->
+    <IOS>
+      <IF>2100032372</IF>
+    </IOS>
+  </IOSList>
+  <UES>
+    <!-- RFO.T_UDAJE_EXT_SYSTEMU (1, _) -->
+    <PO>oversi_rfo</PO>
+    <!-- Dezko SV_EXTERNY_POUZIVATEL (1, _) -->
+    <TI>TID_oversi_rfo</TI>
+    <!-- 123456 NL_TID_EXTERNEHO_SYSTEMU (1, _) -->
+  </UES>
+  <SPIList>
+    <!-- RFO.T_SPECIFIKACIA_POZADOVANEJ_INFORMACIE (1, _) -->
+    <SPI>
+      <!-- RFO.T_SPECIFIKACIA_POZADOVANEJ_INFORMACIE (1, _) -->
+      <TUDHONA>Administratívne údaje</TUDHONA>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+      <HO>1</HO>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+    </SPI>
+    <SPI>
+      <!-- RFO.T_SPECIFIKACIA_POZADOVANEJ_INFORMACIE (1, _) -->
+      <TUDHONA>Lokačné údaje</TUDHONA>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+      <HO>2</HO>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+    </SPI>
+    <SPI>
+      <!-- RFO.T_SPECIFIKACIA_POZADOVANEJ_INFORMACIE (1, _) -->
+      <TUDHONA>Vzťahové údaje</TUDHONA>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+      <HO>3</HO>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+    </SPI>
+    <SPI>
+      <!-- RFO.T_SPECIFIKACIA_POZADOVANEJ_INFORMACIE (1, _) -->
+      <TUDHONA>Identifikačné údaje</TUDHONA>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+      <HO>4</HO>
+      <!-- NL_HODNOTA_ID (1, _) ADMINISTRATIVNE_UDAJE = 1, LOKACNE_UDAJE = 2, VZTAHOVE_UDAJE = 3, IDENTIFIKACNE_UDAJE = 4, -->
+    </SPI>
+  </SPIList>
+</POD>
+                    </TransEnvIn>
+             </Object>
+       </DocumentUnauthorized>
+</Registration>

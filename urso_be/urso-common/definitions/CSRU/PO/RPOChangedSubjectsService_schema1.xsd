@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://rpo.statistics.sk/Rpo/RPOChangedSubjectsService/v1/0" xmlns:ns2="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4" xmlns:ns1="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_in-v2.4" xmlns:ns3="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_out-v2.4" xmlns:tns="http://rpo.statistics.sk/Rpo/RPOChangedSubjectsService/v1/0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_in-v2.4" schemaLocation="Poskytnutie_suborov_zmien_PO_in-v2.4.xsd"/>
+
+  <xs:import namespace="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4" schemaLocation="rpo_core_schema-v2.4.xsd"/>
+
+  <xs:import namespace="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_out-v2.4" schemaLocation="Poskytnutie_suborov_zmien_PO_out-v2.4.xsd"/>
+
+  <xs:element name="listChangedSubjectsFiles" type="tns:listChangedSubjectsFiles"/>
+
+  <xs:element name="listChangedSubjectsFilesResponse" type="tns:listChangedSubjectsFilesResponse"/>
+
+  <xs:element name="listChangedSubjectsFilesCades" type="tns:listChangedSubjectsFilesCades"/>
+
+  <xs:element name="listChangedSubjectsFilesCadesResponse" type="tns:listChangedSubjectsFilesCadesResponse"/>
+
+  <xs:complexType name="listChangedSubjectsFiles">
+    <xs:sequence>
+      <xs:element name="transEnvelope" type="ns1:TransEnvelopeType" minOccurs="0"/>
+      <xs:element name="pageNumber" type="xs:int" minOccurs="0"/>
+      <xs:element name="pageSize" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listChangedSubjectsFilesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="ns3:TransEnvelopeType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listChangedSubjectsFilesCades">
+    <xs:sequence>
+      <xs:element name="transEnvelope" type="ns1:TransEnvelopeType" minOccurs="0"/>
+      <xs:element name="pageNumber" type="xs:int" minOccurs="0"/>
+      <xs:element name="pageSize" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listChangedSubjectsFilesCadesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="ns3:TransEnvelopeType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

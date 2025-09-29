@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema
+	attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.egov.sk/mvsr/RFO/Podp/Ext/PrijatieZmienWS-v1.0"
+	xmlns:this="http://www.egov.sk/mvsr/RFO/Podp/Ext/PrijatieZmienWS-v1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<annotation>
+		<documentation>Potvrdenie prijatia zmien.</documentation>
+	</annotation>
+	<complexType name="TransEnvelopeType" abstract="true" />
+	<element name="TransEnvIn" type="this:TransEnvTypeIn" />
+	<complexType name="TransEnvTypeIn">
+		<complexContent>
+			<extension base="this:TransEnvelopeType">
+				<sequence>
+					<element name="PPZ" type="this:TPPZ_ZZV">
+						<annotation>
+							<documentation>Vstupné XML WS.</documentation>
+						</annotation>
+					</element>
+					<element name="UES" type="this:TUES">
+						<annotation>
+							<documentation>Hodnoty TID externého systému a externý používatel sa využívajú aj pri logovaní. </documentation>
+						</annotation>
+					</element>
+					<element name="VDO" type="this:TVDO" minOccurs="0">
+						<annotation>
+							<documentation>Vstupný dokument, ktorý obsahoval vstupné XML a bol uchovaný v DMS.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+				<attribute name="corrID" type="string" use="optional">
+					<annotation>
+						<documentation>Jednoznačný identifikátor transakcie klientského systému. Ak je uvedený umožňuje jednoducho napárovať súvisiace volania.</documentation>
+					</annotation>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TPPZ_ZZV">
+		<annotation>
+			<documentation>Vstupné XML WS.</documentation>
+		</annotation>
+		<sequence>
+			<element name="IP" type="long">
+				<annotation>
+					<documentation>Identifikátor zmeny pre externý systém.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TUES">
+		<annotation>
+			<documentation>Hodnoty TID externého systému a externý používatel sa využívajú aj pri logovaní. </documentation>
+		</annotation>
+		<sequence>
+			<element name="PO">
+				<annotation>
+					<documentation>Používatel externého systému, ktorý poslal požiadavku na zavolanie príslušného WS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="32" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="TI">
+				<annotation>
+					<documentation>Identifikátor transakcie v externom systéme, ktorá iniciovala príslušnú transakciu v zdrojovom systéme</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="TVDO">
+		<annotation>
+			<documentation>Vstupný dokument, ktorý obsahoval vstupné XML a bol uchovaný v DMS.</documentation>
+		</annotation>
+		<sequence>
+			<element name="ID">
+				<annotation>
+					<documentation>Identifikátor dokumentu v DMS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="TransEnvOut" type="this:TransEnvTypeOut" />
+	<complexType name="TransEnvTypeOut">
+		<complexContent>
+			<extension base="this:TransEnvelopeType">
+				<sequence>
+					<element name="VSP" type="this:TVSPO">
+						<annotation>
+							<documentation>Výstupné XML WS.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+				<attribute name="corrID" type="string" use="optional">
+					<annotation>
+						<documentation>Jednoznačný identifikátor transakcie systému poskytovateľa. Klientský systém môže identifikátor použiť na párovanie s transakciou vo svojom systéme.</documentation>
+					</annotation>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TVSPO">
+		<annotation>
+			<documentation>Výstupné XML WS.</documentation>
+		</annotation>
+		<sequence>
+			<element name="KI" type="int">
+				<annotation>
+					<documentation>Návratový kód WS.</documentation>
+				</annotation>
+			</element>
+			<element name="PO" minOccurs="0">
+				<annotation>
+					<documentation>Návratový oznam WS, ak nebolo úspešne zrealizované spracovanie volania WS.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="400" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+
+	elementFormDefault="qualified"
+	targetNamespace="http://csru.gov.sk/common/v1.4"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:c="http://csru.gov.sk/common/v1.4">
+
+	<xs:element name="base64Content" type="xs:base64Binary"/>
+	<xs:simpleType name="OvmIsIdType">
+		<xs:annotation>
+			<xs:documentation>ID IS OVM (Informačný systém Orgánu verejnej moci)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="OeIdType">
+		<xs:annotation>
+			<xs:documentation>ID OE (Objekt evidencie)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="ScenarioType">
+		<xs:annotation>
+			<xs:documentation>Scenario - Kód spôsobu spracovania požiadavky pre dané OE</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_500"/>
+	</xs:simpleType>
+	<xs:simpleType name="CsruTransactionIdType">
+		<xs:annotation>
+			<xs:documentation>Transakčné ID IS CSRÚ - priradené IS CSRÚ na jednoznačnú identifikáciu volania služby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="OvmTransactionIdType">
+		<xs:annotation>
+			<xs:documentation>Transakčné ID IS OVM – priradené IS OVM na jednoznačnú identifikáciu volania služby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="OvmCorrelationIdType">
+		<xs:annotation>
+			<xs:documentation>Korelačné ID IS OVM – priradené IS OVM na označenie súvisiacich volaní služby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="RequestIdType">
+		<xs:annotation>
+			<xs:documentation>ID požiadavky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceVariantCodeType">
+		<xs:annotation>
+			<xs:documentation>Kód variantu webovej služby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="ResultCodeType">
+		<xs:annotation>
+			<xs:documentation>Návratový kód operácie</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorMessageType">
+		<xs:annotation>
+			<xs:documentation>Doplňujúca textová informácie o chybnom ukončení spracovania požiadavky, pokiaľ taký
+				nastal</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="StatusType">
+		<xs:annotation>
+			<xs:documentation>Stav vykonávania požiadavky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>Prebieha spracovanie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Spracovanie úspešne ukončené</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Spracovanie ukončené s chybou</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Neznáma požiadavka</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>Spracovanie ukončené s upozornením</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ParameterListCType">
+		<xs:annotation>
+			<xs:documentation>Zoznam parameterov pre WS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="parameter" type="c:ParameterCType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParameterCType">
+		<xs:annotation>
+			<xs:documentation>Zoznam dodatočných parametrov – v podobe dvojíc (názov parametra, hodnota parametra).
+				Tieto dodatočné parametre sú podrobne špecifikované pre konkrétne scenáre a slúžia na upresnenie údajov
+				požadovaných pre objekt evidencie (napríklad časové obdobie)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="c:ParameterNameType"/>
+			<xs:element name="value" type="c:ParameterValueType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataPlaceholderCType">
+		<xs:annotation>
+			<xs:documentation>Miesto pre umiestnenie dát so štruktúrou definovanou pre konkrétny scenár</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any processContents="lax"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ParameterNameType">
+		<xs:annotation>
+			<xs:documentation>Meno parametra</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_50"/>
+	</xs:simpleType>
+	<xs:simpleType name="ParameterValueType">
+		<xs:annotation>
+			<xs:documentation>Hodnota parametra</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_500"/>
+	</xs:simpleType>
+	<xs:complexType name="FileListCType">
+		<xs:annotation>
+			<xs:documentation>Zoznam súborov na SFTP serveri</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="file" type="c:FileCType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileCType">
+		<xs:annotation>
+			<xs:documentation>Súbor na SFTP serveri</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path" type="c:FilePathType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="FilePathType">
+		<xs:annotation>
+			<xs:documentation>Cesta k súboru na SFTP serveri</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:string_500"/>
+	</xs:simpleType>
+	<xs:simpleType name="PerformDQType">
+		<xs:annotation>
+			<xs:documentation>Príznak určujúci, či sa má urobiť kontrola kvality nad údajmi</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>Kontrola kvality sa nevykoná</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Kontrola kvality sa vykoná</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string_50">
+		<xs:annotation>
+			<xs:documentation>Textový reťazec s maximálnou dĺžkou 50 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:NonEmptyString">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string_500">
+		<xs:annotation>
+			<xs:documentation>Textový reťazec s maximálnou dĺžkou 500 znakov</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="c:NonEmptyString">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NonEmptyString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProviderStatus">
+		<xs:annotation>
+			<xs:documentation>Stav volania služby poskytovateľa</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PROCESSING">
+				<xs:annotation>
+					<xs:documentation>Prebieha spracovanie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OK">
+				<xs:annotation>
+					<xs:documentation>Spracovanie úspešne ukončené</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERROR">
+				<xs:annotation>
+					<xs:documentation>Spracovanie ukončené s chybou</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

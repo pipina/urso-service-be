@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.minv.sk/ra"
+			xmlns:ns0="http://www.minv.sk/ra"
+			elementFormDefault="qualified" version="1.0">
+
+	<xsd:include schemaLocation="./RA_INTERNAL_1_TYPES.xsd"/>
+
+	<xsd:element name="Address" type="ns0:InternalAddress_t"/>
+
+</xsd:schema>

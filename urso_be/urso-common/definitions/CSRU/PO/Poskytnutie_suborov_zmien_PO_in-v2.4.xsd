@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- schema pre vymenu udajov o pravnickej osobe podla Vynosu 55/2014 Z. z. Vytvorene: MICROCOMP-Computersystem s.r.o. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_in-v2.4" targetNamespace="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_in-v2.4" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="TransEnvelope" type="tns:TransEnvelopeType">
+		<xs:annotation>
+			<xs:documentation>Korenovy element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="TransEnvelopeType">
+		<xs:all>
+			<xs:element name="DateFrom" type="tns:DateFromType">
+				<xs:annotation>
+					<xs:documentation>Datum od ktoreho konzument pozaduje zmenove davky  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateTo" type="tns:DateToType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Datum do ktoreho konzument pozaduje zmenove davky </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ApplicantName" type="tns:ApplicantNameType">
+				<xs:annotation>
+					<xs:documentation>Udaje ziadatela</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:simpleType name="DateFromType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="DateToType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ApplicantNameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

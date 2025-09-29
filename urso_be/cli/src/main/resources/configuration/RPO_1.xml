@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:RegisterPluginConfig
+	xmlns:tns="http://www.dominanz.sk/registerPluginConfig_v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.dominanz.sk/registerPluginConfig_v1 ../definitions/registerPluginConfig_v1.xsd">
+	<tns:Field KeyName="CorporateBodyFullName" XPathValue="po:PO/po:CorporateBodyFullName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Celý názov" Description="Celý názov právnickej osoby">
+	</tns:Field>
+	<tns:Field KeyName="identifierValue" XPathValue="po:PO/po:ID/cs:IdentifierValue"
+		IsIndexed="true" IsOutputField="true" DisplayName="ID" Description="Identifikátor právnickej osoby">
+	</tns:Field>
+	<tns:Field KeyName="LegalForm" XPathValue="po:PO/po:LegalForm/cs:NonCodelistData"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Právna forma" Description="Právna forma subjektu">
+	</tns:Field>
+	<tns:Field KeyName="LegalForm" XPathValue="po:PO/po:LegalForm/cs:Codelist/cs:CodelistItem/cs:ItemName"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Právna forma" Description="Právna forma subjektu">
+	</tns:Field>
+	<tns:Field KeyName="SkNaceMain" XPathValue="po:PO/po:SkNaceMain/cs:NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="SK NACE" Description="SK NACE">
+	</tns:Field>
+	<tns:Field KeyName="SkNaceMain" XPathValue="po:PO/po:SkNaceMain/cs:Codelist/cs:CodelistItem/cs:ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="SK NACE" Description="SK NACE">
+	</tns:Field>
+	<tns:Field KeyName="AddressLine" XPathValue="po:PO/po:PhysicalAddress/po:AddressLine"
+		IsIndexed="true" IsOutputField="true" DisplayName="Adresa" Description="Formatovaná informácia, ktorá určuje určitú adresu (katastrálne územie, názov hospodárskej usadlosti a podobne)">
+	</tns:Field>
+	<tns:Field KeyName="VatIdentificationNumber" XPathValue="po:PO/po:VatIdentificationNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="IČ DPH" Description="Identifikačné číslo pre daň z pridanej hodnoty">
+	</tns:Field>
+	<tns:Field KeyName="TaxIdentificationNumber" XPathValue="po:PO/po:TaxIdentificationNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="DIČ" Description="Daňové identifikačné číslo">
+	</tns:Field>
+	<tns:Field KeyName="identifierTypeCode" XPathValue="po:PO/po:ID/cs:IdentifierType/cs:Codelist/cs:CodelistItem/cs:ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Typ ID" Description="Typ identifikátora právnickej osoby">
+	</tns:Field>
+	<tns:Field KeyName="InternetAddress" XPathValue="po:PO/po:InternetAddress/po:Address"
+		IsIndexed="true" IsOutputField="true" DisplayName="Elektronická adresa" Description="Zložený dátový prvok pre elektronický kontakt">
+	</tns:Field>
+	<tns:Field KeyName="Country" XPathValue="po:PO/po:PhysicalAddress/po:Country/cs:NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="Krajina" Description="Krajina">
+	</tns:Field>
+	<tns:Field KeyName="Country" XPathValue="po:PO/po:PhysicalAddress/po:Country/cs:Codelist/cs:CodelistItem/cs:ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Krajina" Description="Krajina">
+	</tns:Field>
+	<tns:Field KeyName="Region" XPathValue="po:PO/po:PhysicalAddress/po:Region/cs:NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="Okres" Description="Okres">
+	</tns:Field>
+	<tns:Field KeyName="Region" XPathValue="po:PO/po:PhysicalAddress/po:Region/cs:Codelist/cs:CodelistItem/cs:ItemName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Okres" Description="Okres">
+	</tns:Field>
+	<tns:Field KeyName="County" XPathValue="po:PO/po:PhysicalAddress/po:County/cs:NonCodelistData"
+		IsIndexed="true" IsOutputField="true" DisplayName="Kraj" Description="Kraj">
+	</tns:Field>
+	<tns:Field KeyName="County" XPathValue="po:PO/po:PhysicalAddress/po:County/cs:Codelist/cs:CodelistItem/cs:ItemCode"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Kraj" Description="Kraj">
+	</tns:Field>
+	<tns:Field KeyName="Municipality" XPathValue="po:PO/po:PhysicalAddress/po:Municipality/cs:Codelist/cs:CodelistItem/cs:ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Obec" Description="Obec" SearchType="EQUALS">
+	</tns:Field>
+	<tns:Field KeyName="StreetName" XPathValue="po:PO/po:PhysicalAddress/po:StreetName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Ulica" Description="Názov ulice">
+	</tns:Field>
+	<tns:Field KeyName="BuildingNumber" XPathValue="po:PO/po:PhysicalAddress/po:BuildingNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="Číslo budovy" Description="Číslo budovy">
+	</tns:Field>
+	<tns:Field KeyName="PropertyRegistrationNumber" ValueType="NUMBER" XPathValue="po:PO/po:PhysicalAddress/po:PropertyRegistrationNumber"
+		IsIndexed="true" IsOutputField="true" DisplayName="Súpisné číslo" Description="Súpisné číslo">
+	</tns:Field>
+	<tns:Field KeyName="BuildingIndex" XPathValue="po:PO/po:PhysicalAddress/po:BuildingIndex"
+		IsIndexed="true" IsOutputField="true" DisplayName="Index budovy" Description="Index budovy">
+	</tns:Field>
+	<tns:Field KeyName="AddressType" XPathValue="po:PO/po:PhysicalAddress/po:AddressType/cs:Codelist/cs:CodelistItem/cs:ItemCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="Typ adresy" Description="Zložený dátový prvok klasifikujúci typ adresy">
+	</tns:Field>
+	<tns:Field KeyName="PostalCode" XPathValue="po:PO/po:PhysicalAddress/po:DeliveryAddress/po:PostalCode"
+		IsIndexed="true" IsOutputField="true" DisplayName="PSČ" Description="Poštové smerovacie číslo">
+	</tns:Field>
+	<tns:Field KeyName="PostOfficeBox" XPathValue="po:PO/po:PhysicalAddress/po:DeliveryAddress/po:PostOfficeBox"
+		IsIndexed="true" IsOutputField="true" DisplayName="P.O.BOX" Description="Poštový priečinok">
+	</tns:Field>
+	<tns:Field KeyName="CorporateBodyAlternativeName" XPathValue="po:PO/po:CorporateBodyAlternativeName"
+		IsIndexed="true" IsOutputField="true" DisplayName="Alternatívny názov" Description="Alternatívny názov právnickej osoby">
+	</tns:Field>
+	<tns:Field KeyName="SourceRegisterId" XPathValue="po:PO/po:SourceRegisterId"
+		IsIndexed="true" IsOutputField="true" DisplayName="ID zo zdrojového registra" Description="Jednoznačný identifikátor záznamu zo zdrojového registra">
+	</tns:Field>
+	<tns:Field KeyName="SourceRegisterType" XPathValue="po:PO/po:Source/po:SourceRegister/cs:Codelist/cs:CodelistItem/cs:ItemCode"
+			   IsIndexed="true" IsOutputField="true" DisplayName="Typ zdrojového registra" Description="D.6.2 Zložený dátový prvok pre určenie zdroja udája">
+	</tns:Field>
+
+	<tns:RegisterType>EXTERNAL</tns:RegisterType>
+	<tns:GdprParams IsGdprRelevant="false" ImmediateDeleteOnLastReference="false" TTL="1" TTLUnit="DAYS"/>
+	<tns:XsdFile IsPrimary="true" Path="RPO_1/RPO_1_DATA.xsd" IsExternal="true" NamespacePrefix="po" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/PO"/>
+	<tns:XsdFile IsPrimary="false" Path="RPO_1/RPO_1_TYPES.xsd" IsExternal="true" NamespacePrefix="po" NamespaceUrl="http://www.dominanz.sk/UVZ/Reg/PO"/>
+	<tns:XsdFile IsPrimary="false" Path="RPO_1/rpo_core_schema-v2.4.xsd" IsExternal="true" NamespacePrefix="cs" NamespaceUrl="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4"/>
+</tns:RegisterPluginConfig>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.dominanz.sk/UVZ/Reg/SimplifiedAddress"
+    	xmlns:sa="http://www.dominanz.sk/UVZ/Reg/SimplifiedAddress"
+    	xmlns:rb="http://www.dominanz.sk/UVZ/Reg/RegisterBase"
+    	elementFormDefault="qualified" version="1.0">
+    
+    <xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/RegisterBase"
+		schemaLocation="../../registerBase_v1.xsd"/>
+    
+    
+    <xsd:complexType name="SimplifiedAddress_t">
+    	<xsd:sequence>
+    		<xsd:element name="formattedAddress" type="sa:formattedAddress_t" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:element name="addressUsage" type="rb:REG_codelistItem_t" minOccurs="1" maxOccurs="1">
+    			<xsd:annotation>
+    				<xsd:documentation>Enumeration CUREG000016</xsd:documentation>
+    			</xsd:annotation></xsd:element>
+    		<!-- Postova adresa -->
+    		<xsd:element name="postalAddress" minOccurs="0" maxOccurs="1" type="sa:postalAddress_t"></xsd:element>
+    		<!-- Elektronicka adresa -->
+    		<xsd:element name="electronicAddress" maxOccurs="1" minOccurs="0" type="sa:electronicAddress_t"></xsd:element>
+    		<!-- Telefonna adresa -->
+    		<xsd:element name="phones" maxOccurs="1000" minOccurs="0" type="sa:phone_t" ></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+	<xsd:complexType name="postalAddress_t">
+    	<xsd:complexContent>
+    		<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="municipality" minOccurs="0"
+						maxOccurs="1" type="rb:REG_codelistItemOptional_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>Enumeration CUREG000005 - Lokálna štatistická územná jednotka 2 - obec</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="region" minOccurs="0"
+						maxOccurs="1" type="rb:REG_codelistItemOptional_t">
+                        <xsd:annotation>
+                        	<xsd:documentation>Reference to enumeration CUREG000006</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="state" minOccurs="0"
+						maxOccurs="1" type="rb:REG_codelistItem_t">
+					</xsd:element>
+					<xsd:element name="ZIP" minOccurs="0" maxOccurs="1"
+						type="rb:REG_ZIP_t">
+					</xsd:element>
+					<xsd:element name="street" minOccurs="0"
+						maxOccurs="1" type="sa:street_t">
+					</xsd:element>
+					<xsd:element name="pobox" minOccurs="0"
+						maxOccurs="1" type="sa:pobox_t">
+					</xsd:element>
+					<xsd:element name="addressInSyncWithREG"
+						type="rb:REG_boolean_t" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>
+								Ak je pole vyplnene potom signalizuje ze
+								adresa je synchronizovana na referencny
+								register.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="addressPoint" type="sa:AddressPoint_t" maxOccurs="1000" minOccurs="0"></xsd:element>
+				</xsd:sequence>
+    		</xsd:extension>
+		</xsd:complexContent>		
+	</xsd:complexType>
+
+
+	<xsd:complexType name="street_t">
+		<xsd:sequence>
+			<xsd:element name="streetName" minOccurs="0" maxOccurs="1" type="rb:REG_string100_t"></xsd:element>
+			<xsd:element name="streetNumber" minOccurs="0" maxOccurs="1" type="rb:REG_string20_t"></xsd:element>
+			<xsd:element name="registrationNumber" minOccurs="0" maxOccurs="1" type="rb:REG_string20_t"></xsd:element>
+			<xsd:element name="building" minOccurs="0" maxOccurs="1" type="rb:REG_string255_t"></xsd:element>
+			<xsd:element name="buildingPart" minOccurs="0" maxOccurs="1" type="rb:REG_string255_t"></xsd:element>
+			<xsd:element name="unitNumber" minOccurs="0" maxOccurs="1" type="rb:REG_string10_t"></xsd:element>
+			<xsd:element name="floor" minOccurs="0" maxOccurs="1" type="rb:REG_numberShortPositive_t"></xsd:element>
+ 		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="pobox_t">
+    	<xsd:sequence>
+					<xsd:element name="poBox" minOccurs="0" maxOccurs="1" type="rb:REG_string50_t"></xsd:element>
+				</xsd:sequence>
+	</xsd:complexType>
+	
+    <xsd:complexType name="formattedAddress_t">
+    	<xsd:complexContent>
+    		<xsd:extension base="rb:REG_itemWithHistory_t">
+    			<xsd:sequence>
+    				<xsd:element name="address" maxOccurs="1" minOccurs="1"	type="rb:REG_string2047_t"	></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+
+	<xsd:complexType name="electronicAddress_t">
+		<xsd:sequence>
+			<xsd:element name="URI" minOccurs="0" maxOccurs="1000" type="sa:URI_t" ></xsd:element>
+			<xsd:element name="URL" minOccurs="0" maxOccurs="1000" type="sa:URL_t" ></xsd:element>
+			<xsd:element name="email" minOccurs="0" maxOccurs="1000" type="sa:email_t" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+    
+    
+	<xsd:complexType name="URI_t">
+    	<xsd:complexContent>
+	   		<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="URI" minOccurs="1" maxOccurs="1" type="rb:REG_URI_t"></xsd:element>
+					<xsd:element name="description" minOccurs="0" maxOccurs="1" type="rb:REG_string255_t"></xsd:element>			
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>    
+    
+	<xsd:complexType name="URL_t">
+    	<xsd:complexContent>
+	   		<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="URL" minOccurs="1" maxOccurs="1" type="rb:REG_URL_t"></xsd:element>
+					<xsd:element name="description" minOccurs="0" maxOccurs="1" type="rb:REG_string255_t"></xsd:element>			
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>    
+    
+	<xsd:complexType name="email_t">
+    	<xsd:complexContent>
+	   		<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="email" minOccurs="1" maxOccurs="1" type="rb:REG_email_t"></xsd:element>
+					<xsd:element name="emailtype" minOccurs="0" maxOccurs="1" type="sa:emailAddressType_t"></xsd:element>	
+					<xsd:element name="description" minOccurs="0" maxOccurs="1" type="rb:REG_string255_t"></xsd:element>			
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:simpleType name="emailAddressType_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="personal"></xsd:enumeration>
+			<xsd:enumeration value="automaticProccessing"></xsd:enumeration>
+			<xsd:enumeration value="shared"></xsd:enumeration>
+			<xsd:enumeration value="other"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="phone_t">
+    	<xsd:complexContent>
+	   		<xsd:extension base="rb:REG_itemWithHistory_t">
+				<xsd:sequence>
+					<xsd:element name="phone" minOccurs="1" maxOccurs="1" type="rb:REG_phone_t"></xsd:element>
+					<xsd:element name="description" minOccurs="0" maxOccurs="1" type="rb:REG_string255_t"></xsd:element>			
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="AddressPoint_t">
+		<xsd:sequence>
+			<xsd:element name="pointXYZ" type="sa:AddressPointXYH_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="pointBLH" type="sa:AddressPointBLH_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="addressPointID" type="rb:REG_string255_t" maxOccurs="1" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="AddressPointBLH_t">
+		<xsd:sequence>
+			<xsd:element name="axisB" type="rb:REG_dec10.1_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="axisL" type="rb:REG_dec10.1_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="axisH" type="rb:REG_dec10.1_t"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+    <xsd:complexType name="AddressPointXYH_t">
+    	<xsd:sequence>
+    		<xsd:element name="axisX" type="rb:REG_dec10.1_t"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="axisY" type="rb:REG_dec10.1_t"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="heightH" type="rb:REG_dec10.1_t"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.dominanz.sk/UVZ/Reg/CodeListData"
+    	xmlns:tns="http://www.dominanz.sk/UVZ/Reg/CodeListData"
+    	xmlns:cl="http://www.dominanz.sk/UVZ/Reg/CodeList"
+    	xmlns:clb="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+    	elementFormDefault="qualified" version="1.0">
+    
+    
+	<xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/CodeList"
+		schemaLocation="codeList_v1.xsd"/>
+
+	<xsd:import namespace="http://www.dominanz.sk/UVZ/Reg/CodeListBase"
+		schemaLocation="codelistBase_v1.xsd"/>
+	    
+    <xsd:simpleType name="ParentItemCodeType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="255"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+     	    
+    <xsd:simpleType name="HierarchicalItemCodeType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="4095"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="OriginalItemCodeType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="255"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="ReferenceIdentifierType">
+	    <xsd:restriction base="cl:ReferenceIdentifierType">
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ItemNameType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="2047"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ItemNameLocType">
+    	<xsd:sequence>
+    		<xsd:element name="ItemName" maxOccurs="1" minOccurs="1" type="tns:ItemNameType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="Localized_ItemNameType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultItemName" type="tns:ItemNameType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedItemName" type="tns:ItemNameLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:simpleType name="ItemShortenedNameType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="128"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ItemShortenedNameLocType">
+    	<xsd:sequence>
+    		<xsd:element name="ItemShortenedName" maxOccurs="1" minOccurs="1" type="tns:ItemShortenedNameType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="Localized_ItemShortenedNameType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultItemShortenedName" type="tns:ItemShortenedNameType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedItemShortenedName" type="tns:ItemShortenedNameLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+
+    
+    <xsd:simpleType name="ItemAbbreviatedNameType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="20"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+	
+	
+    <xsd:complexType name="ItemAbbreviatedNameLocType">
+    	<xsd:sequence>
+    		<xsd:element name="ItemAbbreviatedName" maxOccurs="1" minOccurs="1" type="tns:ItemAbbreviatedNameType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="Localized_ItemAbbreviatedNameType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultItemAbbreviatedName" type="tns:ItemAbbreviatedNameType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedItemAbbreviatedName" type="tns:ItemAbbreviatedNameLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+	
+	
+    <xsd:simpleType name="AdditionalContentType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="4095"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="AdditionalContentLocType">
+    	<xsd:sequence>
+    		<xsd:element name="AdditionalContent" maxOccurs="1" minOccurs="1" type="tns:AdditionalContentType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="Localized_AdditionalContentType">
+    	<xsd:sequence>
+    		<xsd:element name="DefaultAdditionalContent" type="tns:AdditionalContentType"></xsd:element>
+    		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="LocalizedAdditionalContent" type="tns:AdditionalContentLocType"></xsd:element>	    			
+    		</xsd:sequence>	
+    	</xsd:sequence>
+	</xsd:complexType>
+	    
+    
+    <xsd:simpleType name="UnitOfMeasureType">
+	    <xsd:restriction base="xsd:string">
+	    	<xsd:minLength value="1"></xsd:minLength>
+	    	<xsd:maxLength value="50"></xsd:maxLength>
+	    </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="NoteType">
+	    <xsd:restriction base="cl:NoteType">
+	    </xsd:restriction>
+    </xsd:simpleType>
+	    
+    <xsd:simpleType name="ValidFromType">
+	    <xsd:restriction base="cl:ValidFromType">
+	    </xsd:restriction>
+    </xsd:simpleType>
+	    
+	    
+    <xsd:simpleType name="EffectiveFromType">
+	    <xsd:restriction base="cl:EffectiveFromType">
+	    </xsd:restriction>
+    </xsd:simpleType>
+	    
+    <xsd:simpleType name="EffectiveToType">
+	    <xsd:restriction base="cl:EffectiveToType">
+	    </xsd:restriction>
+    </xsd:simpleType>
+	    
+    <xsd:simpleType name="ItemLogicalOrderType">
+	    <xsd:restriction base="xsd:integer">
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ItemLogicalOrderLocType">
+    	<xsd:sequence>
+    		<xsd:element name="Note" maxOccurs="1" minOccurs="1" type="tns:ItemLogicalOrderType"></xsd:element>
+    		<xsd:element name="Lang" minOccurs="1" maxOccurs="1" type="clb:LanguageType"></xsd:element>
+    	</xsd:sequence>
+	</xsd:complexType>
+
+
+
+
+	    
+    <xsd:simpleType name="LegislativeValidityType">
+	    <xsd:restriction base="xsd:boolean">
+	    </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="VoidType">
+	    <xsd:restriction base="xsd:boolean">
+	    </xsd:restriction>
+    </xsd:simpleType>
+
+
+
+
+	<xsd:complexType name="CodeListDataRecType">
+		<xsd:sequence>
+			<xsd:element name="ItemCode" type="clb:ItemCodeType" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Jedinečný kód položky. Veľkosť dátového poľa 255 znakov. Prideľovaný vo formáte voliteľný prefix a sekvenčné číslo.</xsd:documentation>
+				</xsd:annotation></xsd:element>				
+			<xsd:element name="ParentItemCode" type="tns:ParentItemCodeType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Kód položky o úroveň vyššie v tom istom číselníku, umožňuje stromovú hierarchiu. Veľkosť dátového poľa 255 znakov. Môže byť prázdny ak číselník nemá viac úrovní alebo je položka z prvej úrovne.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="HierarchicalItemCode" type="tns:HierarchicalItemCodeType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Odvodí sa pri pridávaní položky automaticky ako zreťazenie rodičovského hierarchického kódu a kódu položky. Veľkosť dátového poľa 4095 znakov.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="OriginalItemCode" type="tns:OriginalItemCodeType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Pôvodný (nesystémový) kód položky. Veľkosť dátového poľa 255 znakov. Vypĺňaný manuálne. V prípade, že ide o viacúrovňový/hierarchický číselník, bude vyplnený kompletný kód (napríklad „2.1“ pre položku „Penivý čistiaci prostriedok“, ktorá patrí vo vyššej úrovni pod položku s originálnym kódom „2“ a názvom „Čistenie pokožky“)</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ReferenceIdentifier" type="tns:ReferenceIdentifierType"  minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Obsahuje jednotný referencovateľný identifikátor (URI). Veľkosť dátového poľa 2047 znakov, napríklad „https://data.gov.sk/def/egov/life-situation-scope/1“.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ItemName" type="tns:Localized_ItemNameType"  minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Uplný názov položky. Veľkosť dátového poľa 2047 znakov. Je prípustná položka „Iné“, vtedy si obsluhu robí aplikácia (pridanie voľne vypĺňateľného poľa, ktorého hodnota nie je v číselníku).</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ItemShortenedName" type="tns:Localized_ItemShortenedNameType"  minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Zaužívaný skrateny názov položky. Veľkosť dátového poľa 128 znakov.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ItemAbbreviatedName" type="tns:Localized_ItemAbbreviatedNameType"  minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Zaužívaná skratka pre názov položky. Veľkosť dátového poľa 20 znakov.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="AdditionalContent" type="tns:Localized_AdditionalContentType"  minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Významové rozšírenie údajov číselníka, ak je to potrebné. Veľkosť dátového poľa 4095 znakov. Môže byť použitý viackrát.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="UnitOfMeasure" type="tns:UnitOfMeasureType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Použitá merná jednotka. Veľkosť dátového poľa 50 znakov.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="Note" type="cl:Localized_NoteType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Lubovoľné doplňujúce informácie k položke. Veľkosť dátového poľa 4095 znakov.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ValidFrom" type="tns:ValidFromType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Dátum publikovania položky v číselníku. Dátové pole typu dátum. Ak nie je vyplnené použije sa aktuálny dátum importu. </xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="EffectiveFrom" type="tns:EffectiveFromType"  minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Dátum, od ktorého položka nadobudla účinnosť a je možné ju používať. Dátové pole typu dátum (presnosť na deň).</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="EffectiveTo" type="tns:EffectiveToType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Dátum, ktorým sa končí účinnosť položky. Dátové pole typu dátum (presnosť na deň). (ak platnost nie je obmedzena je prazdne)</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="ItemLogicalOrder" type="xsd:int"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Odporúčane logické poradie položky. Číslo. Pri zmene nevzniká nová položka.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="LegislativeValidity" type="tns:LegislativeValidityType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Rozlíšenie legislatívnej uznateľnosti danej položky v podmienkach Slovenskej republiky. Dátový typ logická hodnota.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+			<xsd:element name="Void" type="tns:VoidType"  minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Validnost polozky - pokial polozka nikdy nenadobudla a nenadobudne ucinnost, je true.</xsd:documentation>
+				</xsd:annotation></xsd:element>		
+		</xsd:sequence>	
+	</xsd:complexType>
+
+	
+
+
+
+    
+</xsd:schema>
+
+
+
+
+

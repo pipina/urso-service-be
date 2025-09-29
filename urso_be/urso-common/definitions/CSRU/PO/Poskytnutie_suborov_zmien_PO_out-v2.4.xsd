@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- schema pre vymenu udajov o pravnickej osobe podla Vynosu 55/2014 Z. z. Vytvorene: MICROCOMP-Computersystem s.r.o. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_out-v2.4" xmlns:cs="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4" targetNamespace="http://rpo.statistics.sk/RPO/Datatypes/Poskytnutie/Ext/Poskytnutie_suborov_zmien_PO_out-v2.4" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://rpo.statistics.sk/RPO/Datatypes/rpo_core_schema-v2.4" schemaLocation="rpo_core_schema-v2.4.xsd"/>
+	<xs:element name="TransEnvelope" type="tns:TransEnvelopeType">
+		<xs:annotation>
+			<xs:documentation>Korenovy element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="TransEnvelopeType">
+		<xs:sequence>
+			<xs:element name="GeneratedFile" type="cs:GeneratedFileCType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Informacie o synchronizacnej davke</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Pagination" type="cs:PaginationCType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Strankovanie vysledku</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultStatus" type="cs:ResultStatusCType">
+				<xs:annotation>
+					<xs:documentation>Vysledok spracovania</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

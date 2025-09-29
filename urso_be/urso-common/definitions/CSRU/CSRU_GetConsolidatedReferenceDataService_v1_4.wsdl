@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	name="CSRUGetConsolidatedReferenceDataService"
+	targetNamespace="http://csru.gov.sk/csru_getconsolidatedreferencedata/v1.4"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:csru="http://csru.gov.sk/csru_getconsolidatedreferencedata/v1.4"
+	xmlns:c="http://csru.gov.sk/common/v1.4">
+
+	<wsdl:types>
+		<xs:schema
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+			xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+			xmlns:csru="http://csru.gov.sk/csru_getconsolidatedreferencedata/v1.4"
+			xmlns:c="http://csru.gov.sk/common/v1.4"
+			elementFormDefault="qualified"
+			targetNamespace="http://csru.gov.sk/csru_getconsolidatedreferencedata/v1.4">
+
+			<!-- import common types schema -->
+			<xs:import namespace="http://csru.gov.sk/common/v1.4" schemaLocation="csru_common_types_v1.4.xsd"/>
+
+			<!-- GetReferenceData IN/OUT elements -->
+			<xs:element name="GetReferenceDataRequest" type="csru:GetReferenceDataRequestCType"/>
+			<xs:complexType name="GetReferenceDataRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+					<xs:element name="scenario" type="c:ScenarioType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="payload" type="c:DataPlaceholderCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetReferenceDataResponse" type="csru:GetReferenceDataResponseCType"/>
+			<xs:complexType name="GetReferenceDataResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="requestId" type="c:RequestIdType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+				</xs:sequence>
+			</xs:complexType>
+
+			<!-- GetReferenceDataByIdentifiers IN/OUT elements -->
+			<xs:element name="GetReferenceDataByIdentifiersRequest" type="csru:GetReferenceDataByIdentifiersRequestCType"/>
+			<xs:complexType name="GetReferenceDataByIdentifiersRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="parameters" type="c:ParameterListCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetReferenceDataByIdentifiersResponse" type="csru:GetReferenceDataByIdentifiersResponseCType"/>
+			<xs:complexType name="GetReferenceDataByIdentifiersResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="requestId" type="c:RequestIdType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+				</xs:sequence>
+			</xs:complexType>
+
+			<!-- GetStatus IN/OUT elements -->
+			<xs:element name="GetStatusRequest" type="csru:GetStatusRequestCType"/>
+			<xs:complexType name="GetStatusRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="requestId" type="c:RequestIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetStatusResponse" type="csru:GetStatusResponseCType"/>
+			<xs:complexType name="GetStatusResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+					<xs:element name="status" type="c:StatusType"/>
+					<xs:element minOccurs="0" name="requestProcessingErrorMessage" type="c:ErrorMessageType"/>
+					<xs:element name="fileList" type="c:FileListCType"/>
+				</xs:sequence>
+			</xs:complexType>
+
+			<!-- GetChangedReferenceData IN/OUT elements -->
+			<xs:element name="GetChangedReferenceDataRequest" type="csru:GetChangedReferenceDataRequestCType"/>
+			<xs:complexType name="GetChangedReferenceDataRequestCType">
+				<xs:sequence>
+					<xs:element name="ovmIsId" type="c:OvmIsIdType"/>
+					<xs:element name="oeId" type="c:OeIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="parameters" type="c:ParameterListCType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetChangedReferenceDataResponse" type="csru:GetChangedReferenceDataResponseCType"/>
+			<xs:complexType name="GetChangedReferenceDataResponseCType">
+				<xs:sequence>
+					<xs:element name="csruTransactionId" type="c:CsruTransactionIdType"/>
+					<xs:element name="ovmTransactionId" type="c:OvmTransactionIdType"/>
+					<xs:element name="ovmCorrelationId" type="c:OvmCorrelationIdType"/>
+					<xs:element name="resultCode" type="c:ResultCodeType"/>
+					<xs:element minOccurs="0" name="requestId" type="c:RequestIdType"/>
+					<xs:element minOccurs="0" name="errorMessage" type="c:ErrorMessageType"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="GetChangedReferenceDataResponseMessage">
+		<wsdl:part name="getChangedReferenceDataResponse" element="csru:GetChangedReferenceDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetStatusRequestMessage">
+		<wsdl:part name="getStatusRequest" element="csru:GetStatusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetStatusResponseMessage">
+		<wsdl:part name="getStatusResponse" element="csru:GetStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetChangedReferenceDataRequestMessage">
+		<wsdl:part name="getChangedReferenceDataRequest" element="csru:GetChangedReferenceDataRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetReferenceDataRequestMessage">
+		<wsdl:part name="getReferenceDataRequest" element="csru:GetReferenceDataRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetReferenceDataByIdentifiersResponseMessage">
+		<wsdl:part name="getReferenceDataByIdentifiersResponse" element="csru:GetReferenceDataByIdentifiersResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetReferenceDataByIdentifiersRequestMessage">
+		<wsdl:part name="getReferenceDataByIdentifiersRequest" element="csru:GetReferenceDataByIdentifiersRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetReferenceDataResponseMessage">
+		<wsdl:part name="getReferenceDataResponse" element="csru:GetReferenceDataResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="CSRUGetConsolidatedReferenceData">
+		<wsdl:operation name="getReferenceData">
+			<wsdl:input name="getReferenceDataRequest" message="csru:GetReferenceDataRequestMessage"/>
+			<wsdl:output name="getReferenceDataResponse" message="csru:GetReferenceDataResponseMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="getReferenceDataByIdentifiers">
+			<wsdl:input name="getReferenceDataByIdentifiersRequest" message="csru:GetReferenceDataByIdentifiersRequestMessage"/>
+			<wsdl:output name="getReferenceDataByIdentifiersResponse" message="csru:GetReferenceDataByIdentifiersResponseMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<wsdl:input name="getStatusRequest" message="csru:GetStatusRequestMessage"/>
+			<wsdl:output name="getStatusResponse" message="csru:GetStatusResponseMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="getChangedReferenceData">
+			<wsdl:input name="getChangedReferenceDataRequest" message="csru:GetChangedReferenceDataRequestMessage"/>
+			<wsdl:output name="getChangedReferenceDataResponse" message="csru:GetChangedReferenceDataResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CSRUGetConsolidatedReferenceDataServiceSoapBinding" type="csru:CSRUGetConsolidatedReferenceData">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getReferenceData">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zadanie požiadavky na získanie konsolidovaných referenčných údajov</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getReferenceDataRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getReferenceDataResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getReferenceDataByIdentifiers">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zadanie požiadavky na získanie konsolidovaných referenčných údajov podľa identifikátorov</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getReferenceDataByIdentifiersRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getReferenceDataByIdentifiersResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zistenie stavu vykonávania požiadavky z metódy "getReferenceDataByIdentifiers"</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getStatusRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getStatusResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getChangedReferenceData">
+			<soap12:operation soapActionRequired="false" style="document"/>
+			<xs:annotation>
+				<xs:documentation>Zadanie požiadavky na získanie zmien v referenčných údajoch</xs:documentation>
+			</xs:annotation>
+			<wsdl:input name="getChangedReferenceDataRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getChangedReferenceDataResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CSRUGetConsolidatedReferenceDataService">
+		<wsdl:port binding="csru:CSRUGetConsolidatedReferenceDataServiceSoapBinding" name="CSRUGetConsolidatedReferenceDataPort">
+			<soap12:address location="https://c053.csru.gov.sk:443/services/CSRU_GetConsolidatedReferenceDataService_v1.4"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

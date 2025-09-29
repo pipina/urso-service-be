@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.dominanz.sk/UVZ/Reg/FO"
+	xmlns:fo="http://www.dominanz.sk/UVZ/Reg/FO" 
+	elementFormDefault="qualified" version="1.0">
+
+	<xsd:include schemaLocation="./RFO_1_TYPES.xsd" />
+
+	<xsd:element name="FO" type="fo:TOEX_OEIO" />
+
+</xsd:schema>

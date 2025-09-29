@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="FSDanoveNedoplatky" type="FSDanoveNedoplatkyCType"/>
+	<xs:complexType name="FSDanoveNedoplatkyCType">
+		<xs:sequence>
+			<xs:element name="DanSubj" type="DanSubjCType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DanSubjCType">
+		<xs:sequence>
+			<xs:element name="DIC" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ICO" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RodneCis" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ObchMenoNazov" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Meno" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Priezvisko" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DatNar" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaTrvPobytuSidla" type="AdresaTrvPobytuSidlaCType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DanNedoplatokPohladavka" type="DanNedoplatokPohladavkaCType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DanNedoplatokPohladavkaCType">
+		<xs:sequence>
+			<xs:element name="DruhPohladavky" type="DruhPohladavkyCType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Datum" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<!--<xs:annotation>
+					<xs:documentation>
+						Datum: Datum, ku ktoremu je nedoplatok evidovany, napr. datum poslednej zavierky alebo datum exportu do datoveho rozhrania					
+					</xs:documentation>
+				</xs:annotation> -->
+			<xs:element name="Nedoplatok" minOccurs="1" maxOccurs="1">
+				<!--<xs:annotation>
+					<xs:documentation>
+						Nedoplatok: 0-nemá nedoplatok, 1-má nedoplatok, 2-chyba
+					</xs:documentation>
+				</xs:annotation> -->
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Vyska" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Mena" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ErrorCode" type="xs:string" minOccurs="1" maxOccurs="1">
+				<!--<xs:annotation>
+					<xs:documentation>
+						ErrorCode: 0-žiadna chyba, 2- Subjekt má duplicitu v evidencii
+					</xs:documentation>
+				</xs:annotation> -->
+			</xs:element>
+			<xs:element name="ErrorMessage" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdresaTrvPobytuSidlaCType">
+		<xs:sequence>
+			<xs:element name="Ulica" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="OrientacneSupisneCislo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Obec" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Psc" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Stat" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DruhPohladavkyCType">
+		<xs:sequence>
+			<xs:element name="Typ" minOccurs="1" maxOccurs="1">
+				<!--<xs:annotation>
+					<xs:documentation>
+						Druh pohladavky: Druh dane alebo pohladavky, : NDS - nedoplatok daňovej správy, SPD - nedoplatok na spotrebných daniach, COL - nedoplatok colnej správy
+					</xs:documentation>
+				</xs:annotation> -->
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="NDS"/>
+						<xs:enumeration value="SPD"/>
+						<xs:enumeration value="COL"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

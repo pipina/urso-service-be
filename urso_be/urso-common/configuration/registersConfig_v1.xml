@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:RegistersConfig
+	xmlns:tns="http://www.dominanz.sk/registersConfig"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.dominanz.sk/registersConfig ../definitions/registersConfig_v1.xsd ">
+	<tns:RegisterPlugin
+		Enabled="true" Name="Register právnických osôb" PluginClass="sk.is.urso.plugin.RpoReg1"
+		RegisterId="RPO" Description="" Version="1" EffectiveFrom="2021-03-22"/>
+	<tns:RegisterPlugin
+		Enabled="true" Name="Register fyzických osôb" PluginClass="sk.is.urso.plugin.RfoReg1"
+		RegisterId="RFO" Description="" Version="1" EffectiveFrom="2021-03-22"/>
+	<tns:RegisterPlugin
+			Enabled="true" Name="Register subjektov" PluginClass="sk.is.urso.plugin.SubjectReg1"
+			RegisterId="SUBJECT" Description="Interný register subjektov. Tento register slúži ako integrácia registrov fyzických, právnických a zahraničných osôb" Version="1" EffectiveFrom="2020-09-22"/>
+	<tns:RegisterPlugin
+		Enabled="true" Name="Interný register adries" PluginClass="sk.is.urso.plugin.RaInternalReg1"
+			RegisterId="RA_INTERNAL" Description="" Version="1" EffectiveFrom="2021-04-23"/>
+	<tns:RegisterPlugin
+		Enabled="true" Name="Register adries" PluginClass="sk.is.urso.plugin.RaReg1"
+		RegisterId="RA" Description="" Version="1" EffectiveFrom="2021-03-22"/>
+</tns:RegistersConfig>
